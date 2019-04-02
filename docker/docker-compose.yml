@@ -1,0 +1,44 @@
+version: "3.3"
+
+services:
+  # kafka
+  kafka:
+    container_name: kafka
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "29092:29092/tcp"
+
+  zookeeper:
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 32181
+      ZOOKEEPER_TICK_TIME: 2000
+    image: confluentinc/cp-zookeeper:latest
+    ports:
+      - "32181:32181/tcp"
+
+  # databases
+  fleet-db:
+    container_name: fleet-db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: fleet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5432:5432/tcp"
+
+  customer-db:
+    container_name: customer-db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: customer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5433:5432/tcp"

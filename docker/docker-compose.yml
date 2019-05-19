@@ -1,44 +1,76 @@
-version: "3.3"
+version: '2.1'
 
 services:
-  # kafka
-  kafka:
-    container_name: kafka
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
-      KAFKA_BROKER_ID: 1
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:32181
-    image: confluentinc/cp-kafka:latest
-    ports:
-      - "29092:29092/tcp"
-
   zookeeper:
     container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 32181
-      ZOOKEEPER_TICK_TIME: 2000
-    image: confluentinc/cp-zookeeper:latest
+    image: zookeeper:3.4.9
+    restart: always
+    hostname: zookeeper
     ports:
-      - "32181:32181/tcp"
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+      ZOO_SERVERS: server.1=zookeeper:2888:3888
 
-  # databases
-  fleet-db:
-    container_name: fleet-db
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: fleet
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1
+  kafka:
+    container_name: kafka
+    image: confluentinc/cp-kafka:5.2.1
+    hostname: kafka
     ports:
-      - "5432:5432/tcp"
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
 
-  customer-db:
-    container_name: customer-db
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: customer
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1
+  kafka-rest-proxy:
+    container_name: kafka-rest-proxy
+    image: confluentinc/cp-kafka-rest:5.2.1
+    hostname: kafka-rest-proxy
     ports:
-      - "5433:5432/tcp"
+      - "8082:8082"
+    environment:
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082/
+      KAFKA_REST_SCHEMA_REGISTRY_URL: http://kafka-schema-registry:8081/
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:19092
+    depends_on:
+      - zookeeper
+      - kafka
+      - kafka-schema-registry
+
+  kafka-topics-ui:
+    container_name: kafka-ui
+    image: landoop/kafka-topics-ui:0.9.4
+    hostname: kafka-topics-ui
+    ports:
+      - "8000:8000"
+    environment:
+      KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
+      PROXY: "true"
+    depends_on:
+      - zookeeper
+      - kafka
+      - kafka-schema-registry
+      - kafka-rest-proxy
+
+  ksql-server:
+    container_name: ksql-server
+    image: confluentinc/cp-ksql-server:5.2.1
+    hostname: ksql-server
+    ports:
+      - "8088:8088"
+    environment:
+      KSQL_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:19092
+      KSQL_LISTENERS: http://0.0.0.0:8088/
+      KSQL_KSQL_SERVICE_ID: ksql-server_
+    depends_on:
+      - zookeeper
+      - kafka

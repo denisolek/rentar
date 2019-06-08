@@ -1,0 +1,36 @@
+spring:
+  kafka:
+    consumer:
+      group-id: management
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap-servers: localhost:9092
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:~/management
+    driver-class-name: org.h2.Driver
+    username: sa
+
+
+logbook:
+  include:
+    - /**
+  format.style: json
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
+  filter.enabled: true
+
+logging:
+  level:
+    org.zalando.logbook: trace

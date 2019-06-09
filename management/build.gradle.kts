@@ -3,8 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.1.5.RELEASE"
     id("io.spring.dependency-management") version "1.0.7.RELEASE"
-    kotlin("jvm") version "1.2.71"
-    kotlin("plugin.spring") version "1.2.71"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.3.31" apply true
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.3.31" apply true
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.3.31" apply true
+    kotlin("jvm") version "1.3.31"
+    kotlin("plugin.spring") version "1.3.31"
 }
 
 group = "com.denisolek"

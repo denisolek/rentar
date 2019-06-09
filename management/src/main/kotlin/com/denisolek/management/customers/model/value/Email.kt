@@ -1,6 +1,6 @@
 package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.facade.CustomerExceptions.InvalidEmailException
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.InvalidEmailException
 
 class Email private constructor(
     val value: String

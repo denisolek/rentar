@@ -1,7 +1,6 @@
-package com.denisolek.management.customers
+package com.denisolek.management.customers.facade
 
 import com.denisolek.management.customers.facade.command.AddCustomerCancelledCommand
-import com.denisolek.management.customers.facade.command.CustomerCommandHandler
 import com.denisolek.management.customers.facade.command.UpdateCustomerCancelledCommand
 import com.denisolek.management.customers.infrastructure.CustomerEntity
 import com.denisolek.management.customers.infrastructure.CustomerRepository
@@ -14,8 +13,9 @@ import com.denisolek.management.infrastructure.toCustomerEvent
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
+@Service
 class CustomerEventHandler(
     val customerRepository: CustomerRepository,
     val commandHandler: CustomerCommandHandler

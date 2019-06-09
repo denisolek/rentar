@@ -1,6 +1,9 @@
-package com.denisolek.management.customers.facade.query
+package com.denisolek.management.customers.facade
 
-import com.denisolek.management.customers.facade.CustomerExceptions.*
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.*
+import com.denisolek.management.customers.facade.query.AddCustomerValidate
+import com.denisolek.management.customers.facade.query.BaseCustomer
+import com.denisolek.management.customers.facade.query.UpdateCustomerValidate
 import com.denisolek.management.customers.infrastructure.CustomerRepository
 import org.springframework.stereotype.Service
 import java.util.*

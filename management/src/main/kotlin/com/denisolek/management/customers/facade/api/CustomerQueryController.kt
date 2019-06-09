@@ -1,8 +1,8 @@
-package com.denisolek.management.customers.facade
+package com.denisolek.management.customers.facade.api
 
+import com.denisolek.management.customers.facade.CustomerQueryHandler
 import com.denisolek.management.customers.facade.query.AddCustomerValidate
 import com.denisolek.management.customers.facade.query.BaseCustomer
-import com.denisolek.management.customers.facade.query.CustomerQueryHandler
 import com.denisolek.management.customers.facade.query.UpdateCustomerValidate
 import org.springframework.web.bind.annotation.*
 import java.util.*

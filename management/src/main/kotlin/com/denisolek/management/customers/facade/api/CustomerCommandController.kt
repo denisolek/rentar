@@ -1,7 +1,7 @@
-package com.denisolek.management.customers.facade
+package com.denisolek.management.customers.facade.api
 
+import com.denisolek.management.customers.facade.CustomerCommandHandler
 import com.denisolek.management.customers.facade.command.AddCustomerCommand
-import com.denisolek.management.customers.facade.command.CustomerCommandHandler
 import com.denisolek.management.customers.facade.command.UpdateCustomerCommand
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

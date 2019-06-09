@@ -1,6 +1,6 @@
 package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.facade.CustomerExceptions.InvalidBirthDate
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.InvalidBirthDate
 import java.time.LocalDate
 
 class BirthDate private constructor(

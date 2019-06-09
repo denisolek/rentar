@@ -1,5 +1,9 @@
-package com.denisolek.management.customers.facade.command
+package com.denisolek.management.customers.facade
 
+import com.denisolek.management.customers.facade.command.AddCustomerCancelledCommand
+import com.denisolek.management.customers.facade.command.AddCustomerCommand
+import com.denisolek.management.customers.facade.command.UpdateCustomerCancelledCommand
+import com.denisolek.management.customers.facade.command.UpdateCustomerCommand
 import com.denisolek.management.customers.model.event.CustomerAdded
 import com.denisolek.management.customers.model.event.CustomerAddingCancelled
 import com.denisolek.management.customers.model.event.CustomerUpdated

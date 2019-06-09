@@ -1,4 +1,4 @@
-package com.denisolek.management.customers.facade
+package com.denisolek.management.customers.infrastructure
 
 import com.denisolek.management.infrastructure.ServiceException
 import com.google.i18n.phonenumbers.NumberParseException.ErrorType

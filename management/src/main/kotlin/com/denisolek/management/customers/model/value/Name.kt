@@ -1,7 +1,7 @@
 package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.facade.CustomerExceptions.InvalidFirstNameException
-import com.denisolek.management.customers.facade.CustomerExceptions.InvalidLastNameException
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.InvalidFirstNameException
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.InvalidLastNameException
 
 class Name private constructor(
     val firstName: String,

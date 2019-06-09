@@ -1,6 +1,6 @@
 package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.facade.CustomerExceptions.InvalidDrivingLicenceException
+import com.denisolek.management.customers.infrastructure.CustomerExceptions.InvalidDrivingLicenceException
 
 class DrivingLicence private constructor(
     val value: String

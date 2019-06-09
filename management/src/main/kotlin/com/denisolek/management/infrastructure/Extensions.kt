@@ -9,7 +9,7 @@ import java.util.concurrent.Future
 
 fun Producer<String, String>.send(event: Event): Future<RecordMetadata> {
     val result = when (event) {
-        is CustomerEvent -> this.send(ProducerRecord("customers", "${event.aggregateId}", event.toJson()))
+        is CustomerEvent -> this.send(ProducerRecord(Globals.CONSUMERS_TOPIC, "${event.aggregateId}", event.toJson()))
         else -> throw ServiceException(HttpStatus.INTERNAL_SERVER_ERROR, "Unsupported event type")
     }
     this.flush()

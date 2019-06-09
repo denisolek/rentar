@@ -25,7 +25,7 @@ class AddCustomerDTO(
                 "${StringUtils.stripAccents(firstName.toLowerCase())}.${StringUtils.stripAccents(lastName.toLowerCase())}@${email.random()}"
             val birthDate = LocalDate.ofEpochDay(ThreadLocalRandom.current().nextLong(date["min"]!!, date["max"]!!))
                 val drivingLicence = "${numeric(5)}/${numeric(2)}/${numeric(4)}"
-            val passport = "${alphabetic(2)}${numeric(7)}"
+            val passport = "${alphabetic(2).toUpperCase()}${numeric(7)}"
 
             return AddCustomerDTO(
                 firstName = firstName,

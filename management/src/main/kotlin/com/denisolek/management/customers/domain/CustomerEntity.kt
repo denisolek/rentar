@@ -17,11 +17,25 @@ class CustomerEntity(
     val lastName: String,
     @Column(unique = true)
     val email: String,
-    val phoneNumber: String,
+    val phoneCountryCode: Int,
+    val phoneNationalNumber: Long,
     val birthDate: LocalDate,
     @Column(unique = true)
     val drivingLicence: String,
     @Column(unique = true)
     val passport: String,
     val createdAt: LocalDateTime
-)
+) {
+    constructor(customer: Customer) : this(
+        id = customer.id.value,
+        firstName = customer.name.firstName,
+        lastName = customer.name.lastName,
+        email = customer.email.value,
+        phoneCountryCode = customer.phoneNumber.countryCode,
+        phoneNationalNumber = customer.phoneNumber.nationalNumber,
+        birthDate = customer.birthDate.value,
+        drivingLicence = customer.drivingLicence.value,
+        passport = customer.drivingLicence.value,
+        createdAt = customer.createdAt
+    )
+}

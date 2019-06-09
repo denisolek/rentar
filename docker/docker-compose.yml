@@ -69,6 +69,7 @@ services:
     environment:
       KAFKA_REST_PROXY_URL: "http://kafka-rest-proxy:8082/"
       PROXY: "true"
+      MAX_BYTES: "300000"
     depends_on:
       - zookeeper
       - kafka

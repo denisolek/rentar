@@ -24,11 +24,14 @@ class CustomerController(
     fun addCustomer(@RequestBody addCustomerDTO: AddCustomerDTO) {
         addCustomerDTO.validate()
         when {
-            customerRepository.countByEmail(addCustomerDTO.email) > 0 -> EmailAlreadyExistsException()
-            customerRepository.countByDrivingLicence(addCustomerDTO.email) > 0 -> DrivingLicenceAlreadyExistsException()
-            customerRepository.countByPassport(addCustomerDTO.email) > 0 -> PassportAlreadyExistsException()
+            customerRepository.countByEmail(addCustomerDTO.email) > 0 -> throw EmailAlreadyExistsException()
+            customerRepository.countByDrivingLicence(addCustomerDTO.email) > 0 -> throw DrivingLicenceAlreadyExistsException()
+            customerRepository.countByPassport(addCustomerDTO.email) > 0 -> throw PassportAlreadyExistsException()
         }
-        eventProducer.send(CustomerAdded(addCustomerDTO))
+        CustomerAdded(addCustomerDTO).run {
+            eventProducer.send(this)
+            logger.info("[CustomerAdded] {${this.aggregateId}} - Sent")
+        }
     }
 
     @GetMapping("/customers")

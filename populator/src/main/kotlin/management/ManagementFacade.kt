@@ -5,6 +5,7 @@ import feign.Feign
 import feign.gson.GsonDecoder
 import feign.gson.GsonEncoder
 import management.dto.AddCustomerDTO
+import java.lang.Exception
 
 class ManagementFacade {
     private val managementClient = Feign.builder()
@@ -15,8 +16,13 @@ class ManagementFacade {
     fun addCustomers(count: Int) {
         for (i in 1..count) {
             val dto = AddCustomerDTO()
-            managementClient.addCustomer(dto)
+            try {
+                managementClient.addCustomer(dto)
+            }catch (ex: Exception) {
+                continue
+            }
             println("Added customer [$i] : ${dto.firstName} ${dto.lastName}")
+            Thread.sleep(Setup.requestInterval.toLong())
         }
     }
 }

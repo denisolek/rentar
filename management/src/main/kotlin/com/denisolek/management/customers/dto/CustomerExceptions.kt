@@ -16,4 +16,5 @@ class CustomerExceptions {
     class EmailAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Email already exists.")
     class DrivingLicenceAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Driving licence already exists.")
     class PassportAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Passport already exists.")
+    class CustomerNotFoundException: ServiceException(HttpStatus.NOT_FOUND, "Customer not found.")
 }

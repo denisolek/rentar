@@ -2,7 +2,7 @@ package management.dto
 
 import com.google.gson.annotations.SerializedName
 
-class AddCustomerDTO(
+class UpdateCustomerDTO(
     val firstName: String,
     val lastName: String,
     @SerializedName("email")
@@ -13,7 +13,7 @@ class AddCustomerDTO(
     val passport: String
 ) {
     companion object {
-        operator fun invoke(): AddCustomerDTO {
+        operator fun invoke(): UpdateCustomerDTO {
             val firstName = CustomerGenerators.firstName
             val lastName = CustomerGenerators.lastName
             val email = CustomerGenerators.email(firstName, lastName)
@@ -22,7 +22,7 @@ class AddCustomerDTO(
             val drivingLicence = CustomerGenerators.drivingLicence
             val passport = CustomerGenerators.passport
 
-            return AddCustomerDTO(
+            return UpdateCustomerDTO(
                 firstName = firstName,
                 lastName = lastName,
                 email = email,

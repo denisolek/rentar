@@ -5,6 +5,7 @@ import com.denisolek.management.infrastructure.gson.Gson
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.RecordMetadata
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.HttpStatus
 import java.util.concurrent.Future
 
@@ -16,5 +17,7 @@ fun Producer<String, String>.send(event: Event): Future<RecordMetadata> {
     this.flush()
     return result
 }
+
+fun <T, ID> JpaRepository<T, ID>.findOne(id: ID): T? = findById(id).orElse(null)
 
 fun String.toCustomerEvent(): CustomerEvent = Gson.create().fromJson(this, CustomerEvent::class.java)

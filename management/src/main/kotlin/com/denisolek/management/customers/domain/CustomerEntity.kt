@@ -1,5 +1,6 @@
 package com.denisolek.management.customers.domain
 
+import com.denisolek.management.customers.domain.value.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
@@ -24,7 +25,8 @@ class CustomerEntity(
     val drivingLicence: String,
     @Column(unique = true)
     val passport: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime
 ) {
     constructor(customer: Customer) : this(
         id = customer.id.value,
@@ -36,6 +38,19 @@ class CustomerEntity(
         birthDate = customer.birthDate.value,
         drivingLicence = customer.drivingLicence.value,
         passport = customer.drivingLicence.value,
-        createdAt = customer.createdAt
+        createdAt = customer.createdAt,
+        updatedAt = customer.updatedAt
+    )
+
+    fun toDomainModel() = Customer(
+        id = CustomerId(this.id),
+        name = Name(this.firstName, this.lastName),
+        email = Email(this.email),
+        phoneNumber = PhoneNumber("+${this.phoneCountryCode}${this.phoneNationalNumber}"),
+        birthDate = BirthDate(this.birthDate),
+        drivingLicence = DrivingLicence(this.drivingLicence),
+        passport = Passport(this.passport),
+        createdAt = this.createdAt,
+        updatedAt = this.updatedAt
     )
 }

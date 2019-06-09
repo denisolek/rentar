@@ -45,7 +45,7 @@ class KafkaConfig(val application: Application) {
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = application.kafkaBootstrapServers
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer().javaClass.name
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = StringDeserializer().javaClass.name
-        props[ConsumerConfig.GROUP_ID_CONFIG] = "managementConsumer"
+        props[ConsumerConfig.GROUP_ID_CONFIG] = UUID.randomUUID().toString()
         props[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
         return DefaultKafkaConsumerFactory(props)
     }

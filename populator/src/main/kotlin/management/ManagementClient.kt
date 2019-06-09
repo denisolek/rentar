@@ -4,9 +4,9 @@ import feign.Headers
 import feign.Param
 import feign.RequestLine
 import management.dto.AddCustomerDTO
-import management.dto.AddValidateDTO
+import management.dto.ValidateAddCustomerDTO
+import management.dto.ValidateUpdateCustomerDTO
 import management.dto.UpdateCustomerDTO
-import management.dto.UpdateValidateDTO
 import java.util.*
 
 interface ManagementClient {
@@ -15,7 +15,7 @@ interface ManagementClient {
      */
     @RequestLine("POST customers/validateAdd")
     @Headers("Content-Type: application/json")
-    fun validateAdd(addValidateDTO: AddValidateDTO)
+    fun validateAddCustomer(validateAddCustomerDTO: ValidateAddCustomerDTO)
 
     @RequestLine("POST /customers")
     @Headers("Content-Type: application/json")
@@ -26,9 +26,9 @@ interface ManagementClient {
      */
     @RequestLine("POST /customers/{customerId}/validateUpdate")
     @Headers("Content-Type: application/json")
-    fun validateUpdate(
+    fun validateUpdateCustomer(
         @Param("customerId") customerId: UUID,
-        updateValidateDTO: UpdateValidateDTO
+        validateUpdateCustomerDTO: ValidateUpdateCustomerDTO
     )
 
     @RequestLine("PUT /customers/{customerId}")

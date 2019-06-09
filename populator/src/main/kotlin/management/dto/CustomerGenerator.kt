@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils
 import java.time.LocalDate
 import java.util.concurrent.ThreadLocalRandom
 
-object CustomerGenerators {
+object CustomerGenerator {
     val firstName: String
         get() = firstNames.random()
 

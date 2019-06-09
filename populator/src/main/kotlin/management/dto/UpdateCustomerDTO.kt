@@ -14,13 +14,13 @@ class UpdateCustomerDTO(
 ) {
     companion object {
         operator fun invoke(): UpdateCustomerDTO {
-            val firstName = CustomerGenerators.firstName
-            val lastName = CustomerGenerators.lastName
-            val email = CustomerGenerators.email(firstName, lastName)
-            val phoneNumber = CustomerGenerators.phoneNumber
-            val birthDate = CustomerGenerators.birthDate
-            val drivingLicence = CustomerGenerators.drivingLicence
-            val passport = CustomerGenerators.passport
+            val firstName = CustomerGenerator.firstName
+            val lastName = CustomerGenerator.lastName
+            val email = CustomerGenerator.email(firstName, lastName)
+            val phoneNumber = CustomerGenerator.phoneNumber
+            val birthDate = CustomerGenerator.birthDate
+            val drivingLicence = CustomerGenerator.drivingLicence
+            val passport = CustomerGenerator.passport
 
             return UpdateCustomerDTO(
                 firstName = firstName,

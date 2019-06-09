@@ -2,6 +2,4 @@ package management
 
 import java.util.*
 
-class DummyCustomer(
-    val id: UUID
-)
+class DummyCustomer(val id: UUID)

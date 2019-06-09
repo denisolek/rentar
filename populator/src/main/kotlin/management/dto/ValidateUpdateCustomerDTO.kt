@@ -1,6 +1,6 @@
 package management.dto
 
-class UpdateValidateDTO(
+class ValidateUpdateCustomerDTO(
     val email: String,
     val drivingLicence: String,
     val passport: String

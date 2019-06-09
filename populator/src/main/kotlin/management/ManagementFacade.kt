@@ -5,9 +5,9 @@ import feign.Feign
 import feign.gson.GsonDecoder
 import feign.gson.GsonEncoder
 import management.dto.AddCustomerDTO
-import management.dto.AddValidateDTO
+import management.dto.ValidateAddCustomerDTO
 import management.dto.UpdateCustomerDTO
-import management.dto.UpdateValidateDTO
+import management.dto.ValidateUpdateCustomerDTO
 import java.util.*
 
 class ManagementFacade {
@@ -21,7 +21,7 @@ class ManagementFacade {
         loop@ for (i in 1..count) {
             Thread.sleep(Setup.requestInterval.toLong())
             val dto = AddCustomerDTO()
-            if (validateAdd(dto, i)) continue@loop
+            if (validateAddCustomer(dto, i)) continue@loop
             var id: UUID?
             try {
                 id = managementClient.addCustomer(dto)
@@ -35,9 +35,9 @@ class ManagementFacade {
         return customers
     }
 
-    private fun validateAdd(dto: AddCustomerDTO, i: Int): Boolean {
+    private fun validateAddCustomer(dto: AddCustomerDTO, i: Int): Boolean {
         try {
-            managementClient.validateAdd(AddValidateDTO(dto))
+            managementClient.validateAddCustomer(ValidateAddCustomerDTO(dto))
         } catch (ex: Exception) {
             println("Skipping invalid AddCustomer [$i] : ${dto.firstName} ${dto.lastName} !")
             return true
@@ -51,7 +51,7 @@ class ManagementFacade {
             Thread.sleep(Setup.requestInterval.toLong())
             val dto = UpdateCustomerDTO()
             val id = customers[(1 until customers.count()).random()].id
-            if (validateUpdate(id, dto, i)) continue@loop
+            if (validateUpdateCustomer(id, dto, i)) continue@loop
             try {
                 managementClient.updateCustomer(id, dto)
             } catch (ex: Exception) {
@@ -64,9 +64,9 @@ class ManagementFacade {
         return updatedCustomers
     }
 
-    private fun validateUpdate(id: UUID, dto: UpdateCustomerDTO, i: Int): Boolean {
+    private fun validateUpdateCustomer(id: UUID, dto: UpdateCustomerDTO, i: Int): Boolean {
         try {
-            managementClient.validateUpdate(id, UpdateValidateDTO(dto))
+            managementClient.validateUpdateCustomer(id, ValidateUpdateCustomerDTO(dto))
         } catch (ex: Exception) {
             println("Skipping invalid UpdateCustomer [$i] : ${dto.firstName} ${dto.lastName} !")
             return true

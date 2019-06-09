@@ -13,4 +13,7 @@ class CustomerExceptions {
         ServiceException(HttpStatus.BAD_REQUEST, "Invalid phone number $errorType")
     class InvalidPassportException : ServiceException(HttpStatus.BAD_REQUEST, "Invalid passport.")
     class InvalidDrivingLicenceException : ServiceException(HttpStatus.BAD_REQUEST, "Invalid driving licence.")
+    class EmailAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Email already exists.")
+    class DrivingLicenceAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Driving licence already exists.")
+    class PassportAlreadyExistsException: ServiceException(HttpStatus.CONFLICT, "Passport already exists.")
 }

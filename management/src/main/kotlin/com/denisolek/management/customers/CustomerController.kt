@@ -2,6 +2,7 @@ package com.denisolek.management.customers
 
 import com.denisolek.management.customers.domain.event.CustomerAdded
 import com.denisolek.management.customers.dto.AddCustomerDTO
+import com.denisolek.management.customers.dto.CustomerExceptions.*
 import com.denisolek.management.infrastructure.send
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.streams.KafkaStreams
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class CustomerController(
     val kafkaStreams: KafkaStreams,
+    val customerRepository: CustomerRepository,
     val eventProducer: Producer<String, String>
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -21,6 +23,11 @@ class CustomerController(
     @ResponseStatus(HttpStatus.CREATED)
     fun addCustomer(@RequestBody addCustomerDTO: AddCustomerDTO) {
         addCustomerDTO.validate()
+        when {
+            customerRepository.countByEmail(addCustomerDTO.email) > 0 -> EmailAlreadyExistsException()
+            customerRepository.countByDrivingLicence(addCustomerDTO.email) > 0 -> DrivingLicenceAlreadyExistsException()
+            customerRepository.countByPassport(addCustomerDTO.email) > 0 -> PassportAlreadyExistsException()
+        }
         eventProducer.send(CustomerAdded(addCustomerDTO))
     }
 

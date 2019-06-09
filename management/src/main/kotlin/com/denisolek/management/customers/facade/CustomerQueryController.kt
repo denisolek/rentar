@@ -1,12 +1,10 @@
 package com.denisolek.management.customers.facade
 
 import com.denisolek.management.customers.facade.query.AddCustomerValidate
+import com.denisolek.management.customers.facade.query.BaseCustomer
 import com.denisolek.management.customers.facade.query.CustomerQueryHandler
 import com.denisolek.management.customers.facade.query.UpdateCustomerValidate
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
@@ -26,5 +24,10 @@ class CustomerQueryController(val queryHandler: CustomerQueryHandler) {
         @RequestBody dto: UpdateCustomerValidate
     ) {
         queryHandler.validateUpdate(dto, id)
+    }
+
+    @GetMapping("/customers")
+    fun fetchAll(): List<BaseCustomer> {
+        return queryHandler.fetchAll()
     }
 }

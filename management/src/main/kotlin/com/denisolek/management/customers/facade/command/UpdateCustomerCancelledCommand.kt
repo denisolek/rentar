@@ -1,6 +1,7 @@
 package com.denisolek.management.customers.facade.command
 
 import com.denisolek.management.customers.model.Customer
+import com.denisolek.management.customers.model.value.toDTO
 import java.time.LocalDate
 import java.util.*
 
@@ -20,7 +21,7 @@ class UpdateCustomerCancelledCommand(
         lastName = customer.name.lastName,
         email = customer.email.value,
         birthDate = customer.birthDate.value,
-        phoneNumber = "+${customer.phoneNumber.countryCode}${customer.phoneNumber.nationalNumber}",
+        phoneNumber = customer.phoneNumber.toDTO(),
         drivingLicence = customer.drivingLicence.value,
         passport = customer.passport.value
     )

@@ -26,4 +26,8 @@ class CustomerQueryHandler(val repository: CustomerRepository) {
                 throw PassportAlreadyExistsException()
         }
     }
+
+    fun fetchAll(): List<BaseCustomer> {
+        return repository.findAll().map { BaseCustomer(it.toDomainModel()) }
+    }
 }

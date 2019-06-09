@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class ConsumerListener {
-    @KafkaListener(topics = [Globals.CONSUMERS_TOPIC])
+    @KafkaListener(topics = [Globals.CUSTOMERS_TOPIC])
     fun process(message: String) {
         val event = message.toCustomerEvent()
         println(event)

@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidProductionYearException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidProductionYearException
 import java.time.LocalDate
 
 class ProductionYear private constructor(

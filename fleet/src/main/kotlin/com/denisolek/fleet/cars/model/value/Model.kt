@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidModelException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidModelException
 
 class Model private constructor(
     val value: String

@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidRegistrationNumberException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidRegistrationNumberException
 
 class RegistrationNumber private constructor(
     val value: String

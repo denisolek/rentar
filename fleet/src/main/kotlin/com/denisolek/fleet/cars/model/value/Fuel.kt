@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidFuelException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidFuelException
 
 class Fuel private constructor(
     val type: FuelType
@@ -12,8 +12,8 @@ class Fuel private constructor(
     }
 
     companion object {
-        operator fun invoke(type: String): Fuel {
-            val type = when (type.toUpperCase()) {
+        operator fun invoke(value: String): Fuel {
+            val type = when (value.toUpperCase()) {
                 "PETROL" -> FuelType.PETROL
                 "DIESEL" -> FuelType.DIESEL
                 "ELECTRICITY" -> FuelType.ELECTRICITY

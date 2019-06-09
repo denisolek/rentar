@@ -24,7 +24,7 @@ class KafkaConfig(val application: Application) {
     fun eventProducer(): Producer<String, String> {
         val props = Properties()
         props[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = application.kafkaBootstrapServers
-        props[ProducerConfig.CLIENT_ID_CONFIG] = "ManagementService-events"
+        props[ProducerConfig.CLIENT_ID_CONFIG] = "FleetService-events"
         return KafkaProducer(props, StringSerializer(), StringSerializer())
     }
 
@@ -34,7 +34,7 @@ class KafkaConfig(val application: Application) {
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = application.kafkaBootstrapServers
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer().javaClass.name
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = StringDeserializer().javaClass.name
-        props[ConsumerConfig.GROUP_ID_CONFIG] = "managementConsumer"
+        props[ConsumerConfig.GROUP_ID_CONFIG] = "fleetConsumer"
         props[ConsumerConfig.AUTO_OFFSET_RESET_CONFIG] = "earliest"
         return KafkaConsumer(props)
     }

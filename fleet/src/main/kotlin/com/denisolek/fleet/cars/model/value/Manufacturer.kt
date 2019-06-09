@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidManufacturerException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidManufacturerException
 
 class Manufacturer private constructor(
     val value: String

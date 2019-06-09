@@ -1,4 +1,4 @@
-package com.denisolek.fleet.cars.facade
+package com.denisolek.fleet.cars.infrastructure
 
 import com.denisolek.fleet.infrastructure.ServiceException
 import org.springframework.http.HttpStatus
@@ -11,4 +11,6 @@ class CarExceptions {
     class InvalidProductionYearException : ServiceException(HttpStatus.BAD_REQUEST, "Invalid production year name.")
     class InvalidRegistrationNumberException : ServiceException(HttpStatus.BAD_REQUEST, "Invalid registration number name.")
     class InvalidTransmissionException : ServiceException(HttpStatus.BAD_REQUEST, "Invalid transmission name.")
+    class CarNotFoundException : ServiceException(HttpStatus.NOT_FOUND, "Car not found.")
+    class RegistrationNumberAlreadyExistsException : ServiceException(HttpStatus.CONFLICT, "Registration number already exists.")
 }

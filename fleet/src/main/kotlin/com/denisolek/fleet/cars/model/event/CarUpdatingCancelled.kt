@@ -1,17 +1,16 @@
 package com.denisolek.fleet.cars.model.event
 
-import com.denisolek.fleet.cars.facade.command.AddCarCommand
-import com.denisolek.fleet.cars.model.value.CarId
+import com.denisolek.fleet.cars.facade.command.UpdateCarCancelledCommand
 import com.denisolek.fleet.infrastructure.gson.Gson
 import java.time.LocalDateTime
 import java.util.*
 
-class CarAdded(
+class CarUpdatingCancelled(
     override val id: UUID,
     override val aggregateId: UUID,
     override val occurredAt: LocalDateTime,
     override val version: Int = 1,
-    override val type: String = "CarAdded",
+    override val type: String = "CarUpdatingCancelled",
     val manufacturer: String,
     val model: String,
     val productionYear: Int,
@@ -20,9 +19,9 @@ class CarAdded(
     val fuel: String,
     val registrationNumber: String
 ) : CarEvent {
-    constructor(command: AddCarCommand) : this(
+    constructor(command: UpdateCarCancelledCommand) : this(
         id = UUID.randomUUID(),
-        aggregateId = CarId().value,
+        aggregateId = command.aggregateId,
         occurredAt = LocalDateTime.now(),
         manufacturer = command.manufacturer,
         model = command.model,

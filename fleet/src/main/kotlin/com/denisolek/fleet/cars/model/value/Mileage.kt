@@ -1,6 +1,6 @@
 package com.denisolek.fleet.cars.model.value
 
-import com.denisolek.fleet.cars.facade.CarExceptions.InvalidMileageException
+import com.denisolek.fleet.cars.infrastructure.CarExceptions.InvalidMileageException
 
 class Mileage private constructor(
     val value: Int

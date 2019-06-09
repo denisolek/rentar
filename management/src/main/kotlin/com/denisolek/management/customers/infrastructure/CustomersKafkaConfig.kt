@@ -1,4 +1,4 @@
-package com.denisolek.management.infrastructure
+package com.denisolek.management.customers.infrastructure
 
 import com.denisolek.management.infrastructure.application.Application
 import org.apache.kafka.clients.producer.KafkaProducer
@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration
 import java.util.*
 
 @Configuration
-class KafkaConfig(val application: Application) {
+class CustomersKafkaConfig(val application: Application) {
     @Bean
-    fun eventProducer(): Producer<String, String> {
+    fun customersProducer(): Producer<String, String> {
         val props = Properties()
         props[StreamsConfig.APPLICATION_ID_CONFIG] = application.name
         props[StreamsConfig.BOOTSTRAP_SERVERS_CONFIG] = application.kafkaBootstrapServers

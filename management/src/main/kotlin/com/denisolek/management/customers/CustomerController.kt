@@ -2,8 +2,8 @@ package com.denisolek.management.customers
 
 import com.denisolek.management.customers.domain.event.CustomerAdded
 import com.denisolek.management.customers.dto.AddCustomerDTO
+import com.denisolek.management.infrastructure.send
 import org.apache.kafka.clients.producer.Producer
-import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.streams.KafkaStreams
 import org.apache.kafka.streams.state.QueryableStoreTypes
 import org.slf4j.LoggerFactory
@@ -21,9 +21,7 @@ class CustomerController(
     @ResponseStatus(HttpStatus.CREATED)
     fun addCustomer(@RequestBody addCustomerDTO: AddCustomerDTO) {
         addCustomerDTO.validate()
-        val event = CustomerAdded(addCustomerDTO)
-        eventProducer.send(ProducerRecord("events", "${event.aggregateId}", event.toJson())).get()
-        eventProducer.flush()
+        eventProducer.send(CustomerAdded(addCustomerDTO))
     }
 
     @GetMapping("/customers")

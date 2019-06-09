@@ -19,7 +19,7 @@ class CustomerAdded(
     val phoneNumber: String,
     val drivingLicence: String,
     val passport: String
-) : Event {
+) : CustomerEvent {
     constructor(dto: AddCustomerDTO) : this(
         id = UUID.randomUUID(),
         aggregateId = UUID.randomUUID(),
@@ -33,5 +33,5 @@ class CustomerAdded(
         passport = dto.passport
     )
 
-    fun toJson(): String = Gson.create().toJson(this)
+    override fun toJson(): String = Gson.create().toJson(this)
 }

@@ -1,7 +1,6 @@
 package com.denisolek.management.customers.domain.event
 
 import com.denisolek.management.customers.dto.AddCustomerDTO
-import com.denisolek.management.infrastructure.Event
 import com.denisolek.management.infrastructure.gson.Gson
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -12,6 +11,7 @@ class CustomerAdded(
     override val aggregateId: UUID,
     override val occurredAt: LocalDateTime,
     override val type: String = "CustomerAdded",
+    override val version: Int = 1,
     val firstName: String,
     val lastName: String,
     val email: String,

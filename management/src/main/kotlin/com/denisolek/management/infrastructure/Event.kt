@@ -8,7 +8,6 @@ interface Event {
     val aggregateId: UUID
     val occurredAt: LocalDateTime
     val version: Int
-        get() = 1
     val type: String
 
     fun toJson(): String

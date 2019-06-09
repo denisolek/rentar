@@ -1,5 +1,7 @@
 package com.denisolek.management.infrastructure.gson
 
+import com.denisolek.management.customers.domain.event.CustomerEvent
+import com.denisolek.management.infrastructure.gson.adapters.CustomerEventDeserializerAdapter
 import com.denisolek.management.infrastructure.gson.adapters.LocalDateAdapter
 import com.denisolek.management.infrastructure.gson.adapters.LocalDateTimeAdapter
 import com.denisolek.management.infrastructure.gson.adapters.LocalTimeAdapter
@@ -15,6 +17,7 @@ object Gson {
         builder.registerTypeAdapter(LocalTime::class.java, LocalTimeAdapter())
         builder.registerTypeAdapter(LocalDate::class.java, LocalDateAdapter())
         builder.registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeAdapter())
+        builder.registerTypeAdapter(CustomerEvent::class.java, CustomerEventDeserializerAdapter())
         return builder.create()
     }
 }

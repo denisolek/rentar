@@ -1,6 +1,7 @@
 package com.denisolek.management.infrastructure
 
 import com.denisolek.management.customers.domain.event.CustomerEvent
+import com.denisolek.management.infrastructure.gson.Gson
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.RecordMetadata
@@ -15,3 +16,5 @@ fun Producer<String, String>.send(event: Event): Future<RecordMetadata> {
     this.flush()
     return result
 }
+
+fun String.toCustomerEvent(): CustomerEvent = Gson.create().fromJson(this, CustomerEvent::class.java)

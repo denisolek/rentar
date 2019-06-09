@@ -6,6 +6,6 @@ object Setup {
 }
 fun main(){
     println("***** Adding customers *****")
-    val customers = ManagementFacade().addCustomers(1000)
+    val customers = ManagementFacade().addCustomers(500)
     val updatedCustomers = ManagementFacade().updateCustomers(customers)
 }

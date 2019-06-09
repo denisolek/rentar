@@ -1,7 +1,7 @@
 package com.denisolek.management.customers.model.event
 
-import com.denisolek.management.customers.model.value.CustomerId
 import com.denisolek.management.customers.facade.command.UpdateCustomerCommand
+import com.denisolek.management.customers.model.value.CustomerId
 import com.denisolek.management.infrastructure.gson.Gson
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -21,17 +21,17 @@ class CustomerUpdated(
     val drivingLicence: String,
     val passport: String
 ) : CustomerEvent {
-    constructor(dto: UpdateCustomerCommand, id: CustomerId) : this(
+    constructor(command: UpdateCustomerCommand, id: CustomerId) : this(
         id = UUID.randomUUID(),
         aggregateId = id.value,
         occurredAt = LocalDateTime.now(),
-        firstName = dto.firstName,
-        lastName = dto.lastName,
-        email = dto.email,
-        birthDate = dto.birthDate,
-        phoneNumber = dto.phoneNumber,
-        drivingLicence = dto.drivingLicence,
-        passport = dto.passport
+        firstName = command.firstName,
+        lastName = command.lastName,
+        email = command.email,
+        birthDate = command.birthDate,
+        phoneNumber = command.phoneNumber,
+        drivingLicence = command.drivingLicence,
+        passport = command.passport
     )
 
     override fun toJson(): String = Gson.create().toJson(this)

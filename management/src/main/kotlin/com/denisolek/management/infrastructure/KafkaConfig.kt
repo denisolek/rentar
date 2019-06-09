@@ -24,7 +24,7 @@ class KafkaConfig(val application: Application) {
     fun eventProducer(): Producer<String, String> {
         val props = Properties()
         props[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = application.kafkaBootstrapServers
-        props[ProducerConfig.CLIENT_ID_CONFIG] = "ManagementService"
+        props[ProducerConfig.CLIENT_ID_CONFIG] = "ManagementService-events"
         return KafkaProducer(props, StringSerializer(), StringSerializer())
     }
 

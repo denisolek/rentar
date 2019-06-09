@@ -1,18 +1,25 @@
 package com.denisolek.management.customers
 
+import com.denisolek.management.customers.facade.command.AddCustomerCancelledCommand
+import com.denisolek.management.customers.facade.command.CustomerCommandHandler
+import com.denisolek.management.customers.facade.command.UpdateCustomerCancelledCommand
 import com.denisolek.management.customers.infrastructure.CustomerEntity
-import com.denisolek.management.customers.model.CustomerFactory
 import com.denisolek.management.customers.infrastructure.CustomerRepository
+import com.denisolek.management.customers.model.CustomerFactory
 import com.denisolek.management.customers.model.event.CustomerAdded
 import com.denisolek.management.customers.model.event.CustomerUpdated
 import com.denisolek.management.infrastructure.Globals
+import com.denisolek.management.infrastructure.findOne
 import com.denisolek.management.infrastructure.toCustomerEvent
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class CustomerEventHandler(val customerRepository: CustomerRepository) {
+class CustomerEventHandler(
+    val customerRepository: CustomerRepository,
+    val commandHandler: CustomerCommandHandler
+) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @KafkaListener(topics = [Globals.CUSTOMERS_TOPIC])
@@ -25,15 +32,26 @@ class CustomerEventHandler(val customerRepository: CustomerRepository) {
     }
 
     fun handle(customerAdded: CustomerAdded) {
-        val customer = CustomerFactory.create(customerAdded)
-        customerRepository.save(CustomerEntity(customer))
-        logger.info("[CustomerAdded] {${customer.id.value}} - Handled")
+        try {
+            val customer = CustomerFactory.create(customerAdded)
+            customerRepository.save(CustomerEntity(customer))
+            logger.info("[CustomerAdded] {${customer.id.value}} - Handled")
+        } catch (e: Exception) {
+            commandHandler.handle(AddCustomerCancelledCommand(customerAdded.aggregateId))
+            throw e
+        }
     }
 
     fun handle(customerUpdated: CustomerUpdated) {
-        val customer = customerRepository.findByIdOrThrow(customerUpdated.aggregateId).toDomainModel()
-        customer.apply(customerUpdated)
-        customerRepository.save(CustomerEntity(customer))
-        logger.info("[CustomerUpdated] {${customer.id.value}} - Handled")
+        try {
+            val customer = customerRepository.findByIdOrThrow(customerUpdated.aggregateId).toDomainModel()
+            customer.apply(customerUpdated)
+            customerRepository.save(CustomerEntity(customer))
+            logger.info("[CustomerUpdated] {${customer.id.value}} - Handled")
+        } catch (e: Exception) {
+            val customer = customerRepository.findOne(customerUpdated.aggregateId)?.toDomainModel()
+            customer?.run { commandHandler.handle(UpdateCustomerCancelledCommand(this)) }
+            throw e
+        }
     }
 }

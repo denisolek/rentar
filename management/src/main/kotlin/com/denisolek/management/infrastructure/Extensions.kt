@@ -1,6 +1,6 @@
 package com.denisolek.management.infrastructure
 
-import com.denisolek.management.customers.domain.event.CustomerEvent
+import com.denisolek.management.customers.model.event.CustomerEvent
 import com.denisolek.management.infrastructure.gson.Gson
 import org.apache.kafka.clients.producer.Producer
 import org.apache.kafka.clients.producer.ProducerRecord

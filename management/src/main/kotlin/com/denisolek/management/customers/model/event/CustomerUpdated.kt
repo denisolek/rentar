@@ -1,17 +1,17 @@
-package com.denisolek.management.customers.domain.event
+package com.denisolek.management.customers.model.event
 
-import com.denisolek.management.customers.domain.value.CustomerId
-import com.denisolek.management.customers.dto.AddCustomerDTO
+import com.denisolek.management.customers.model.value.CustomerId
+import com.denisolek.management.customers.facade.command.UpdateCustomerCommand
 import com.denisolek.management.infrastructure.gson.Gson
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
-class CustomerAdded(
+class CustomerUpdated(
     override val id: UUID,
     override val aggregateId: UUID,
     override val occurredAt: LocalDateTime,
-    override val type: String = "CustomerAdded",
+    override val type: String = "CustomerUpdated",
     override val version: Int = 1,
     val firstName: String,
     val lastName: String,
@@ -21,9 +21,9 @@ class CustomerAdded(
     val drivingLicence: String,
     val passport: String
 ) : CustomerEvent {
-    constructor(dto: AddCustomerDTO) : this(
+    constructor(dto: UpdateCustomerCommand, id: CustomerId) : this(
         id = UUID.randomUUID(),
-        aggregateId = CustomerId().value,
+        aggregateId = id.value,
         occurredAt = LocalDateTime.now(),
         firstName = dto.firstName,
         lastName = dto.lastName,

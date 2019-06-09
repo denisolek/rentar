@@ -1,7 +1,7 @@
-package com.denisolek.management.customers.domain
+package com.denisolek.management.customers.model
 
-import com.denisolek.management.customers.domain.event.CustomerUpdated
-import com.denisolek.management.customers.domain.value.*
+import com.denisolek.management.customers.model.event.CustomerUpdated
+import com.denisolek.management.customers.model.value.*
 import java.time.LocalDateTime
 
 class Customer(

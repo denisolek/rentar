@@ -1,7 +1,7 @@
 package com.denisolek.management.infrastructure.gson.adapters
 
-import com.denisolek.management.customers.domain.event.CustomerAdded
-import com.denisolek.management.customers.domain.event.CustomerUpdated
+import com.denisolek.management.customers.model.event.CustomerAdded
+import com.denisolek.management.customers.model.event.CustomerUpdated
 import com.denisolek.management.infrastructure.ServiceException
 import com.google.gson.*
 import org.springframework.http.HttpStatus

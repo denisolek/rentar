@@ -1,6 +1,6 @@
-package com.denisolek.management.customers.domain.value
+package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.dto.CustomerExceptions.InvalidPhoneNumberException
+import com.denisolek.management.customers.facade.CustomerExceptions.InvalidPhoneNumberException
 import com.google.i18n.phonenumbers.NumberParseException
 import com.google.i18n.phonenumbers.PhoneNumberUtil
 

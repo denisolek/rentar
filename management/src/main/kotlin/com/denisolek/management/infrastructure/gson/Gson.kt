@@ -1,6 +1,6 @@
 package com.denisolek.management.infrastructure.gson
 
-import com.denisolek.management.customers.domain.event.CustomerEvent
+import com.denisolek.management.customers.model.event.CustomerEvent
 import com.denisolek.management.infrastructure.gson.adapters.CustomerEventDeserializerAdapter
 import com.denisolek.management.infrastructure.gson.adapters.LocalDateAdapter
 import com.denisolek.management.infrastructure.gson.adapters.LocalDateTimeAdapter

@@ -1,7 +1,6 @@
-package com.denisolek.management.customers
+package com.denisolek.management.customers.infrastructure
 
-import com.denisolek.management.customers.domain.CustomerEntity
-import com.denisolek.management.customers.dto.CustomerExceptions.CustomerNotFoundException
+import com.denisolek.management.customers.facade.CustomerExceptions.CustomerNotFoundException
 import com.denisolek.management.infrastructure.findOne
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*

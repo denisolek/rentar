@@ -1,6 +1,7 @@
-package com.denisolek.management.customers.domain
+package com.denisolek.management.customers.infrastructure
 
-import com.denisolek.management.customers.domain.value.*
+import com.denisolek.management.customers.model.value.*
+import com.denisolek.management.customers.model.Customer
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*

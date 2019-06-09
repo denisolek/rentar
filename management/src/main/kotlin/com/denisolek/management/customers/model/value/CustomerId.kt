@@ -1,4 +1,4 @@
-package com.denisolek.management.customers.domain.value
+package com.denisolek.management.customers.model.value
 
 import java.io.Serializable
 import java.util.*

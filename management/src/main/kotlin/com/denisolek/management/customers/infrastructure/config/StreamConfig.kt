@@ -1,4 +1,4 @@
-package com.denisolek.management.customers.infrastructure
+package com.denisolek.management.customers.infrastructure.config
 
 import com.denisolek.management.infrastructure.application.Application
 import org.apache.kafka.clients.consumer.ConsumerConfig

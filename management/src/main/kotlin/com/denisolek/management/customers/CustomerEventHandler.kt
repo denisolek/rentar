@@ -1,9 +1,10 @@
 package com.denisolek.management.customers
 
-import com.denisolek.management.customers.domain.CustomerEntity
-import com.denisolek.management.customers.domain.CustomerFactory
-import com.denisolek.management.customers.domain.event.CustomerAdded
-import com.denisolek.management.customers.domain.event.CustomerUpdated
+import com.denisolek.management.customers.infrastructure.CustomerEntity
+import com.denisolek.management.customers.model.CustomerFactory
+import com.denisolek.management.customers.infrastructure.CustomerRepository
+import com.denisolek.management.customers.model.event.CustomerAdded
+import com.denisolek.management.customers.model.event.CustomerUpdated
 import com.denisolek.management.infrastructure.Globals
 import com.denisolek.management.infrastructure.toCustomerEvent
 import org.slf4j.LoggerFactory
@@ -11,7 +12,7 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class CustomerHandler(val customerRepository: CustomerRepository) {
+class CustomerEventHandler(val customerRepository: CustomerRepository) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @KafkaListener(topics = [Globals.CUSTOMERS_TOPIC])

@@ -1,6 +1,6 @@
-package com.denisolek.management.customers.domain.value
+package com.denisolek.management.customers.model.value
 
-import com.denisolek.management.customers.dto.CustomerExceptions.InvalidPassportException
+import com.denisolek.management.customers.facade.CustomerExceptions.InvalidPassportException
 
 class Passport private constructor(
     val value: String

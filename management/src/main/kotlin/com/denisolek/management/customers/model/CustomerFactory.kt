@@ -1,7 +1,8 @@
-package com.denisolek.management.customers.domain
+package com.denisolek.management.customers.model
 
-import com.denisolek.management.customers.domain.event.CustomerAdded
-import com.denisolek.management.customers.domain.value.*
+import com.denisolek.management.customers.model.event.CustomerAdded
+import com.denisolek.management.customers.model.value.*
+import com.denisolek.management.customers.model.Customer
 
 object CustomerFactory {
     fun create(e: CustomerAdded) = Customer(

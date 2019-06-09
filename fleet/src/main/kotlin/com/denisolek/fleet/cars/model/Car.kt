@@ -7,6 +7,7 @@ class Car(
     val id: CarId,
     var manufacturer: Manufacturer,
     var model: Model,
+    var segment: Segment,
     var productionYear: ProductionYear,
     var mileage: Mileage,
     var transmission: Transmission,
@@ -16,6 +17,7 @@ class Car(
     fun apply(e: CarUpdated) {
         this.manufacturer = Manufacturer(e.manufacturer)
         this.model = Model(e.model)
+        this.segment = Segment(e.segment)
         this.productionYear = ProductionYear(e.productionYear)
         this.mileage = Mileage(e.mileage)
         this.transmission = Transmission(e.transmission)

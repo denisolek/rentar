@@ -11,7 +11,6 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
 
-
 logbook:
   include:
     - /**
@@ -28,3 +27,6 @@ logbook:
 logging:
   level:
     org.zalando.logbook: trace
+
+server:
+  port: 9001

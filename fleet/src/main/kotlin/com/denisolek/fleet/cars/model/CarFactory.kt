@@ -8,6 +8,7 @@ object CarFactory {
         id = CarId(e.aggregateId),
         manufacturer = Manufacturer(e.manufacturer),
         model = Model(e.model),
+        segment = Segment(e.segment),
         productionYear = ProductionYear(e.productionYear),
         mileage = Mileage(e.mileage),
         transmission = Transmission(e.transmission),

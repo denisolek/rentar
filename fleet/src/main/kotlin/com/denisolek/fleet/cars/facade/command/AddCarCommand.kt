@@ -3,6 +3,7 @@ package com.denisolek.fleet.cars.facade.command
 class AddCarCommand(
     val manufacturer: String,
     val model: String,
+    val segment: String,
     val productionYear: Int,
     val mileage: Int,
     val transmission: String,

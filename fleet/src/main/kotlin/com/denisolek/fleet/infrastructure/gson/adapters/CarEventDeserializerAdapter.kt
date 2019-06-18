@@ -4,7 +4,7 @@ import com.denisolek.fleet.cars.model.event.CarAdded
 import com.denisolek.fleet.cars.model.event.CarAddingCancelled
 import com.denisolek.fleet.cars.model.event.CarUpdated
 import com.denisolek.fleet.cars.model.event.CarUpdatingCancelled
-import com.denisolek.fleet.infrastructure.ServiceException
+import com.denisolek.fleet.infrastructure.Exception
 import com.google.gson.*
 import org.springframework.http.HttpStatus
 import java.lang.reflect.Type
@@ -19,7 +19,7 @@ class CarEventDeserializerAdapter : JsonDeserializer<Any> {
             CarUpdated::class.java.simpleName -> getObjectClass(CarUpdated::class.java.name)
             CarAddingCancelled::class.java.simpleName -> getObjectClass(CarAddingCancelled::class.java.name)
             CarUpdatingCancelled::class.java.simpleName -> getObjectClass(CarUpdatingCancelled::class.java.name)
-            else -> throw ServiceException(HttpStatus.INTERNAL_SERVER_ERROR, "Unsupported event.")
+            else -> throw Exception(HttpStatus.INTERNAL_SERVER_ERROR, "Unsupported event.")
         }
         return context.deserialize(jsonObject, objectClass)
     }

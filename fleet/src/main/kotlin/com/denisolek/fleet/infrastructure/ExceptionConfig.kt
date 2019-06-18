@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
 class ExceptionHandlerAdvice {
-    var ex: Exception? = null
-    @ExceptionHandler(ServiceException::class)
-    fun handleException(e: ServiceException): ResponseEntity<*> {
+    var ex: java.lang.Exception? = null
+    @ExceptionHandler(Exception::class)
+    fun handleException(e: Exception): ResponseEntity<*> {
         ex = e
         return ResponseEntity.status(e.httpStatus).body(e.body)
     }
 }
 
-open class ServiceException(
+open class Exception(
     val httpStatus: HttpStatus = HttpStatus.INTERNAL_SERVER_ERROR,
     val body: ResponseTemplate
 

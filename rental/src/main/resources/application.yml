@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: rental
+  kafka:
+    bootstrap-servers: localhost:9092
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:~/rental
+    driver-class-name: org.h2.Driver
+    username: sa
+
+logbook:
+  include:
+    - /**
+  format.style: json
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
+    parameters:
+      - access_token
+      - password
+  filter.enabled: true
+
+logging:
+  level:
+    org.zalando.logbook: trace
+
+server:
+  port: 9002

@@ -10,8 +10,10 @@ import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
+@Table(name = "rental")
 class RentalEntity(
     @Id
     val id: UUID,

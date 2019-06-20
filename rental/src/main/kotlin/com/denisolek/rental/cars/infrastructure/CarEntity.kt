@@ -8,8 +8,10 @@ import java.math.BigDecimal
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
+@Table(name = "car")
 class CarEntity(@Id val id: UUID, val name: String, val dailyPrice: BigDecimal) {
     constructor(car: Car) : this(
         id = car.id.value,

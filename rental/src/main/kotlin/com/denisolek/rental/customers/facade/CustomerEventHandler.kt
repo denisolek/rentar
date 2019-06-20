@@ -31,7 +31,7 @@ class CustomerEventHandler(val repository: CustomerRepository) {
     }
 
     fun handle(e: CustomerAddingCancelled) {
-        repository.removeIfExists(e.aggregateId)
+        repository.deleteOrThrow(e.aggregateId)
         logger.info("[CustomerAddingCancelled] {${e.aggregateId}} - Handled")
     }
 }

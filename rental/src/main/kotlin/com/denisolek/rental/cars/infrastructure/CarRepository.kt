@@ -1,29 +1,27 @@
 package com.denisolek.rental.cars.infrastructure
 
-import com.denisolek.rental.cars.infrastructure.CarExceptions.CarNotFoundException
 import com.denisolek.rental.cars.model.Car
 import com.denisolek.rental.infrastructure.findOne
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Component
 import java.util.*
 
-interface CarRepository : JpaRepository<CarEntity, UUID> {
-    fun countById(id: UUID): Int
-
+@Component
+class CarRepository(val repository: CarEntityRepository) {
     fun save(car: Car): Car {
-        return save(CarEntity(car)).toDomainModel()
+        return repository.save(CarEntity(car)).toDomainModel()
     }
 
     fun findByIdOrThrow(id: UUID): Car {
-        return findOne(id)?.toDomainModel() ?: throw CarNotFoundException()
+        return repository.findOne(id)?.toDomainModel() ?: throw CarExceptions.CarNotFoundException()
     }
 
-    fun removeIfExists(id: UUID) {
-        delete(findOne(id) ?: throw CarNotFoundException())
+    fun removeOrThrow(id: UUID) {
+        return repository.delete(repository.findOne(id) ?: throw CarExceptions.CarNotFoundException())
     }
 
     fun existOrThrow(id: UUID): Boolean {
-        if (countById(id) > 0)
+        if (repository.countById(id) > 0)
             return true
-        else throw CarNotFoundException()
+        else throw CarExceptions.CarNotFoundException()
     }
 }

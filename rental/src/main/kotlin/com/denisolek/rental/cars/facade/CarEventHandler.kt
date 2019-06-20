@@ -44,7 +44,7 @@ class CarEventHandler(
     }
 
     fun handle(e: CarAddingCancelled) {
-        repository.removeIfExists(e.aggregateId)
+        repository.removeOrThrow(e.aggregateId)
         logger.info("[CarAddingCancelled] {${e.aggregateId}} - Handled")
     }
 

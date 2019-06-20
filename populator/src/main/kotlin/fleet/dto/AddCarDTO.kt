@@ -8,7 +8,8 @@ class AddCarDTO(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 ) {
     companion object {
         operator fun invoke(): AddCarDTO {
@@ -22,7 +23,8 @@ class AddCarDTO(
                 mileage = CarGenerator.mileage,
                 transmission = template.transmission,
                 fuel = CarGenerator.fuel,
-                registrationNumber = CarGenerator.registrationNumber
+                registrationNumber = CarGenerator.registrationNumber,
+                dailyPrice = CarGenerator.dailyPrice
             )
         }
     }

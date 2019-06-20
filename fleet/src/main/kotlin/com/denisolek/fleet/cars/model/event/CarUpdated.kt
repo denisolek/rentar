@@ -2,7 +2,6 @@ package com.denisolek.fleet.cars.model.event
 
 import com.denisolek.fleet.cars.facade.command.UpdateCarCommand
 import com.denisolek.fleet.cars.model.value.CarId
-import com.denisolek.fleet.infrastructure.gson.Gson
 import java.time.LocalDateTime
 import java.util.*
 
@@ -36,6 +35,4 @@ class CarUpdated(
         registrationNumber = command.registrationNumber,
         dailyPrice = command.dailyPrice
     )
-
-    override fun toJson(): String = Gson.create().toJson(this)
 }

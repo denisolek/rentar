@@ -1,7 +1,6 @@
 package com.denisolek.fleet.cars.model.event
 
 import com.denisolek.fleet.cars.facade.command.UpdateCarCancelledCommand
-import com.denisolek.fleet.infrastructure.gson.Gson
 import java.time.LocalDateTime
 import java.util.*
 
@@ -31,6 +30,4 @@ class CarUpdatingCancelled(
         fuel = command.fuel,
         registrationNumber = command.registrationNumber
     )
-
-    override fun toJson(): String = Gson.create().toJson(this)
 }

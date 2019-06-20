@@ -13,6 +13,7 @@ object CarFactory {
         mileage = Mileage(e.mileage),
         transmission = Transmission(e.transmission),
         fuel = Fuel(e.fuel),
-        registrationNumber = RegistrationNumber(e.registrationNumber)
+        registrationNumber = RegistrationNumber(e.registrationNumber),
+        dailyPrice = DailyPrice(e.dailyPrice)
     )
 }

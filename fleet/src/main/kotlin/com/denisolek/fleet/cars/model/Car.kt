@@ -12,7 +12,8 @@ class Car(
     var mileage: Mileage,
     var transmission: Transmission,
     var fuel: Fuel,
-    var registrationNumber: RegistrationNumber
+    var registrationNumber: RegistrationNumber,
+    var dailyPrice: DailyPrice
 ) {
     fun apply(e: CarUpdated) {
         this.manufacturer = Manufacturer(e.manufacturer)
@@ -23,5 +24,6 @@ class Car(
         this.transmission = Transmission(e.transmission)
         this.fuel = Fuel(e.fuel)
         this.registrationNumber = RegistrationNumber(e.registrationNumber)
+        this.dailyPrice = DailyPrice(e.dailyPrice)
     }
 }

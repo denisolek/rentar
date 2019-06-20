@@ -2,6 +2,7 @@ package com.denisolek.fleet.cars.infrastructure
 
 import com.denisolek.fleet.cars.model.Car
 import com.denisolek.fleet.cars.model.value.*
+import java.math.BigDecimal
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -19,7 +20,8 @@ class CarEntity(
     val transmission: String,
     val fuel: String,
     @Column(unique = true)
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: BigDecimal
 ) {
     constructor(car: Car) : this(
         id = car.id.value,
@@ -30,7 +32,8 @@ class CarEntity(
         mileage = car.mileage.value,
         transmission = car.transmission.type.name,
         fuel = car.fuel.type.name,
-        registrationNumber = car.registrationNumber.value
+        registrationNumber = car.registrationNumber.value,
+        dailyPrice = car.dailyPrice.value
     )
 
     fun toDomainModel() = Car(
@@ -42,6 +45,7 @@ class CarEntity(
         mileage = Mileage(this.mileage),
         transmission = Transmission(this.transmission),
         fuel = Fuel(this.fuel),
-        registrationNumber = RegistrationNumber(this.registrationNumber)
+        registrationNumber = RegistrationNumber(this.registrationNumber),
+        dailyPrice = DailyPrice(this.dailyPrice)
     )
 }

@@ -19,7 +19,8 @@ class CarUpdated(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 ) : CarEvent {
     constructor(command: UpdateCarCommand, id: CarId) : this(
         id = UUID.randomUUID(),
@@ -32,7 +33,8 @@ class CarUpdated(
         mileage = command.mileage,
         transmission = command.transmission,
         fuel = command.fuel,
-        registrationNumber = command.registrationNumber
+        registrationNumber = command.registrationNumber,
+        dailyPrice = command.dailyPrice
     )
 
     override fun toJson(): String = Gson.create().toJson(this)

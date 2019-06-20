@@ -8,5 +8,6 @@ class UpdateCarCommand(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 )

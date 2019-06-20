@@ -14,4 +14,5 @@ class CarExceptions {
     class InvalidSegmentException : Exception(HttpStatus.BAD_REQUEST, "Invalid segment.")
     class CarNotFoundException : Exception(HttpStatus.NOT_FOUND, "Car not found.")
     class RegistrationNumberAlreadyExistsException : Exception(HttpStatus.CONFLICT, "Registration number already exists.")
+    class InvalidDailyPrice : Exception(HttpStatus.CONFLICT, "Invalid daily price.")
 }

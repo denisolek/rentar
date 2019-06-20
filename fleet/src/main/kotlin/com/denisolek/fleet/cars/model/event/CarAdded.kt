@@ -2,6 +2,7 @@ package com.denisolek.fleet.cars.model.event
 
 import com.denisolek.fleet.cars.facade.command.AddCarCommand
 import com.denisolek.fleet.cars.model.value.CarId
+import com.denisolek.fleet.cars.model.value.DailyPrice
 import com.denisolek.fleet.infrastructure.gson.Gson
 import java.time.LocalDateTime
 import java.util.*
@@ -19,7 +20,8 @@ class CarAdded(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 ) : CarEvent {
     constructor(command: AddCarCommand) : this(
         id = UUID.randomUUID(),
@@ -32,7 +34,8 @@ class CarAdded(
         mileage = command.mileage,
         transmission = command.transmission,
         fuel = command.fuel,
-        registrationNumber = command.registrationNumber
+        registrationNumber = command.registrationNumber,
+        dailyPrice = command.dailyPrice
     )
 
     override fun toJson(): String = Gson.create().toJson(this)

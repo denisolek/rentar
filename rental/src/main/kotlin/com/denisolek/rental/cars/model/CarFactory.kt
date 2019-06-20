@@ -7,7 +7,7 @@ import com.denisolek.rental.cars.model.value.DailyPrice
 
 object CarFactory {
     fun create(e: CarAdded) = Car(
-        id = CarId(e.id),
+        id = CarId(e.aggregateId),
         name = CarName("${e.manufacturer} ${e.model}"),
         dailyPrice = DailyPrice(e.dailyPrice)
     )

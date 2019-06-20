@@ -14,7 +14,7 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "rentalshere")
+@Table(name = "rental")
 class RentalEntity(
     @Id
     val id: UUID,

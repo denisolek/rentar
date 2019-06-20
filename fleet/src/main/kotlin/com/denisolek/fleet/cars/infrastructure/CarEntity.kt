@@ -7,8 +7,10 @@ import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
+@Table(name ="car")
 class CarEntity(
     @Id
     val id: UUID,

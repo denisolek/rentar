@@ -25,7 +25,7 @@ class RentalCommandHandler(val eventProducer: Producer<String, String>) {
     fun handle(command: CreateRentalCancelledCommand) {
         RentalCreatingCancelled(command).run {
             eventProducer.send(this)
-            logger.info("[CarCreatingCancelled] {${this.aggregateId}} - Sent")
+            logger.info("[CarAddingCancelled] {${this.aggregateId}} - Sent")
         }
     }
 }

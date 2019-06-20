@@ -11,8 +11,11 @@ class UpdateCarCancelledCommand(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 ) {
+
+
     constructor(car: Car) : this(
         aggregateId = car.id.value,
         manufacturer = car.manufacturer.value,
@@ -21,6 +24,7 @@ class UpdateCarCancelledCommand(
         mileage = car.mileage.value,
         transmission = car.transmission.type.name,
         fuel = car.fuel.type.name,
-        registrationNumber = car.registrationNumber.value
+        registrationNumber = car.registrationNumber.value,
+        dailyPrice = car.dailyPrice.value.toInt()
     )
 }

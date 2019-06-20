@@ -16,7 +16,8 @@ class CarUpdatingCancelled(
     val mileage: Int,
     val transmission: String,
     val fuel: String,
-    val registrationNumber: String
+    val registrationNumber: String,
+    val dailyPrice: Int
 ) : CarEvent {
     constructor(command: UpdateCarCancelledCommand) : this(
         id = UUID.randomUUID(),
@@ -28,6 +29,7 @@ class CarUpdatingCancelled(
         mileage = command.mileage,
         transmission = command.transmission,
         fuel = command.fuel,
-        registrationNumber = command.registrationNumber
+        registrationNumber = command.registrationNumber,
+        dailyPrice = command.dailyPrice
     )
 }

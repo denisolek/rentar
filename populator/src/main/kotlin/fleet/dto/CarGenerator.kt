@@ -1,7 +1,6 @@
 package fleet.dto
 
 import org.apache.commons.lang3.RandomStringUtils
-import kotlin.random.Random
 
 object CarGenerator {
     val productionYear: Int
@@ -15,6 +14,9 @@ object CarGenerator {
 
     val registrationNumber: String
         get() = "PO ${RandomStringUtils.randomNumeric(2)}${RandomStringUtils.randomAlphanumeric(3).toUpperCase()}"
+
+    val dailyPrice: Int
+        get() = (4000..40000).random()
 
     class CarTemplate(val manufacturer: String, val model: String, val segment: String, val transmission: String)
 

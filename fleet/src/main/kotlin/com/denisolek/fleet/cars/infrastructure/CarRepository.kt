@@ -1,22 +1,27 @@
 package com.denisolek.fleet.cars.infrastructure
 
-import com.denisolek.fleet.cars.infrastructure.CarExceptions.CarNotFoundException
-import com.denisolek.fleet.cars.infrastructure.CarExceptions.RegistrationNumberAlreadyExistsException
+import com.denisolek.fleet.cars.model.Car
 import com.denisolek.fleet.infrastructure.findOne
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Component
 import java.util.*
 
-interface CarRepository : JpaRepository<CarEntity, UUID> {
-    fun countByRegistrationNumber(registrationNumber: String): Int
+@Component
+class CarRepository(val repository: CarEntityRepository) {
+    fun save(car: Car): Car {
+        return repository.save(CarEntity(car)).toDomainModel()
+    }
 
-    @JvmDefault
-    fun findByIdOrThrow(id: UUID): CarEntity {
-        return findOne(id) ?: throw CarNotFoundException()
+    fun findAll(): List<Car> {
+        return repository.findAll().map { it.toDomainModel() }
+    }
+
+    fun findByIdOrThrow(id: UUID): Car {
+        return repository.findOne(id)?.toDomainModel() ?: throw CarExceptions.CarNotFoundException()
     }
 
     fun registrationAvailableOrThrow(registrationNumber: String): Boolean {
-        if (countByRegistrationNumber(registrationNumber) > 0)
-            throw RegistrationNumberAlreadyExistsException()
+        if (repository.countByRegistrationNumber(registrationNumber) > 0)
+            throw CarExceptions.RegistrationNumberAlreadyExistsException()
         else return true
     }
 }

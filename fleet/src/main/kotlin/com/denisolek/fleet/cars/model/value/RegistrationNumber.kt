@@ -15,4 +15,6 @@ class RegistrationNumber private constructor(
 
         private fun validate(input: String) = input.length in 4..10
     }
+
+    fun equals(value: String) = this.value == value
 }

@@ -8,18 +8,21 @@ import com.denisolek.rental.rentals.model.*
 import com.denisolek.rental.rentals.model.value.RentalId
 import java.time.LocalDateTime
 import java.util.*
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "rental")
+@Table(name = "rentalshere")
 class RentalEntity(
     @Id
     val id: UUID,
     val carId: UUID,
     val customerId: UUID,
+    @Column(name = "start")
     val from: LocalDateTime,
+    @Column(name = "end")
     val to: LocalDateTime,
     val cancelled: Boolean
 ) {

@@ -45,7 +45,7 @@ class CarEventHandler(
 
     fun handle(carUpdated: CarUpdated) {
         try {
-            queryHanlder.validateUpdate(UpdateCarValidate(carUpdated.registrationNumber), carUpdated.id)
+            queryHanlder.validateUpdate(UpdateCarValidate(carUpdated.registrationNumber), carUpdated.aggregateId)
             val car = repository.findByIdOrThrow(carUpdated.aggregateId)
             car.apply(carUpdated)
             repository.save(car)

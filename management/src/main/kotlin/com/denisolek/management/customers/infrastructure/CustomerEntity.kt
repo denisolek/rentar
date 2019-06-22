@@ -38,7 +38,7 @@ class CustomerEntity(
         phoneNationalNumber = customer.phoneNumber.nationalNumber,
         birthDate = customer.birthDate.value,
         drivingLicence = customer.drivingLicence.value,
-        passport = customer.drivingLicence.value,
+        passport = customer.passport.value,
         createdAt = customer.createdAt,
         updatedAt = customer.updatedAt
     )

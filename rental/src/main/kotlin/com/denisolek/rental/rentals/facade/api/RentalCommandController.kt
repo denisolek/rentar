@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-class RentalsCommandController(val commandHandler: RentalCommandHandler) {
+class RentalCommandController(val commandHandler: RentalCommandHandler) {
 
     @PostMapping("/rentals")
     @ResponseStatus(HttpStatus.CREATED)

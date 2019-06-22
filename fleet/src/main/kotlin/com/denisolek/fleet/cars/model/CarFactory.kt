@@ -6,6 +6,8 @@ import com.denisolek.fleet.cars.model.value.*
 object CarFactory {
     fun create(e: CarAdded) = Car(
         id = CarId(e.aggregateId),
+        createdAt = e.occurredAt,
+        updatedAt = e.occurredAt,
         manufacturer = Manufacturer(e.manufacturer),
         model = Model(e.model),
         segment = Segment(e.segment),

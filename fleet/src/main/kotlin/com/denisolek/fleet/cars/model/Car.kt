@@ -2,9 +2,12 @@ package com.denisolek.fleet.cars.model
 
 import com.denisolek.fleet.cars.model.event.CarUpdated
 import com.denisolek.fleet.cars.model.value.*
+import java.time.LocalDateTime
 
 class Car(
     val id: CarId,
+    var createdAt: LocalDateTime,
+    var updatedAt: LocalDateTime,
     var manufacturer: Manufacturer,
     var model: Model,
     var segment: Segment,
@@ -16,6 +19,7 @@ class Car(
     var dailyPrice: DailyPrice
 ) {
     fun apply(e: CarUpdated) {
+        this.updatedAt = e.occurredAt
         this.manufacturer = Manufacturer(e.manufacturer)
         this.model = Model(e.model)
         this.segment = Segment(e.segment)

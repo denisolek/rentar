@@ -5,8 +5,8 @@ object Setup {
     const val managementHost = "http://localhost:9000"
     const val fleetHost = "http://localhost:9001"
     const val requestInterval = 0
-    const val customersCount = 400
-    const val carCount = 300
+    const val customersCount = 20
+    const val carCount = 20
 }
 
 fun main() {

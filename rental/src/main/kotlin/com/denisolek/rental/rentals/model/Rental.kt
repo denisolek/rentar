@@ -12,5 +12,5 @@ interface Rental {
     val from: LocalDateTime
     val to: LocalDateTime
 
-    fun overlaps(start: LocalDateTime, end: LocalDateTime) = from < start && to > end
+    fun overlaps(start: LocalDateTime, end: LocalDateTime) = from <= start && to >= end
 }

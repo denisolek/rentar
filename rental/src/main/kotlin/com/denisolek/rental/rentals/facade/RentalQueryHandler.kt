@@ -2,10 +2,10 @@ package com.denisolek.rental.rentals.facade
 
 import com.denisolek.rental.cars.facade.CarFacade
 import com.denisolek.rental.customers.facade.CustomerFacade
+import com.denisolek.rental.infrastructure.isAfterOrEqual
 import com.denisolek.rental.infrastructure.isBeforeOrEqual
 import com.denisolek.rental.rentals.facade.query.CreateRentalValidate
-import com.denisolek.rental.rentals.infrastructure.RentalExceptions.RentalInThePastException
-import com.denisolek.rental.rentals.infrastructure.RentalExceptions.RentalsOverlapsException
+import com.denisolek.rental.rentals.infrastructure.RentalExceptions.*
 import com.denisolek.rental.rentals.infrastructure.RentalRepository
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
@@ -17,7 +17,7 @@ class RentalQueryHandler(
     val customerFacade: CustomerFacade
 ) {
     fun validateCreate(dto: CreateRentalValidate) {
-        rentalNotInThePast(dto)
+        timeValidation(dto)
         carExists(dto)
         customerExists(dto)
         rentalsNotOverlapping(dto)
@@ -37,8 +37,10 @@ class RentalQueryHandler(
         }
     }
 
-    private fun rentalNotInThePast(dto: CreateRentalValidate) {
+    private fun timeValidation(dto: CreateRentalValidate) {
         if (dto.from.isBeforeOrEqual(LocalDateTime.now()))
             throw RentalInThePastException()
+        if (dto.from.isAfterOrEqual(dto.to))
+            throw RentalStartsAfterEndsException()
     }
 }

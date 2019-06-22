@@ -19,6 +19,8 @@ import javax.persistence.Table
 class RentalEntity(
     @Id
     val id: UUID,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime,
     val carId: UUID,
     val customerId: UUID,
     @Column(name = "start")
@@ -30,6 +32,8 @@ class RentalEntity(
 ) {
     constructor(rental: Rental) : this(
         id = rental.id.value,
+        createdAt = rental.createdAt,
+        updatedAt = rental.updatedAt,
         carId = rental.carId.value,
         customerId = rental.customerId.value,
         from = rental.from,
@@ -49,6 +53,8 @@ class RentalEntity(
     private fun upcomingRental(): UpcomingRental {
         return UpcomingRental(
             id = RentalId(this.id),
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt,
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
@@ -62,6 +68,8 @@ class RentalEntity(
     private fun cancelledRental(): CancelledRental {
         return CancelledRental(
             id = RentalId(this.id),
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt,
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
@@ -75,6 +83,8 @@ class RentalEntity(
     private fun ongoingRental(): OngoingRental {
         return OngoingRental(
             id = RentalId(this.id),
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt,
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
@@ -88,6 +98,8 @@ class RentalEntity(
     private fun completedRental(): CompletedRental {
         return CompletedRental(
             id = RentalId(this.id),
+            createdAt = this.createdAt,
+            updatedAt = this.updatedAt,
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,

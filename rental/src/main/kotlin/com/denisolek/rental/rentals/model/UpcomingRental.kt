@@ -8,6 +8,8 @@ import java.time.LocalDateTime
 
 class UpcomingRental(
     override val id: RentalId,
+    override val createdAt: LocalDateTime,
+    override val updatedAt: LocalDateTime,
     override val carId: CarId,
     override val customerId: CustomerId,
     override val from: LocalDateTime,

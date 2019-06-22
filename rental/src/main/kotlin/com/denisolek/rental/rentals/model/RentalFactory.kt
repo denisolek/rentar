@@ -10,6 +10,8 @@ import com.denisolek.rental.rentals.model.value.RentalPrice
 object RentalFactory {
     fun create(e: RentalCreated, dailyPrice: DailyPrice) = UpcomingRental(
         id = RentalId(e.aggregateId),
+        createdAt = e.occurredAt,
+        updatedAt = e.occurredAt,
         carId = CarId(e.carId),
         customerId = CustomerId(e.customerId),
         from = e.from,

@@ -8,6 +8,8 @@ import java.time.LocalDateTime
 
 interface Rental {
     val id: RentalId
+    val createdAt: LocalDateTime
+    val updatedAt: LocalDateTime
     val carId: CarId
     val customerId: CustomerId
     val from: LocalDateTime

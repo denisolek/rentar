@@ -6,10 +6,12 @@ import com.denisolek.rental.infrastructure.isAfterOrEqual
 import com.denisolek.rental.infrastructure.isBeforeOrEqual
 import com.denisolek.rental.rentals.facade.query.BaseRental
 import com.denisolek.rental.rentals.facade.query.CreateRentalValidate
+import com.denisolek.rental.rentals.facade.query.DetailedRental
 import com.denisolek.rental.rentals.infrastructure.RentalExceptions.*
 import com.denisolek.rental.rentals.infrastructure.RentalRepository
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
+import java.util.*
 
 @Component
 class RentalQueryHandler(
@@ -22,10 +24,6 @@ class RentalQueryHandler(
         carExists(dto)
         customerExists(dto)
         rentalsNotOverlapping(dto)
-    }
-
-    fun fetchAll(): List<BaseRental> {
-        return repository.findAll().map { BaseRental(it) }
     }
 
     private fun customerExists(dto: CreateRentalValidate) {
@@ -47,5 +45,13 @@ class RentalQueryHandler(
             throw RentalInThePastException()
         if (dto.from.isAfterOrEqual(dto.to))
             throw RentalStartsAfterEndsException()
+    }
+
+    fun fetchAll(): List<BaseRental> {
+        return repository.findAll().map { BaseRental(it) }
+    }
+
+    fun findOne(id: UUID): DetailedRental {
+        return DetailedRental(repository.findOneOrThrow(id))
     }
 }

@@ -30,8 +30,6 @@ dependencies {
     implementation("org.zalando:logbook-core:2.0.0-RC.1")
     implementation("org.zalando:logbook-spring-boot-starter:2.0.0-RC.1")
     implementation("com.google.code.gson:gson:2.8.5")
-    implementation("io.springfox:springfox-swagger2:2.9.2")
-    implementation("io.springfox:springfox-swagger-ui:2.9.2")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.kafka:spring-kafka-test")

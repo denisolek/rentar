@@ -5,6 +5,7 @@ import java.util.*
 
 class CreateRentalValidate(
     val carId: UUID,
+    val customerId: UUID,
     val from: LocalDateTime,
     val to: LocalDateTime
 )

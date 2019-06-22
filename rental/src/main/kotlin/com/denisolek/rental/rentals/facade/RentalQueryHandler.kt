@@ -24,7 +24,7 @@ class RentalQueryHandler(
     }
 
     private fun customerExists(dto: CreateRentalValidate) {
-        customerFacade.existOrThrow(dto.carId)
+        customerFacade.existOrThrow(dto.customerId)
     }
 
     private fun carExists(dto: CreateRentalValidate) {

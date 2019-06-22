@@ -9,7 +9,7 @@ class RentalCreatingCancelled(
     override val aggregateId: UUID,
     override val occurredAt: LocalDateTime,
     override val version: Int = 1,
-    override val type: String = "CarAddingCancelled"
+    override val type: String = "RentalCreatingCancelled"
 ) : RentalEvent {
     constructor(command: CreateRentalCancelledCommand) : this(
         id = UUID.randomUUID(),

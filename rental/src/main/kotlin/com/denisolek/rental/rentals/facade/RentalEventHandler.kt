@@ -29,7 +29,7 @@ class RentalEventHandler(
 
     fun handle(rentalCreated: RentalCreated) {
         try {
-            queryHandler.validateCreate(CreateRentalValidate(rentalCreated.carId, rentalCreated.from, rentalCreated.to))
+            queryHandler.validateCreate(CreateRentalValidate(rentalCreated.carId, rentalCreated.customerId, rentalCreated.from, rentalCreated.to))
             RentalFactory.create(rentalCreated).run {
                 repository.save(this)
                 logger.info("[RentalCreated] {${this.id.value}} - Handled")

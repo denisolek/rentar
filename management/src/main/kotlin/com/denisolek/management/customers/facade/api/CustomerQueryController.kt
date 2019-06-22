@@ -3,6 +3,7 @@ package com.denisolek.management.customers.facade.api
 import com.denisolek.management.customers.facade.CustomerQueryHandler
 import com.denisolek.management.customers.facade.query.AddCustomerValidate
 import com.denisolek.management.customers.facade.query.BaseCustomer
+import com.denisolek.management.customers.facade.query.DetailedCustomer
 import com.denisolek.management.customers.facade.query.UpdateCustomerValidate
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -29,5 +30,10 @@ class CustomerQueryController(val queryHandler: CustomerQueryHandler) {
     @GetMapping("/customers")
     fun fetchAll(): List<BaseCustomer> {
         return queryHandler.fetchAll()
+    }
+
+    @GetMapping("/customers/{$CUSTOMER_ID}")
+    fun fetchById(@PathVariable(required = true, value = CUSTOMER_ID) id: UUID): DetailedCustomer {
+        return queryHandler.fetchById(id)
     }
 }

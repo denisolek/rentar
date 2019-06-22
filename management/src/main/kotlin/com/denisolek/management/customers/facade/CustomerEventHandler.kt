@@ -2,17 +2,14 @@ package com.denisolek.management.customers.facade
 
 import com.denisolek.management.customers.facade.command.AddCustomerCancelledCommand
 import com.denisolek.management.customers.facade.command.UpdateCustomerCancelledCommand
-import com.denisolek.management.customers.infrastructure.CustomerEntity
-import com.denisolek.management.customers.infrastructure.CustomerRepository
+import com.denisolek.management.customers.infrastructure.config.CustomerRepository
 import com.denisolek.management.customers.model.CustomerFactory
 import com.denisolek.management.customers.model.event.CustomerAdded
 import com.denisolek.management.customers.model.event.CustomerUpdated
 import com.denisolek.management.infrastructure.Globals
-import com.denisolek.management.infrastructure.findOne
 import com.denisolek.management.infrastructure.toCustomerEvent
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Service
@@ -34,7 +31,7 @@ class CustomerEventHandler(
     fun handle(customerAdded: CustomerAdded) {
         try {
             val customer = CustomerFactory.create(customerAdded)
-            customerRepository.save(CustomerEntity(customer))
+            customerRepository.save(customer)
             logger.info("[CustomerAdded] {${customer.id.value}} - Handled")
         } catch (e: Exception) {
             commandHandler.handle(AddCustomerCancelledCommand(customerAdded.aggregateId))
@@ -44,13 +41,13 @@ class CustomerEventHandler(
 
     fun handle(customerUpdated: CustomerUpdated) {
         try {
-            val customer = customerRepository.findByIdOrThrow(customerUpdated.aggregateId).toDomainModel()
+            val customer = customerRepository.findByIdOrThrow(customerUpdated.aggregateId)
             customer.apply(customerUpdated)
-            customerRepository.save(CustomerEntity(customer))
+            customerRepository.save(customer)
             logger.info("[CustomerUpdated] {${customer.id.value}} - Handled")
         } catch (e: Exception) {
-            val customer = customerRepository.findOne(customerUpdated.aggregateId)?.toDomainModel()
-            customer?.run { commandHandler.handle(UpdateCustomerCancelledCommand(this)) }
+            val customer = customerRepository.findByIdOrThrow(customerUpdated.aggregateId)
+            customer.run { commandHandler.handle(UpdateCustomerCancelledCommand(this)) }
             throw e
         }
     }

@@ -15,4 +15,6 @@ class DrivingLicence private constructor(
 
         private fun validate(input: String) = input.length in 2..50
     }
+
+    fun equals(value: String) = this.value == value
 }

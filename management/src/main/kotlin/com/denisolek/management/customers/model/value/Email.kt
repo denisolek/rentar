@@ -20,4 +20,6 @@ class Email private constructor(
             if (!valid) throw InvalidEmailException()
         }
     }
+
+    fun equals(value: String) = this.value == value
 }

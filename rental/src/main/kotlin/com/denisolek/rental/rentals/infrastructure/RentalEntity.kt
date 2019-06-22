@@ -6,6 +6,7 @@ import com.denisolek.rental.infrastructure.isBetweenInclusive
 import com.denisolek.rental.rentals.infrastructure.RentalExceptions.DomainMappingException
 import com.denisolek.rental.rentals.model.*
 import com.denisolek.rental.rentals.model.value.RentalId
+import com.denisolek.rental.rentals.model.value.RentalPrice
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Column
@@ -24,7 +25,8 @@ class RentalEntity(
     val from: LocalDateTime,
     @Column(name = "end")
     val to: LocalDateTime,
-    val cancelled: Boolean
+    val cancelled: Boolean,
+    val price: Int
 ) {
     constructor(rental: Rental) : this(
         id = rental.id.value,
@@ -32,7 +34,8 @@ class RentalEntity(
         customerId = rental.customerId.value,
         from = rental.from,
         to = rental.to,
-        cancelled = rental is CancelledRental
+        cancelled = rental is CancelledRental,
+        price = rental.price.value.toInt()
     )
 
     fun toDomainModel(): Rental = when {
@@ -49,7 +52,8 @@ class RentalEntity(
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
-            to = this.to
+            to = this.to,
+            price = RentalPrice.fromEntity(this.price)
         )
     }
 
@@ -61,7 +65,8 @@ class RentalEntity(
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
-            to = this.to
+            to = this.to,
+            price = RentalPrice.fromEntity(this.price)
         )
     }
 
@@ -73,7 +78,8 @@ class RentalEntity(
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
-            to = this.to
+            to = this.to,
+            price = RentalPrice.fromEntity(this.price)
         )
     }
 
@@ -85,7 +91,8 @@ class RentalEntity(
             carId = CarId(this.carId),
             customerId = CustomerId(this.customerId),
             from = this.from,
-            to = this.to
+            to = this.to,
+            price = RentalPrice.fromEntity(this.price)
         )
     }
 }

@@ -13,4 +13,8 @@ class RentalRepository(val repository: RentalEntityRepository) {
     fun save(rental: Rental): Rental {
         return repository.save(RentalEntity(rental)).toDomainModel()
     }
+
+    fun findAll(): List<Rental> {
+        return repository.findAll().map { it.toDomainModel() }
+    }
 }

@@ -1,5 +1,6 @@
 package com.denisolek.rental.rentals.facade
 
+import com.denisolek.rental.cars.facade.CarFacade
 import com.denisolek.rental.infrastructure.Globals
 import com.denisolek.rental.infrastructure.toRentalEvent
 import com.denisolek.rental.rentals.facade.command.CreateRentalCancelledCommand
@@ -15,7 +16,8 @@ import org.springframework.stereotype.Service
 class RentalEventHandler(
     val repository: RentalRepository,
     val commandHandler: RentalCommandHandler,
-    val queryHandler: RentalQueryHandler
+    val queryHandler: RentalQueryHandler,
+    val carFacade: CarFacade
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -37,7 +39,8 @@ class RentalEventHandler(
                     rentalCreated.to
                 )
             )
-            RentalFactory.create(rentalCreated).run {
+            val dailyPrice = carFacade.findOne(rentalCreated.carId).dailyPrice
+            RentalFactory.create(rentalCreated, dailyPrice).run {
                 repository.save(this)
                 logger.info("[RentalCreated] {${this.id.value}} - Handled")
             }

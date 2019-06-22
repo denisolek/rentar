@@ -4,6 +4,7 @@ import com.denisolek.rental.cars.facade.CarFacade
 import com.denisolek.rental.customers.facade.CustomerFacade
 import com.denisolek.rental.infrastructure.isAfterOrEqual
 import com.denisolek.rental.infrastructure.isBeforeOrEqual
+import com.denisolek.rental.rentals.facade.query.BaseRental
 import com.denisolek.rental.rentals.facade.query.CreateRentalValidate
 import com.denisolek.rental.rentals.infrastructure.RentalExceptions.*
 import com.denisolek.rental.rentals.infrastructure.RentalRepository
@@ -21,6 +22,10 @@ class RentalQueryHandler(
         carExists(dto)
         customerExists(dto)
         rentalsNotOverlapping(dto)
+    }
+
+    fun fetchAll(): List<BaseRental> {
+        return repository.findAll().map { BaseRental(it) }
     }
 
     private fun customerExists(dto: CreateRentalValidate) {

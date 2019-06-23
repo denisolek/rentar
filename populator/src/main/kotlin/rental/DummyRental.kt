@@ -2,4 +2,4 @@ package rental
 
 import java.util.*
 
-class DummyRental(id: UUID)
+class DummyRental(val id: UUID)

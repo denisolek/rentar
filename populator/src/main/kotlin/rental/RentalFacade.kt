@@ -3,7 +3,6 @@ package rental
 import GsonConfig
 import Setup
 import feign.Feign
-import feign.gson.GsonEncoder
 import rental.dto.CreateRentalDTO
 import rental.dto.ValidateRentalCreateDTO
 import java.time.LocalDate
@@ -17,7 +16,7 @@ class RentalFacade {
         .decoder(GsonConfig.decoder)
         .target(RentalClient::class.java, Setup.rentalHost)
 
-    fun createRentals(count: Int, customers: List<UUID>) {
+    fun createRentals(count: Int, customers: List<UUID>): List<DummyRental> {
         val rentals = mutableListOf<DummyRental>()
         loop@ for (i in 1..count) {
             Thread.sleep(Setup.requestInterval.toLong())
@@ -35,6 +34,7 @@ class RentalFacade {
             rentals.add(DummyRental(id))
             println("Created rental [$i] : ${dto.carId} ${dto.from} ${dto.to} {$id}")
         }
+        return rentals
     }
 
     private fun generateTimeRange(): Pair<String, String> {
@@ -57,5 +57,14 @@ class RentalFacade {
             return true
         }
         return false
+    }
+
+    fun cancelRentals(rentals: List<DummyRental>) {
+        loop@ for (i in 1..rentals.count() / 5) {
+            Thread.sleep(Setup.requestInterval.toLong())
+            val id = rentals[(1 until rentals.count()).random()].id
+            rentalClient.cancel(id)
+            println("Cancelled rental [$i] : {$id}")
+        }
     }
 }

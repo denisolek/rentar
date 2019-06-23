@@ -10,6 +10,7 @@ import java.util.*
 
 interface RentalClient {
     companion object {
+        const val RENTAL_ID = "rentalId"
         const val FROM = "from"
         const val TO = "to"
     }
@@ -28,4 +29,11 @@ interface RentalClient {
     @RequestLine("POST /rentals")
     @Headers("Content-Type: application/json")
     fun create(createRentalDTO: CreateRentalDTO): UUID
+
+    /**
+     * Cancel rental
+     */
+    @RequestLine("PUT /rentals/{$RENTAL_ID}/cancel")
+    @Headers("Content-Type: application/json")
+    fun cancel(@Param(value = RENTAL_ID) id: UUID)
 }

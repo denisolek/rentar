@@ -7,9 +7,9 @@ object Setup {
     const val fleetHost = "http://localhost:9001"
     const val rentalHost = "http://localhost:9002"
     const val requestInterval = 0
-    const val customersCount = 20
-    const val carCount = 20
-    const val rentalsCount = 500
+    const val customersCount = 100
+    const val carCount = 25
+    const val rentalsCount = 300
 }
 
 fun main() {
@@ -17,5 +17,6 @@ fun main() {
     ManagementFacade().updateCustomers(customers)
     val cars = FleetFacade().addCars(Setup.carCount)
     FleetFacade().updateCars(cars)
-    RentalFacade().createRentals(Setup.rentalsCount, customers.map { it.id })
+    val rentals = RentalFacade().createRentals(Setup.rentalsCount, customers.map { it.id })
+    RentalFacade().cancelRentals(rentals)
 }

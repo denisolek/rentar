@@ -2,7 +2,7 @@ spring:
   application:
     name: management
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${KAFKA_HOST}
   h2:
     console:
       enabled: true
@@ -24,6 +24,8 @@ logbook:
       - access_token
       - password
   filter.enabled: true
+  exclude:
+    - /customers/healthcheck
 
 logging:
   level:

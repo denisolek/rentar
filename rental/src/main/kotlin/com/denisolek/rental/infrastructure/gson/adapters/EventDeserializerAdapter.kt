@@ -9,6 +9,7 @@ import com.denisolek.rental.customers.model.event.CustomerAddingCancelled
 import com.denisolek.rental.customers.model.event.CustomerUpdated
 import com.denisolek.rental.customers.model.event.CustomerUpdatingCancelled
 import com.denisolek.rental.infrastructure.Exception
+import com.denisolek.rental.rentals.model.event.RentalCancelled
 import com.denisolek.rental.rentals.model.event.RentalCreated
 import com.denisolek.rental.rentals.model.event.RentalCreatingCancelled
 import com.google.gson.*
@@ -23,6 +24,7 @@ class EventDeserializerAdapter : JsonDeserializer<Any> {
         val objectClass = when (prim.asString) {
             RentalCreated::class.java.simpleName -> getObjectClass(RentalCreated::class.java.name)
             RentalCreatingCancelled::class.java.simpleName -> getObjectClass(RentalCreatingCancelled::class.java.name)
+            RentalCancelled::class.java.simpleName -> getObjectClass(RentalCancelled::class.java.name)
             CarAdded::class.java.simpleName -> getObjectClass(CarAdded::class.java.name)
             CarAddingCancelled::class.java.simpleName -> getObjectClass(CarAddingCancelled::class.java.name)
             CarUpdated::class.java.simpleName -> getObjectClass(CarUpdated::class.java.name)

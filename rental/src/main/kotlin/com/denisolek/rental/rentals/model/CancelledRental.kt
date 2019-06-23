@@ -16,4 +16,14 @@ class CancelledRental(
     override val to: LocalDateTime,
     override val price: RentalPrice
 ) : Rental {
+    constructor(rental: Rental) : this(
+        id = rental.id,
+        createdAt = rental.createdAt,
+        updatedAt = LocalDateTime.now(),
+        carId = rental.carId,
+        customerId = rental.customerId,
+        from = rental.from,
+        to = rental.to,
+        price = rental.price
+    )
 }

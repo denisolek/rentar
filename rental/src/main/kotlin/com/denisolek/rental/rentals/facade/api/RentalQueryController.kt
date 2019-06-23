@@ -29,7 +29,7 @@ class RentalQueryController(val handler: RentalQueryHandler) {
         return handler.fetchAll()
     }
 
-    @GetMapping("/rentals{$RENTAL_ID}")
+    @GetMapping("/rentals/{$RENTAL_ID}")
     fun fetchOne(@PathVariable(required = true, value = RENTAL_ID) id: UUID): DetailedRental {
         return handler.findOne(id)
     }

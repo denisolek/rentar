@@ -1,6 +1,7 @@
 package com.denisolek.rental.rentals.facade.query
 
-import com.denisolek.rental.rentals.model.Rental
+import com.denisolek.rental.rentals.infrastructure.RentalExceptions.DomainMappingException
+import com.denisolek.rental.rentals.model.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
@@ -14,7 +15,8 @@ class DetailedRental(
     val from: LocalDateTime,
     val to: LocalDateTime,
     val days: Int,
-    val price: Int
+    val price: Int,
+    val status: String
 ) {
     constructor(rental: Rental) : this(
         id = rental.id.value,
@@ -25,6 +27,13 @@ class DetailedRental(
         from = rental.from,
         to = rental.to,
         days = ChronoUnit.DAYS.between(rental.from, rental.to).toInt(),
-        price = rental.price.value.toInt()
+        price = rental.price.value.toInt(),
+        status = when (rental) {
+            is CancelledRental -> "Cancelled"
+            is CompletedRental -> "Completed"
+            is OngoingRental -> "Ongoing"
+            is UpcomingRental -> "Upcoming"
+            else -> throw DomainMappingException()
+        }
     )
 }

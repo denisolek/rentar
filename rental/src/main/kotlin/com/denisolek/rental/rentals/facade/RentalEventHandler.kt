@@ -6,7 +6,9 @@ import com.denisolek.rental.infrastructure.toRentalEvent
 import com.denisolek.rental.rentals.facade.command.CreateRentalCancelledCommand
 import com.denisolek.rental.rentals.facade.query.CreateRentalValidate
 import com.denisolek.rental.rentals.infrastructure.RentalRepository
+import com.denisolek.rental.rentals.model.CancelledRental
 import com.denisolek.rental.rentals.model.RentalFactory
+import com.denisolek.rental.rentals.model.event.RentalCancelled
 import com.denisolek.rental.rentals.model.event.RentalCreated
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
@@ -26,6 +28,7 @@ class RentalEventHandler(
         val event = message.toRentalEvent()
         when (event) {
             is RentalCreated -> handle(event)
+            is RentalCancelled -> handle(event)
         }
     }
 
@@ -48,5 +51,11 @@ class RentalEventHandler(
             commandHandler.handle(CreateRentalCancelledCommand(rentalCreated.aggregateId))
             throw e
         }
+    }
+
+    fun handle(rentalCancelled: RentalCancelled) {
+        val rental = repository.findOneOrThrow(rentalCancelled.aggregateId)
+        repository.save(CancelledRental(rental))
+        logger.info("[RentalCancelled] {${rental.id.value} - Handled")
     }
 }

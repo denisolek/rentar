@@ -16,7 +16,7 @@ object CarGenerator {
         get() = "PO ${RandomStringUtils.randomNumeric(2)}${RandomStringUtils.randomAlphanumeric(3).toUpperCase()}"
 
     val dailyPrice: Int
-        get() = (4000..40000).random()
+        get() = (4000..14000).random()
 
     class CarTemplate(val manufacturer: String, val model: String, val segment: String, val transmission: String)
 

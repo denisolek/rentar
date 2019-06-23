@@ -3,13 +3,14 @@ package com.denisolek.rental.rentals.facade
 import com.denisolek.rental.cars.facade.CarFacade
 import com.denisolek.rental.customers.facade.CustomerFacade
 import com.denisolek.rental.infrastructure.isAfterOrEqual
-import com.denisolek.rental.infrastructure.isBeforeOrEqual
 import com.denisolek.rental.rentals.facade.query.BaseRental
 import com.denisolek.rental.rentals.facade.query.CreateRentalValidate
 import com.denisolek.rental.rentals.facade.query.DetailedRental
 import com.denisolek.rental.rentals.facade.query.RentalEstimate
-import com.denisolek.rental.rentals.infrastructure.RentalExceptions.*
+import com.denisolek.rental.rentals.infrastructure.RentalExceptions.RentalStartsAfterEndsException
+import com.denisolek.rental.rentals.infrastructure.RentalExceptions.RentalsOverlapsException
 import com.denisolek.rental.rentals.infrastructure.RentalRepository
+import com.denisolek.rental.rentals.model.CancelledRental
 import com.denisolek.rental.rentals.model.value.RentalPrice
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
@@ -37,7 +38,9 @@ class RentalQueryHandler(
     }
 
     private fun rentalsNotOverlapping(dto: CreateRentalValidate) {
-        repository.findByCar(dto.carId).forEach {
+        repository.findByCar(dto.carId)
+            .filter { it !is CancelledRental }
+            .forEach {
             if (it.overlaps(dto.from, dto.to)) throw RentalsOverlapsException()
         }
     }
@@ -57,7 +60,8 @@ class RentalQueryHandler(
 
     fun estimate(from: LocalDateTime, to: LocalDateTime): List<RentalEstimate> {
         timeValidation(from, to)
-        val overlappingCars = repository.findAll().filter { it.overlaps(from, to) }.map { it.carId }
+        val overlappingCars =
+            repository.findAll().filter { it !is CancelledRental && it.overlaps(from, to) }.map { it.carId }
         val availableCars = carFacade.fetchAll().filter { !overlappingCars.contains(it.id) }
         return availableCars.map {
             RentalEstimate(

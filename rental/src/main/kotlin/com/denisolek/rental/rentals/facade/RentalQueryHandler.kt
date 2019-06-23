@@ -43,8 +43,6 @@ class RentalQueryHandler(
     }
 
     private fun timeValidation(from: LocalDateTime, to: LocalDateTime) {
-        if (from.isBeforeOrEqual(LocalDateTime.now()))
-            throw RentalInThePastException()
         if (from.isAfterOrEqual(to))
             throw RentalStartsAfterEndsException()
     }
@@ -63,6 +61,7 @@ class RentalQueryHandler(
         val availableCars = carFacade.fetchAll().filter { !overlappingCars.contains(it.id) }
         return availableCars.map {
             RentalEstimate(
+                carId = it.id.value,
                 carName = it.name.value,
                 price = RentalPrice(it.dailyPrice, from, to).toDto(),
                 from = from,

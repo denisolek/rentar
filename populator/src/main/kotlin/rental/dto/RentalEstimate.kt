@@ -1,4 +1,4 @@
-package com.denisolek.rental.rentals.facade.query
+package rental.dto
 
 import java.time.LocalDateTime
 import java.util.*

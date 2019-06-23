@@ -15,4 +15,6 @@ class RentalPrice private constructor(
 
         fun fromEntity(price: Int) = RentalPrice(price.toBigDecimal())
     }
+
+    fun toDto() = this.value.toInt()
 }

@@ -39,7 +39,7 @@ class RentalEventHandler(
                     rentalCreated.to
                 )
             )
-            val dailyPrice = carFacade.findOne(rentalCreated.carId).dailyPrice
+            val dailyPrice = carFacade.fetchOne(rentalCreated.carId).dailyPrice
             RentalFactory.create(rentalCreated, dailyPrice).run {
                 repository.save(this)
                 logger.info("[RentalCreated] {${this.id.value}} - Handled")

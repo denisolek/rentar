@@ -24,4 +24,8 @@ class CarRepository(val repository: CarEntityRepository) {
             return true
         else throw CarExceptions.CarNotFoundException()
     }
+
+    fun findAll(): List<Car> {
+        return repository.findAll().map { it.toDomainModel() }
+    }
 }

@@ -75,3 +75,13 @@ services:
       - kafka
       - kafka-schema-registry
       - kafka-rest-proxy
+
+  rentar-fleet:
+    container_name: rentar-fleet
+    image: denisolek/rentar-fleet:1.0.4
+    ports:
+      - "9001:9001"
+    environment:
+      KAFKA_HOST: PLAINTEXT://kafka:19092
+    depends_on:
+      - kafka

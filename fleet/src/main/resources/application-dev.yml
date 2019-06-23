@@ -2,7 +2,7 @@ spring:
   application:
     name: fleet
   kafka:
-    bootstrap-servers: ${KAFKA_HOST}
+    bootstrap-servers: localhost:9092
   h2:
     console:
       enabled: true
@@ -23,8 +23,6 @@ logbook:
       - access_token
       - password
   filter.enabled: true
-  exclude:
-    - /cars/healthcheck
 
 logging:
   level:

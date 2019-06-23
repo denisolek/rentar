@@ -13,6 +13,8 @@ import java.util.*
 class RentalQueryController(val handler: RentalQueryHandler) {
     companion object {
         const val RENTAL_ID = "rentalId"
+        const val CAR_ID = "carId"
+        const val CUSTOMER_ID = "customerId"
         const val FROM = "from"
         const val TO = "to"
     }
@@ -38,5 +40,15 @@ class RentalQueryController(val handler: RentalQueryHandler) {
         @RequestParam(required = true, value = TO) to: String
     ): List<RentalEstimate> {
         return handler.estimate(LocalDateTime.parse(from), LocalDateTime.parse(to))
+    }
+
+    @GetMapping("/rentals/customers/{$CUSTOMER_ID}")
+    fun fetchForCustomer(@PathVariable(required = true, value = CUSTOMER_ID) id: UUID): List<BaseRental> {
+        return handler.fetchForCustomer(id)
+    }
+
+    @GetMapping("/rentals/cars/{$CAR_ID}")
+    fun fetchForCar(@PathVariable(required = true, value = CAR_ID) id: UUID): List<BaseRental> {
+        return handler.fetchForCar(id)
     }
 }

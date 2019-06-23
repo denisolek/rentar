@@ -70,4 +70,12 @@ class RentalQueryHandler(
             )
         }
     }
+
+    fun fetchForCustomer(id: UUID): List<BaseRental> {
+        return repository.findByCustomer(id).map { BaseRental(it) }
+    }
+
+    fun fetchForCar(id: UUID): List<BaseRental> {
+        return repository.findByCar(id).map { BaseRental(it) }
+    }
 }

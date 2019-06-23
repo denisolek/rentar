@@ -5,4 +5,5 @@ import java.util.*
 
 interface RentalEntityRepository : JpaRepository<RentalEntity, UUID> {
     fun findByCarId(id: UUID): List<RentalEntity>
+    fun findByCustomerId(id: UUID): List<RentalEntity>
 }

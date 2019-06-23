@@ -23,4 +23,8 @@ class RentalRepository(val repository: RentalEntityRepository) {
     fun findOneOrThrow(id: UUID): Rental {
         return repository.findOne(id)?.toDomainModel() ?: throw RentalNotFoundException()
     }
+
+    fun findByCustomer(id: UUID): List<Rental> {
+        return repository.findByCustomerId(id).map { it.toDomainModel() }
+    }
 }

@@ -42,7 +42,10 @@ class RentalFacade {
             LocalDate.now().plusDays((-50..200).random().toLong()),
             LocalTime.of((6..23).random(), listOf(0, 15, 30, 45).random())
         )
-        val to = from.plusDays((2..24).random().toLong())
+        val to = LocalDateTime.of(
+            from.plusDays((2..24).random().toLong()).toLocalDate(),
+            LocalTime.of((6..23).random(), listOf(0, 15, 30, 45).random())
+        )
         return from.toString() to to.toString()
     }
 

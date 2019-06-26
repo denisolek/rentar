@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kafka-ca1
+  name: rentar-fleet
+spec:
+  ports:
+  - protocol: TCP
+    port: 9001
+    targetPort: 9001
+  selector:
+    app: rentar-fleet
+  type: NodePort

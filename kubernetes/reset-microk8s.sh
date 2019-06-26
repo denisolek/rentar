@@ -3,7 +3,7 @@ kill $(ps aux | grep 'ngrok' | awk '{print $2}')
 microk8s.reset
 sleep 5
 microk8s.enable dns ingress dashboard
-microk8s.kubectl apply -f kafka-cluster/00-namespace/
+# microk8s.kubectl apply -f kafka-cluster/00-namespace/
 microk8s.kubectl apply -f kafka-cluster/01-zookeeper/
 microk8s.kubectl apply -f kafka-cluster/02-kafka/
 microk8s.kubectl apply -f kafka-cluster/03-yahoo-kafka-manager/

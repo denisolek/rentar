@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: kafka-ca1
   name: rentar-fleet-deployment
   labels:
     app: rentar-fleet

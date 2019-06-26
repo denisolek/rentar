@@ -1,0 +1,16 @@
+1. Generate certs
+docker run -it --rm --name certbot -p 80:80 \
+-v "/etc/letsencrypt:/etc/letsencrypt" \
+-v "/var/lib/letsencrypt:/var/lib/letsencrypt" \
+certbot/certbot certonly --agree-tos \
+-d "rentar.eu" \
+-d "api.rentar.eu" \
+-d "dashboard.rentar.eu" \
+-d "kibana.rentar.eu" \
+-d "grafana.rentar.eu" \
+-d "prometheus.rentar.eu" \
+--server https://acme-v02.api.letsencrypt.org/directory
+
+
+2. Add certs as secrets to kubernetes
+microk8s.kubectl create secret tls rentar-eu-tls --cert=*** --key=***

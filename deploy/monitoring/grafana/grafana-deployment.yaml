@@ -31,22 +31,6 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #       - wget 
-        #       - localhost:3000
-        #       - --spider
-        #   initialDelaySeconds: 30
-        #   periodSeconds: 30
-        # readinessProbe:
-        #   exec:
-        #     command:
-        #       - wget 
-        #       - localhost:3000
-        #       - --spider
-          # initialDelaySeconds: 120
-          # periodSeconds: 5
         volumeMounts:
         - mountPath: /var/lib/grafana
           name: grafana-claim

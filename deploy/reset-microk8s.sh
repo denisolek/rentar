@@ -1,3 +1,4 @@
+#!/bin/bash
 rm ngrok.log
 kill $(ps aux | grep 'ngrok' | awk '{print $2}')
 microk8s.reset

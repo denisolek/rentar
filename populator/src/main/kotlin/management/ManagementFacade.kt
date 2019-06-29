@@ -14,7 +14,7 @@ class ManagementFacade {
     private val managementClient = Feign.builder()
         .encoder(GsonEncoder())
         .decoder(GsonDecoder())
-        .target(ManagementClient::class.java, Setup.managementHost)
+        .target(ManagementClient::class.java, Setup.apiHost)
 
     fun addCustomers(count: Int): List<DummyCustomer> {
         val customers = mutableListOf<DummyCustomer>()

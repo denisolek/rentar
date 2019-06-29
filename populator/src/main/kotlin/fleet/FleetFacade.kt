@@ -14,7 +14,7 @@ class FleetFacade {
     private val fleetClient = Feign.builder()
         .encoder(GsonEncoder())
         .decoder(GsonDecoder())
-        .target(FleetClient::class.java, Setup.fleetHost)
+        .target(FleetClient::class.java, Setup.apiHost)
 
     fun addCars(count: Int): List<DummyCar> {
         val cars = mutableListOf<DummyCar>()

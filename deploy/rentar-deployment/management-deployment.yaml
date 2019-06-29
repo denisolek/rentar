@@ -1,27 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: kafka-ca1
-  name: rentar-fleet-deployment
+  name: rentar-management-deployment
   labels:
-    app: rentar-fleet
+    app: rentar-management
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rentar-fleet
+      app: rentar-management
   template:
     metadata:
       labels:
-        app: rentar-fleet
+        app: rentar-management
     spec:
       containers:
       - env:
         - name: KAFKA_HOST
           value: kafka:9092
-        image: denisolek/rentar-fleet:1.0.5
-        name: rentar-fleet
+        image: denisolek/rentar-management:1.0.1
+        name: rentar-management
         ports:
-        - containerPort: 9001
-      hostname: rentar-fleet
+        - containerPort: 9000
+      hostname: rentar-management
       restartPolicy: Always

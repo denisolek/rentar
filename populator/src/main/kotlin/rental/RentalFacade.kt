@@ -14,7 +14,7 @@ class RentalFacade {
     private val rentalClient = Feign.builder()
         .encoder(GsonConfig.encoder)
         .decoder(GsonConfig.decoder)
-        .target(RentalClient::class.java, Setup.rentalHost)
+        .target(RentalClient::class.java, Setup.apiHost)
 
     fun createRentals(count: Int, customers: List<UUID>): List<DummyRental> {
         val rentals = mutableListOf<DummyRental>()

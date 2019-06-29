@@ -1,7 +1,7 @@
 <template>
   <div class="h-panel frame-page">
     <div class="h-panel-bar">
-      <span class="h-panel-title">Klienci</span>
+      <Breadcrumb/>
     </div>
     <div class="h-panel-body">
       <Row>
@@ -46,6 +46,7 @@
 
 <script>
   import AddCustomer from 'components/rentar-components/addCustomer'
+  import Breadcrumb from 'components/rentar-components/breadcrumbs/customersBC';
 
   export default {
     data() {
@@ -90,6 +91,7 @@
       },
     },
     components: {
+      Breadcrumb,
       AddCustomer,
     },
   }

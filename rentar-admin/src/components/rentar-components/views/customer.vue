@@ -1,7 +1,7 @@
 <template>
   <div class="h-panel frame-page">
     <div class="h-panel-bar">
-      <span class="h-panel-title">Klienci</span>
+      <Breadcrumb/>
     </div>
     <div class="h-panel-body">
       <Row>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+  import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
   export default {
     data() {
       return {
@@ -38,6 +39,8 @@
         })
       }
     },
-    components: {},
+    components: {
+      Breadcrumb
+    },
   }
 </script>

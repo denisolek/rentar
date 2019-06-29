@@ -11,31 +11,31 @@
       <FormItem>
         <h2>Dodaj nowego klienta</h2>
       </FormItem>
-      <FormItem label="Imię" prop="firstName">
+      <FormItem label="Pole 'Imię' " prop="firstName">
         <template v-slot:label>Imię</template>
         <input type="text" v-model="model.firstName">
       </FormItem>
-      <FormItem label="lastName" prop="lastName">
+      <FormItem label="Pole 'Nazwisko'" prop="lastName">
         <template v-slot:label>Nazwisko</template>
         <input type="text" v-model="model.lastName">
       </FormItem>
-      <FormItem label="email" prop="email">
+      <FormItem label="Pole 'Email'" prop="email">
         <template v-slot:label>Email</template>
         <input type="text" v-model="model.email">
       </FormItem>
-      <FormItem label="birthDate" prop="birthDate">
+      <FormItem label="Pole 'Data urodzenia'" prop="birthDate">
         <template v-slot:label>Data urodzenia</template>
         <input type="text" v-model="model.birthDate">
       </FormItem>
-      <FormItem label="phoneNumber" prop="phoneNumber">
+      <FormItem label="Pole 'Numer telefonu'" prop="phoneNumber">
         <template v-slot:label>Numer telefonu</template>
         <input type="text" v-model="model.phoneNumber">
       </FormItem>
-      <FormItem label="drivingLicence" prop="drivingLicence">
+      <FormItem label="Pole 'Prawo jazdy'" prop="drivingLicence">
         <template v-slot:label>Prawo jazdy</template>
         <input type="text" v-model="model.drivingLicence">
       </FormItem>
-      <FormItem label="passport" prop="passport">
+      <FormItem label="Pole 'Paszport'" prop="passport">
         <template v-slot:label>Paszport</template>
         <input type="text" v-model="model.passport">
       </FormItem>
@@ -62,10 +62,25 @@
           passport: ''
         },
         validationRules: {
-          required: ['lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
-          rules:{
+          required: ['firstName','lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
+          email: ['email'],
+          mobile: ['phoneNumber'],
+          rules: {
             firstName: {
-
+              minLen: 2,
+              maxLen: 50
+            },
+            lastName: {
+              minLen: 2,
+              maxLen: 50
+            },
+            drivingLicence: {
+              minLen: 2,
+              maxLen: 50
+            },
+            passport: {
+              minLen: 2,
+              maxLen: 50
             }
           }
         },

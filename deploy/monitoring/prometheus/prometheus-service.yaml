@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: prometheus
   namespace: default
-  # namespace: monitoring
   annotations:
       prometheus.io/scrape: 'true'
       prometheus.io/path:   /metrics

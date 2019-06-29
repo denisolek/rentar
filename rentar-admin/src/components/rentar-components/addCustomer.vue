@@ -47,8 +47,8 @@
   </div>
 </template>
 <script>
-  import { parsePhoneNumberFromString as parseMax } from 'libphonenumber-js/max'
-  const moment = require('moment');
+  import {parsePhoneNumberFromString as parseMax} from 'libphonenumber-js/max'
+  import moment from "moment";
 
   export default {
     data() {
@@ -65,7 +65,7 @@
           passport: ''
         },
         validationRules: {
-          required: ['firstName','lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
+          required: ['firstName', 'lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
           email: ['email'],
           globalmobile: ['phoneNumber'],
           rules: {
@@ -99,26 +99,40 @@
         }
 
         if (parseMax(this.model.phoneNumber, 'PL').isValid() === false) {
-          this.$Message['error']('Taki numer telefonu nie istnieje');
+          this.$Message.error('Taki numer telefonu nie istnieje');
           this.isLoading = false;
           return;
         }
 
-        if (moment(this.model.birthDate) > moment().subtract(18, 'years')){
-          this.$Message['error']('Klient musi mieć ukończone 18 lat');
+        if (moment(this.model.birthDate) > moment().subtract(18, 'years')) {
+          this.$Message.error('Klient musi mieć ukończone 18 lat');
           this.isLoading = false;
           return;
         }
 
-        let isUnique = await R.Customers.validateAdd({email: this.model.email, drivingLicence: this.model.drivingLicence, passport: this.model.passport});
-        if (isUnique.status === 200) {
+        let validateUnique = await R.Customers.validateAdd({
+          email: this.model.email,
+          drivingLicence: this.model.drivingLicence,
+          passport: this.model.passport
+        });
 
+        if (validateUnique.status === 200) {
+          let addCustomer = await R.Customers.add({
+            firstName: this.model.firstName,
+            lastName: this.model.lastName,
+            email: this.model.email,
+            birthDate: moment(this.model.birthDate).format('YYYY-MM-DD'),
+            phoneNumber: parseMax(this.model.phoneNumber, 'PL').format("E.164"),
+            drivingLicence: this.model.drivingLicence,
+            passport: this.model.passport
+          });
+          if (addCustomer.status === 201) {
+            this.$Message.success('Dodano klienta [' + addCustomer.data + ']!');
+            this.$bus.emit('CustomerCreated', addCustomer.data);
+          }
         }
-
+        this.reset();
         this.isLoading = false;
-      },
-      resetDatepicker() {
-        this.$refs.datepicker.resetValid();
       },
       reset() {
         this.$refs.form.resetValid();

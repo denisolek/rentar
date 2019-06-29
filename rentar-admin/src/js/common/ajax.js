@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import Utils from './utils';
 
-const DefaultParam = { repeatable: false };
+const DefaultParam = {repeatable: false};
 const TargetHost = 'https://api.rentar.eu';
 
 let ajax = {
@@ -68,13 +68,15 @@ let ajax = {
     let url = params.url;
     if (params.method != 'GET') {
       if (this.isRequesting(url)) {
-        return new Promise((resolve, reject) => { resolve({ ok: false, msg: 'Repeat request' }); });
+        return new Promise((resolve, reject) => {
+          resolve({ok: false, msg: 'Repeat request'});
+        });
       }
       if (params.repeatable === false) {
         this.addRequest(url);
       }
     }
-    let header = { };
+    let header = {};
     let defaultParam = {
       headers: header,
       responseType: 'json',
@@ -82,7 +84,7 @@ let ajax = {
         return true;
       },
       paramsSerializer: (params) => {
-        return qs.stringify(params, { allowDots: true });
+        return qs.stringify(params, {allowDots: true});
       }
     };
     if (params.crossDomain) {
@@ -95,23 +97,14 @@ let ajax = {
         that.deleteRequest(params.url);
         let data = response.data;
         let status = response.status;
-        if (status !== 200) {
-          if (status === 401) {
-            window.top.location = '/login';
-            return;
-          }
-          if (status === 500) {
-            HeyUI.$Message.error('Internal server error');
-          } else if (status === 404) {
-            HeyUI.$Message.error('Not found');
-          } else if (status !== 200) {
-            HeyUI.$Message.error(data._msg || 'Something went wrong!');
-          }
+        if (status !== 200 && status !== 201) {
+          let errorMessage = data.message || 'Coś poszło nie tak!';
+          HeyUI.$Message.error(errorMessage + ' [' + status + ']');
         }
-        resolve({data: response.data, status: response.status});
-      }).catch(() => {
+        resolve({data: data, status: status});
+      }).catch((error) => {
         that.deleteRequest(params.url);
-        resolve({data: response.data, status: response.status});
+        resolve(error);
       });
     });
   }

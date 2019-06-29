@@ -31,6 +31,9 @@ const Request = {
     },
     validateAdd(param) {
       return Ajax.postJson('/customers/validateAdd', param);
+    },
+    add(param) {
+      return Ajax.postJson('/customers', param);
     }
   }
 };

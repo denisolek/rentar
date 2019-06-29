@@ -29,7 +29,12 @@ module.exports = {
       historyApiFallback: true
     },
     globalVars: './src/css/var.less',
-    externals: {}
+    externals: {},
+    resolve: {
+      root: [
+        path.resolve('./src')
+      ]
+    }
   },
   copy: ['static/images/*', 'call/*', './baidu_verify_7O2vpVMzwg.html']
 };

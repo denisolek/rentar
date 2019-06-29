@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 import Vue from 'vue';
 import App from 'components/App';
 import pl from './lang/pl-PL.js';
+import VueBus from 'vue-bus';
 
 import heyuiConfig from 'js/config/heyui-config';
 import routerConfig from 'js/config/router-config';
@@ -18,9 +19,9 @@ require('./mock/index');
 
 heyuiConfig();
 Vue.use(HeyUI, {locale: pl});
+Vue.use(VueBus);
 
 const router = routerConfig();
-
 export default new Vue({
   router,
   store,

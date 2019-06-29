@@ -42,7 +42,7 @@
 </template>
 
 <script>
-  import AddCustomer from '../addCustomer'
+  import AddCustomer from 'components/rentar-components/addCustomer'
 
   export default {
     data () {
@@ -54,10 +54,15 @@
       }
     },
     created () {
-      this.fetchCustomers()
+      this.fetchCustomers();
+      this.$bus.on('CustomerCreated', () => {
+        setTimeout(() => {
+          this.fetchCustomers()
+        }, 1000);
+      })
     },
     methods: {
-      fetchCustomers () {
+      fetchCustomers() {
         this.loadingCustomers = true;
         R.Customers.fetchAll().then(resp => {
           if (resp.status === 200) {

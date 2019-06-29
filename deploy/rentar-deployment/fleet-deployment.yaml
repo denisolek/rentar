@@ -18,7 +18,7 @@ spec:
       - env:
         - name: KAFKA_HOST
           value: kafka:9092
-        image: denisolek/rentar-fleet:1.0.5
+        image: denisolek/rentar-fleet:1.0.6
         name: rentar-fleet
         ports:
         - containerPort: 9001

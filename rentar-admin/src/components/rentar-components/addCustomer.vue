@@ -23,9 +23,9 @@
         <template v-slot:label>Email</template>
         <input type="text" v-model="model.email">
       </FormItem>
-      <FormItem label="Pole 'Data urodzenia'" prop="birthDate">
+      <FormItem label="Pole 'Data urodzenia'" ref="datepicker" prop="birthDate">
         <template v-slot:label>Data urodzenia</template>
-        <input type="text" v-model="model.birthDate">
+        <DatePicker v-model="model.birthDate"></DatePicker>
       </FormItem>
       <FormItem label="Pole 'Numer telefonu'" prop="phoneNumber">
         <template v-slot:label>Numer telefonu</template>
@@ -64,7 +64,7 @@
         validationRules: {
           required: ['firstName','lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
           email: ['email'],
-          mobile: ['phoneNumber'],
+          globalmobile: ['phoneNumber'],
           rules: {
             firstName: {
               minLen: 2,
@@ -99,6 +99,9 @@
         } else {
           this.isLoading = false;
         }
+      },
+      resetDatepicker() {
+        this.$refs.datepicker.resetValid();
       },
       reset() {
         this.$refs.form.resetValid();

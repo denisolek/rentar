@@ -161,7 +161,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
             url: ' nie jest poprawnym adresem URL',
             tel: ' nie jest poprawnym numerem telefonu',
             mobile: ' nie jest poprawnym numerem telefonu',
-            globalmobile: ' nie jest w poprawnym międzynarodowym formacie numeru telefonu'
+            globalmobile: ' nie jest w poprawnym numerem telefonu'
           }
         },
         date: {
@@ -183,27 +183,27 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
             quarter: '{year} {quarter}th quarter'
           },
           months: {
-            january: 'Styczeń',
-            february: 'Luty',
-            march: 'Marzec',
-            april: 'Kwiecień',
+            january: 'Sty',
+            february: 'Lut',
+            march: 'Mar',
+            april: 'Kwi',
             may: 'Maj',
-            june: 'Czerwiec',
-            july: 'Lipiec',
-            august: 'Sierpień',
-            september: 'Wrzesień',
-            october: 'Październik',
-            november: 'Listopad',
-            december: 'Grudzień'
+            june: 'Cze',
+            july: 'Lip',
+            august: 'Sie',
+            september: 'Wrz',
+            october: 'Paź',
+            november: 'Lis',
+            december: 'Gru'
           },
           weeks: {
-            monday: 'Poniedziałek',
-            tuesday: 'Wtorek',
-            wednesday: 'Środa',
-            thursday: 'Czwartek',
-            friday: 'Piątek',
-            saturday: 'Sobota',
-            sunday: 'Niedziela'
+            monday: 'Pon',
+            tuesday: 'Wt',
+            wednesday: 'Śr',
+            thursday: 'Czw',
+            friday: 'Pt',
+            saturday: 'Sob',
+            sunday: 'Niedz'
           }
         },
         datepicker: {

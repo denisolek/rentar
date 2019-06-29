@@ -1,4 +1,24 @@
-export default [{
+export default [ {
+  path: '/customers',
+  name: 'Customers',
+  component: (resolve) => require(['components/rentar-components/customers'], resolve),
+  meta: { title: 'Customers' }
+}, {
+  path: '/fleet',
+  name: 'Fleet',
+  component: (resolve) => require(['components/rentar-components/fleet'], resolve),
+  meta: { title: 'Fleet' }
+}, {
+  path: '/rentals',
+  name: 'Rentals',
+  component: (resolve) => require(['components/rentar-components/rentals'], resolve),
+  meta: { title: 'Rentals' }
+}, {
+  path: '/events',
+  name: 'Events',
+  component: (resolve) => require(['components/rentar-components/events'], resolve),
+  meta: { title: 'Events' }
+}, {
   path: '/form',
   name: 'Form',
   component: (resolve) => require(['components/demo-components/form'], resolve),
@@ -27,7 +47,7 @@ export default [{
   path: '/icons',
   name: 'Icons',
   component: (resolve) => require(['components/demo-components/icons'], resolve),
-  meta: { title: '图表列表', icon: 'icon-grid' }
+  meta: { title: 'Icons Title', icon: 'icon-grid' }
 }, {
   path: '/form-basic',
   name: 'FormBasic',

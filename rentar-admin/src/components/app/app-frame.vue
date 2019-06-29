@@ -51,34 +51,32 @@ export default {
     };
   },
   mounted() {
-    // 如果无后台数据，将此处屏蔽
     this.init();
-
-    // 如果无后台数据，将此处打开
-    // this.loading = false;
   },
   methods: {
     init() {
-      this.$Loading('加载中');
-      R.User.info().then(resp => {
-        if (resp.ok) {
-          resp.body.avatar = require('../../images/avatar.png');
-          store.dispatch('updateAccount', resp.body);
-          this.initDict();
-        }
-      });
+      this.$Loading('Loading');
+      this.loading = false;
+      this.$Loading.close();
+      // R.User.info().then(resp => {
+      //   if (resp.ok) {
+      //     resp.body.avatar = require('../../images/avatar.png');
+      //     store.dispatch('updateAccount', resp.body);
+      //     this.initDict();
+      //   }
+      // });
     },
     initDict() {
-      R.Dict.get().then(resp => {
-        if (resp.ok) {
-          let dicts = resp.body;
-          for (let dict of dicts) {
-            HeyUI.addDict(dict.name, dict.data);
-          }
-        }
-        this.loading = false;
-        this.$Loading.close();
-      });
+      // R.Dict.get().then(resp => {
+      //   if (resp.ok) {
+      //     let dicts = resp.body;
+      //     for (let dict of dicts) {
+      //       HeyUI.addDict(dict.name, dict.data);
+      //     }
+      //   }
+      //   this.loading = false;
+      //   this.$Loading.close();
+      // });
     },
     updateLayoutConfig({ key, value }) {
       this.layoutConfig[key] = value;

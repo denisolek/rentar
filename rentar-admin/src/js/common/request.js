@@ -23,6 +23,12 @@ const Request = {
     logout(param) {
       return Ajax.post('/logout', param);
     }
+  },
+  // RENTAR
+  Customers: {
+    fetchAll() {
+      return Ajax.get('/customers');
+    }
   }
 };
 

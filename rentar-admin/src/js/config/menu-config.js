@@ -1,33 +1,28 @@
 const menuConfig = [
   {
-    title: 'Home',
-    key: 'RentarHome',
+    title: 'Dashboard',
+    key: 'Home',
     icon: 'h-icon-home'
   },
   {
     title: 'Wypożyczenia',
-    key: 'RentarRentals',
+    key: 'Rentals',
     icon: 'h-icon-calendar'
   },
   {
     title: 'Klienci',
-    key: 'RentarCustomers',
+    key: 'Customers',
     icon: 'h-icon-users'
   },
   {
     title: 'Flota',
-    key: 'RentarFleet',
+    key: 'Fleet',
     icon: 'h-icon-location'
   },
   {
     title: 'Technikalia',
-    key: 'RentarTech',
+    key: 'Events',
     icon: 'h-icon-setting'
-  },
-  {
-    title: 'Dashboard',
-    key: 'Home',
-    icon: 'icon-monitor'
   },
   {
     title: 'Icons',

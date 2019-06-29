@@ -3,10 +3,9 @@ import qs from 'qs';
 import Utils from './utils';
 
 const DefaultParam = { repeatable: false };
+const TargetHost = 'https://api.rentar.eu';
 
 let ajax = {
-  PREFIX: '/api',
-  Author: Utils.getAuthor() || 'heyui',
   requestingApi: new Set(),
   extractUrl: function (url) {
     return url ? url.split('?')[0] : '';
@@ -65,22 +64,17 @@ let ajax = {
   ajax: function (param, extendParam) {
     let params = Utils.extend({}, DefaultParam, param, extendParam || {});
     params.crossDomain = params.url.indexOf('http') === 0;
+    params.url = TargetHost + params.url;
     let url = params.url;
-    if (!params.crossDomain) {
-      url = params.url = this.PREFIX + params.url;
-    }
     if (params.method != 'GET') {
       if (this.isRequesting(url)) {
-        return new Promise((resolve, reject) => { resolve({ok: false, msg: '重复请求'}); });
+        return new Promise((resolve, reject) => { resolve({ ok: false, msg: 'Repeat request' }); });
       }
       if (params.repeatable === false) {
         this.addRequest(url);
       }
     }
-    let header = {
-      author: this.Author,
-      Authorization: Utils.getLocal('token')
-    };
+    let header = { };
     let defaultParam = {
       headers: header,
       responseType: 'json',
@@ -111,14 +105,14 @@ let ajax = {
             return;
           }
           if (status == 500) {
-            HeyUI.$Message.error('后台异常');
+            HeyUI.$Message.error('Internal server error');
           } else if (status == 404) {
-            HeyUI.$Message.error('请求不存在');
+            HeyUI.$Message.error('Not found');
           } else if (status != 200) {
-            HeyUI.$Message.error(data._msg || '请求异常');
+            HeyUI.$Message.error(data._msg || 'Something went wrong!');
           }
         }
-        data.ok = data.status == 200;
+        data.ok = status == 200;
         resolve(data);
       }).catch(() => {
         that.deleteRequest(params.url);

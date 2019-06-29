@@ -25,15 +25,6 @@ module.exports = {
       log: 'hey-log',
       R: [path.resolve(__dirname, 'src/js/common/request'), 'default']
     },
-    devServer: {
-      proxy: {
-        // 此处应该配置为开发服务器的后台地址
-        // '/api': {
-        //   target: 'http://xxx.xx.xx'
-        // }
-      },
-      historyApiFallback: true
-    },
     globalVars: './src/css/var.less',
     externals: {}
   },

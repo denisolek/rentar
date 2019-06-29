@@ -1,4 +1,4 @@
 #!/bin/sh
 ./gradlew clean bootJar
-docker rmi denisolek/rentar-fleet:1.0.5
-docker build -t denisolek/rentar-fleet:1.0.5 .
+docker rmi denisolek/rentar-fleet:1.0.6
+docker build -t denisolek/rentar-fleet:1.0.6 .

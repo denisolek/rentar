@@ -40,13 +40,16 @@
         <input type="text" v-model="model.passport">
       </FormItem>
       <FormItem>
-        <Button color="primary" :loading="isLoading" @click="submit">Dodaj klienta</Button>&nbsp;&nbsp;&nbsp;
+        <Button color="blue" :loading="isLoading" @click="submitAsync">Dodaj klienta</Button>
         <Button @click="reset">wyczyść</Button>
       </FormItem>
     </Form>
   </div>
 </template>
 <script>
+  import { parsePhoneNumberFromString as parseMax } from 'libphonenumber-js/max'
+  const moment = require('moment');
+
   export default {
     data() {
       return {
@@ -88,17 +91,31 @@
       };
     },
     methods: {
-      submit() {
+      submitAsync: async function () {
         this.isLoading = true;
-        let validResult = this.$refs.form.valid();
-        if (validResult.result) {
-          this.$Message('Successful verification');
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 1000);
-        } else {
+        if (this.$refs.form.valid().result === false) {
           this.isLoading = false;
+          return;
         }
+
+        if (parseMax(this.model.phoneNumber, 'PL').isValid() === false) {
+          this.$Message['error']('Taki numer telefonu nie istnieje');
+          this.isLoading = false;
+          return;
+        }
+
+        if (moment(this.model.birthDate) > moment().subtract(18, 'years')){
+          this.$Message['error']('Klient musi mieć ukończone 18 lat');
+          this.isLoading = false;
+          return;
+        }
+
+        let isUnique = await R.Customers.validateAdd({email: this.model.email, drivingLicence: this.model.drivingLicence, passport: this.model.passport});
+        if (isUnique.status === 200) {
+
+        }
+
+        this.isLoading = false;
       },
       resetDatepicker() {
         this.$refs.datepicker.resetValid();

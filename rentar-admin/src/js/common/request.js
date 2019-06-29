@@ -28,6 +28,9 @@ const Request = {
   Customers: {
     fetchAll() {
       return Ajax.get('/customers');
+    },
+    validateAdd(param) {
+      return Ajax.postJson('/customers/validateAdd', param);
     }
   }
 };

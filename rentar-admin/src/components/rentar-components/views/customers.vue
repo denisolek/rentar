@@ -58,11 +58,11 @@
     },
     methods: {
       fetchCustomers () {
-        this.loadingCustomers = true
+        this.loadingCustomers = true;
         R.Customers.fetchAll().then(resp => {
-          if (resp.ok) {
-            this.loadingCustomers = false
-            this.customers = resp
+          if (resp.status === 200) {
+            this.loadingCustomers = false;
+            this.customers = resp.data;
             this.customerTable = [...this.customers]
           } else {
             this.$Message.info(`Couldn't fetch users`)
@@ -76,7 +76,7 @@
         if (value === '') {
           this.customerTable = [...this.customers]
         } else {
-          var loweredValue = value.toLowerCase()
+          let loweredValue = value.toLowerCase();
           this.customerTable = this.customers.filter(function (el) {
             return el.firstName.toLowerCase().includes(loweredValue) ||
               el.lastName.toLowerCase().includes(loweredValue) ||

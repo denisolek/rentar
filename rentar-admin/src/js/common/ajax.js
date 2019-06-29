@@ -95,30 +95,23 @@ let ajax = {
         that.deleteRequest(params.url);
         let data = response.data;
         let status = response.status;
-        // 如果后端统一封装返回，即所有的请求都是200, 错误码由返回结果提供，则使用以下代码获取状态
-        // if (status == 200) {
-        //   status = data.status;
-        // }
-        if (status != 200) {
-          if (status == 401) {
+        if (status !== 200) {
+          if (status === 401) {
             window.top.location = '/login';
             return;
           }
-          if (status == 500) {
+          if (status === 500) {
             HeyUI.$Message.error('Internal server error');
-          } else if (status == 404) {
+          } else if (status === 404) {
             HeyUI.$Message.error('Not found');
-          } else if (status != 200) {
+          } else if (status !== 200) {
             HeyUI.$Message.error(data._msg || 'Something went wrong!');
           }
         }
-        data.ok = status == 200;
-        resolve(data);
+        resolve({data: response.data, status: response.status});
       }).catch(() => {
         that.deleteRequest(params.url);
-        resolve({
-          ok: false
-        });
+        resolve({data: response.data, status: response.status});
       });
     });
   }

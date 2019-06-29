@@ -55,9 +55,11 @@ export default {
   },
   methods: {
     init() {
-      this.$Loading('Loading');
-      this.loading = false;
-      this.$Loading.close();
+      this.$Loading();
+      setTimeout(() => {
+        this.loading = false;
+        this.$Loading.close();
+      }, 1500);
       // R.User.info().then(resp => {
       //   if (resp.ok) {
       //     resp.body.avatar = require('../../images/avatar.png');

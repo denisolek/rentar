@@ -1,22 +1,22 @@
 export default [ {
   path: '/customers',
   name: 'Customers',
-  component: (resolve) => require(['components/rentar-components/customers'], resolve),
+  component: (resolve) => require(['components/rentar-components/views/customers'], resolve),
   meta: { title: 'Customers' }
 }, {
   path: '/fleet',
   name: 'Fleet',
-  component: (resolve) => require(['components/rentar-components/fleet'], resolve),
+  component: (resolve) => require(['components/rentar-components/views/fleet'], resolve),
   meta: { title: 'Fleet' }
 }, {
   path: '/rentals',
   name: 'Rentals',
-  component: (resolve) => require(['components/rentar-components/rentals'], resolve),
+  component: (resolve) => require(['components/rentar-components/views/rentals'], resolve),
   meta: { title: 'Rentals' }
 }, {
   path: '/events',
   name: 'Events',
-  component: (resolve) => require(['components/rentar-components/events'], resolve),
+  component: (resolve) => require(['components/rentar-components/views/events'], resolve),
   meta: { title: 'Events' }
 }, {
   path: '/form',

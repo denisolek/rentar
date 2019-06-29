@@ -25,6 +25,9 @@ module.exports = {
       log: 'hey-log',
       R: [path.resolve(__dirname, 'src/js/common/request'), 'default']
     },
+    devServer: {
+      historyApiFallback: true
+    },
     globalVars: './src/css/var.less',
     externals: {}
   },

@@ -108,70 +108,70 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
       h: {
         locale: 'en-US',
         common: {
-          cancel: 'Cancel',
-          confirm: 'Confirm',
-          clear: 'Clear',
-          nullOptionText: 'please choose',
-          empty: 'empty',
-          any: 'any'
+          cancel: 'Anuluj',
+          confirm: 'Potwierdź',
+          clear: 'Wyczyść',
+          nullOptionText: 'proszę wybrać',
+          empty: 'pueste',
+          any: 'dowolne'
         },
         confirm: {
-          title: 'Confirm'
+          title: 'Potwierdź'
         },
         select: {
-          nullOptionText: 'please choose',
-          placeholder: 'select',
-          emptyContent: 'no results found',
-          searchPlaceHolder: 'search',
-          limitSize: 'You can select up to {0} data.'
+          nullOptionText: 'proszę wybrać',
+          placeholder: 'wybierz',
+          emptyContent: 'brak danych',
+          searchPlaceHolder: 'szukaj',
+          limitSize: 'Możesz wybrać maksymalnie {0} danych.'
         },
         category: {
-          placeholder: 'please choose'
+          placeholder: 'proszę wybrać'
         },
         cascader: {
-          placeholder: 'please choose'
+          placeholder: 'proszę wybrać'
         },
         categoryModal: {
-          limitWords: 'You can select up to {size} data.',
-          emptyContent: 'No results found',
-          total: 'total'
+          limitWords: 'Możesz wybrać maksymalnie {0} danych.',
+          emptyContent: 'brak danych',
+          total: 'suma'
         },
         categoryPicker: {
-          nullOptionText: 'please choose',
-          placeholder: 'select',
-          total: 'total',
-          limitSize: 'You can select up to {0} data.'
+          nullOptionText: 'proszę wybrać',
+          placeholder: 'wybierz',
+          total: 'suma',
+          limitSize: 'Możesz wybrać maksymalnie {0} danych.'
         },
         autoComplate: {
-          placeholder: 'Search Input',
-          emptyContent: 'No results found'
+          placeholder: 'Szukaj',
+          emptyContent: 'Brak wyniku'
         },
         validation: {
           base: {
             required: ' nie może by puste',
-            maxLen: " text length can't exceed {value} bits",
-            minLen: " text length can't be less than {value} bits",
-            max: ' no more than {value}',
-            min: " can't be less than {value}"
+            maxLen: " nie może mieć więcej niż {value} znaków",
+            minLen: " nie może mieć mniej niż {value} znaków",
+            max: ' nie więcej niż {value}',
+            min: ' nie mniej niż {value}'
           },
           type: {
-            int: ' is not the correct integer format',
-            number: ' is not the correct digital format',
-            email: ' is not the correct mailbox format',
-            url: ' is not the correct URL format',
-            tel: ' is not the correct phone number format',
-            mobile: ' is not the correct mobile number format',
-            globalmobile: ' is not the correct international mobile number format'
+            int: ' nie jest liczbą całkowitą',
+            number: ' nie jest cyfrą',
+            email: ' nie jest poprawnym adresem email',
+            url: ' nie jest poprawnym adresem URL',
+            tel: ' nie jest poprawnym numerem telefonu',
+            mobile: ' nie jest poprawnym numerem telefonu',
+            globalmobile: ' nie jest w poprawnym międzynarodowym formacie numeru telefonu'
           }
         },
         date: {
-          today: 'Today',
-          yesterday: 'Yesterday',
-          year: 'year',
-          month: 'month',
-          week: 'week',
+          today: 'Dzisiaj',
+          yesterday: 'Wczoraj',
+          year: 'rok',
+          month: 'miesiąc',
+          week: 'tydzień',
           quarter: 'quarter',
-          day: 'day',
+          day: 'dzień',
           header: {
             year: '',
             month: '',
@@ -183,67 +183,67 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
             quarter: '{year} {quarter}th quarter'
           },
           months: {
-            january: 'Jan',
-            february: 'Feb',
-            march: 'Mar',
-            april: 'Apr',
-            may: 'May',
-            june: 'Jun',
-            july: 'Jul',
-            august: 'Aug',
-            september: 'Sep',
-            october: 'Oct',
-            november: 'Nov',
-            december: 'Dec'
+            january: 'Styczeń',
+            february: 'Luty',
+            march: 'Marzec',
+            april: 'Kwiecień',
+            may: 'Maj',
+            june: 'Czerwiec',
+            july: 'Lipiec',
+            august: 'Sierpień',
+            september: 'Wrzesień',
+            october: 'Październik',
+            november: 'Listopad',
+            december: 'Grudzień'
           },
           weeks: {
-            monday: 'Mon',
-            tuesday: 'Tue',
-            wednesday: 'Wed',
-            thursday: 'Thu',
-            friday: 'Fri',
-            saturday: 'Sat',
-            sunday: 'Sun'
+            monday: 'Poniedziałek',
+            tuesday: 'Wtorek',
+            wednesday: 'Środa',
+            thursday: 'Czwartek',
+            friday: 'Piątek',
+            saturday: 'Sobota',
+            sunday: 'Niedziela'
           }
         },
         datepicker: {
-          placeholder: 'select date',
-          startTime: 'start',
-          endTime: 'end',
-          customize: 'customize',
-          start: 'start',
-          end: 'end'
+          placeholder: 'wybierz datę',
+          startTime: 'początek',
+          endTime: 'koniec',
+          customize: 'dostosuj',
+          start: 'początek',
+          end: 'koniec'
         },
         wordlimit: {
-          warn: 'You are limited to enter {0} words'
+          warn: 'Możesz wpisać maksymalnie {0} słów'
         },
         wordcount: {
-          warn: 'You have exceeded {0} words'
+          warn: 'Przekroczyłeś limit {0} słów'
         },
         treepicker: {
-          selectDesc: 'You have selected {0} items',
-          placeholder: 'please select'
+          selectDesc: 'Wybrałeś {0} rzeczy',
+          placeholder: 'proszę wybrać'
         },
         search: {
-          placeholder: 'search...',
-          searchText: 'Search'
+          placeholder: 'szukaj...',
+          searchText: 'Szukaj'
         },
         taginput: {
-          limitWords: 'You have exceeded the limit'
+          limitWords: 'Przekroczyłeś limit'
         },
         table: {
-          empty: 'No results found'
+          empty: 'Brak danych'
         },
         uploader: {
-          upload: 'Upload',
-          reUpload: 'ReUpload'
+          upload: 'Wgraj',
+          reUpload: 'Wgraj ponownie'
         },
         pagination: {
-          incorrectFormat: 'The format of the value you entered is incorrect',
-          overSize: 'The value you entered exceeds the range',
-          totalBefore: 'Total',
-          totalAfter: 'items',
-          sizeOfPage: '{size} items/page'
+          incorrectFormat: 'Niepoprawna wartość',
+          overSize: 'Wartość przekracza zakres',
+          totalBefore: 'Suma',
+          totalAfter: 'wyników',
+          sizeOfPage: '{size} wyników/stronę'
         }
       }
     };

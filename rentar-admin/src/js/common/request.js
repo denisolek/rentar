@@ -70,6 +70,26 @@ const Request = {
     cancel(id) {
       return Ajax.delete('/rentals/' + id + '/cancel')
     }
+  },
+  Cars: {
+    fetchAll() {
+      return Ajax.get('/cars');
+    },
+    fetchOne(id) {
+      return Ajax.get('/cars/' + id)
+    },
+    validateAdd(param) {
+      return Ajax.postJson('/cars/validateAdd', param);
+    },
+    add(param) {
+      return Ajax.postJson('/cars', param);
+    },
+    validateUpdate(id, param) {
+      return Ajax.postJson('/cars/' + id + '/validateUpdate', param);
+    },
+    update(id, param) {
+      return Ajax.putJson('/cars/' + id, param);
+    },
   }
 };
 

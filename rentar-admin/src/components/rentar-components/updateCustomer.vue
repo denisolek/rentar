@@ -108,7 +108,7 @@
         this.editedCustomer.lastName = this.customer.lastName;
         this.editedCustomer.email = this.customer.email;
         this.editedCustomer.birthDate = this.customer.birthDate;
-        this.editedCustomer.phoneNumber = parseMax(this.customer.phoneNumber).format('INTERNATIONAL');
+        this.editedCustomer.phoneNumber = parseMax(this.customer.phoneNumber).formatInternational();
         this.editedCustomer.drivingLicence = this.customer.drivingLicence;
         this.editedCustomer.passport = this.customer.passport;
       },
@@ -160,11 +160,11 @@
           };
           let updateCustomer = await R.Customers.update(this.editedCustomer.id, updateDTO);
           if (updateCustomer.status === 200) {
-            this.$Message.success('Zapisano klienta [' + updateCustomer.data.id + ']!');
+            this.$Message.success('Zapisano klienta [' + this.editedCustomer.id + ']!');
             this.$bus.emit('CustomerUpdated', updateCustomer.data);
           }
         }
-        this.updateViewCustomer();
+        this.fetchCustomer();
         this.isLoading = false;
       }
     }

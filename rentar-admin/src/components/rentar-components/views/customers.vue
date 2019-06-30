@@ -46,7 +46,8 @@
 
 <script>
   import AddCustomer from 'components/rentar-components/addCustomer'
-  import Breadcrumb from 'components/rentar-components/breadcrumbs/customersBC';
+  import Breadcrumb from 'components/rentar-components/breadcrumbs/customersBC'
+  import {parsePhoneNumberFromString as parseMin} from 'libphonenumber-js/max'
 
   export default {
     data() {
@@ -66,27 +67,36 @@
       })
     },
     methods: {
-      fetchCustomers() {
+      mapToTable: function (customers) {
+        return customers.map(customer => ({
+          id: customer.id,
+          firstName: customer.firstName,
+          lastName: customer.lastName,
+          phoneNumber: parseMin(customer.phoneNumber).formatInternational(),
+          drivingLicence: customer.drivingLicence
+        }));
+      }, fetchCustomers() {
         this.loadingCustomers = true;
         R.Customers.fetchAll().then(resp => {
           if (resp.status === 200) {
             this.loadingCustomers = false;
             this.customers = resp.data;
-            this.customerTable = [...this.customers]
+            this.customerTable = this.mapToTable(this.customers)
           }
         })
       },
       customerSearch(value) {
         if (value === '') {
-          this.customerTable = [...this.customers]
+          this.customerTable = this.mapToTable(this.customers)
         } else {
           let loweredValue = value.toLowerCase();
-          this.customerTable = this.customers.filter(function (el) {
+          let filteredCustomers = this.customers.filter(function (el) {
             return el.firstName.toLowerCase().includes(loweredValue) ||
               el.lastName.toLowerCase().includes(loweredValue) ||
               el.phoneNumber.toLowerCase().includes(loweredValue) ||
               el.drivingLicence.toLowerCase().includes(loweredValue)
           })
+          this.customerTable = this.mapToTable(filteredCustomers)
         }
       },
     },

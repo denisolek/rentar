@@ -5,16 +5,17 @@ import rental.RentalFacade
 object Setup {
     const val apiHost = "https://api.rentar.eu"
     const val requestInterval = 0
-    const val customersCount = 150
-    const val carCount = 200
-    const val rentalsCount = 400
+    const val customersCount = 0
+    const val carCount = 0
+    const val rentalsCount = 100
 }
 
 fun main() {
-    val customers = ManagementFacade().addCustomers(Setup.customersCount)
-    ManagementFacade().updateCustomers(customers)
+    val createdCustomers = ManagementFacade().addCustomers(Setup.customersCount)
+    ManagementFacade().updateCustomers(createdCustomers)
     val cars = FleetFacade().addCars(Setup.carCount)
     FleetFacade().updateCars(cars)
-    val rentals = RentalFacade().createRentals(Setup.rentalsCount, customers.map { it.id })
+    val allCustomers = ManagementFacade().getAll()
+    val rentals = RentalFacade().createRentals(Setup.rentalsCount, allCustomers)
     RentalFacade().cancelRentals(rentals)
 }

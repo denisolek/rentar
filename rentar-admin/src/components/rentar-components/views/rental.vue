@@ -4,13 +4,18 @@
       <Breadcrumb/>
     </div>
     <div class="h-panel-body">
-      <Row>
-        <Cell width="12">
+      <Row type="flex" justify="space-around">
+        <Cell width="8">
           <template>
-            <div v-width="600">
+            <div>
               <div class="h-panel">
                 <div class="h-panel-bar">
                   <span class="h-panel-title">Dane klienta</span>
+                  <div class="h-panel-right">
+                    <router-link :to="{name: 'Customer', params: {id: customer.id}}">
+                      <Button :circle="true" color="primary">Więcej</Button>
+                    </router-link>
+                  </div>
                 </div>
                 <div class="h-panel-body">
                   <template>
@@ -26,10 +31,15 @@
             </div>
           </template>
           <template>
-            <div v-width="600">
+            <div>
               <div class="h-panel">
                 <div class="h-panel-bar">
                   <span class="h-panel-title">Dane pojazdu</span>
+                  <div class="h-panel-right">
+                    <router-link :to="{name: 'Car', params: {id: car.id}}">
+                      <Button :circle="true" color="primary">Więcej</Button>
+                    </router-link>
+                  </div>
                 </div>
                 <div class="h-panel-body">
                   <template>
@@ -46,12 +56,17 @@
             </div>
           </template>
         </Cell>
-        <Cell width="12">
+        <Cell width="8">
           <template>
-            <div v-width="600">
+            <div>
               <div class="h-panel">
                 <div class="h-panel-bar">
                   <span class="h-panel-title">Podsumowanie</span>
+                  <div v-if="rental.status !== 'Anulowana'" class="h-panel-right">
+                    <Poptip content="Jesteś tego pewny?" @confirm="cancelRental">
+                      <Button :circle="true" color="red">Anuluj</Button>
+                    </Poptip>
+                  </div>
                 </div>
                 <div class="h-panel-body">
                   <template>
@@ -163,6 +178,14 @@
             this.customer.firstName = resp.data.firstName;
             this.customer.lastName = resp.data.lastName;
             this.customer.phoneNumber = parseMax(resp.data.phoneNumber).formatInternational();
+          }
+        });
+      },
+      cancelRental() {
+        R.Rentals.cancel(this.rental.id).then(resp => {
+          if (resp.status === 200) {
+            this.$Message.success('Rezerwacja została anulowana');
+            this.loadViewData();
           }
         });
       }

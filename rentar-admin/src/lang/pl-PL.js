@@ -108,8 +108,8 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
       h: {
         locale: 'en-US',
         common: {
-          cancel: 'Anuluj',
-          confirm: 'Potwierdź',
+          cancel: 'Nie',
+          confirm: 'Tak',
           clear: 'Wyczyść',
           nullOptionText: 'proszę wybrać',
           empty: 'pueste',

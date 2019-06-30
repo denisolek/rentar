@@ -68,7 +68,7 @@ const Request = {
       return Ajax.postJson('/rentals', param)
     },
     cancel(id) {
-      return Ajax.delete('/rentals/' + id + '/cancel')
+      return Ajax.putJson('/rentals/' + id + '/cancel')
     }
   },
   Cars: {

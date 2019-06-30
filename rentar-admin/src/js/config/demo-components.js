@@ -24,15 +24,15 @@ export default [{
   component: (resolve) => require(['components/rentar-components/views/rentals'], resolve),
   meta: {title: 'Rentals'}
 }, {
-  path: '/rentals/:id',
-  name: 'Rental',
-  component: (resolve) => require(['components/rentar-components/views/rental'], resolve),
-  meta: {title: 'Rental'}
-}, {
   path: '/rentals/create',
   name: 'CreateRental',
   component: (resolve) => require(['components/rentar-components/views/createRental'], resolve),
   meta: {title: 'Create rental'}
+}, {
+  path: '/rentals/:id',
+  name: 'Rental',
+  component: (resolve) => require(['components/rentar-components/views/rental'], resolve),
+  meta: {title: 'Rental'}
 }, {
   path: '/form',
   name: 'Form',

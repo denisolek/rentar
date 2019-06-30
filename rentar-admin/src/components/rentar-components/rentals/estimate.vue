@@ -30,7 +30,7 @@
           <TableItem title="Akcja" align="center" :width="100">
             <template slot-scope="{data}">
               <router-link
-                :to="{name: 'CreateRental', query: {carId: data.carId, from: data.from, to: data.to, price: data.price}}">
+                :to="{name: 'CreateRental', query: {carId: data.carId, from: data.from, to: data.to, price: data.rawPrice}}">
                 <button class="h-btn h-btn-blue h-btn-circle">Wybierz</button>
               </router-link>
             </template>
@@ -93,6 +93,7 @@
           return {
             carId: result.carId,
             carName: result.carName,
+            rawPrice: result.price,
             price: dinero({amount: result.price, currency: 'PLN'}).setLocale('pl-PL').toFormat('$0,0'),
             from: result.from,
             to: result.to,

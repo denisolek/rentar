@@ -5,11 +5,11 @@
     </div>
     <div class="h-panel-body">
       <Row>
-        <Cell width="8">
+        <Cell width="10">
           <UpdateCustomer/>
         </Cell>
-        <Cell width="16">
-          <CustomerReservations/>
+        <Cell width="14">
+          <CustomerRentals/>
         </Cell>
       </Row>
     </div>
@@ -18,7 +18,7 @@
 
 <script>
   import UpdateCustomer from 'components/rentar-components/updateCustomer'
-  import CustomerReservations from 'components/rentar-components/customerRentals'
+  import CustomerRentals from 'components/rentar-components/customerRentals'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
   export default {
     data() {
@@ -27,7 +27,7 @@
     },
     components: {
       UpdateCustomer,
-      CustomerReservations,
+      CustomerRentals,
       Breadcrumb
     },
   }

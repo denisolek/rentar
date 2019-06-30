@@ -45,7 +45,7 @@ const Request = {
       return Ajax.putJson('/customers/' + id, param);
     },
   },
-  Reservations: {
+  Rentals: {
     fetchAll() {
       return Ajax.get('/rentals');
     },

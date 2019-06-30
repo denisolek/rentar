@@ -1,5 +1,5 @@
 <template>
-  <Row>
+  <Row v-padding="30">
     <h2>Dane klienta</h2><br>
     <b>Identyfikator: </b><span>{{ editedCustomer.id }}</span><br>
     <b>Data utworzenia: </b><span>{{ editedCustomer.createdAt }}</span><br>

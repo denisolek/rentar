@@ -8,8 +8,8 @@
         <Cell width="8">
           <UpdateCustomer/>
         </Cell>
-        <Cell width="8">
-          right
+        <Cell width="16">
+          <CustomerReservations/>
         </Cell>
       </Row>
     </div>
@@ -18,6 +18,7 @@
 
 <script>
   import UpdateCustomer from 'components/rentar-components/updateCustomer'
+  import CustomerReservations from 'components/rentar-components/customerRentals'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
   export default {
     data() {
@@ -26,6 +27,7 @@
     },
     components: {
       UpdateCustomer,
+      CustomerReservations,
       Breadcrumb
     },
   }

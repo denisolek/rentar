@@ -16,7 +16,6 @@
           <div>
             <div>
               <Table :datas="customerTable" :height="400">
-                <TableItem prop="$index" :width="30"></TableItem>
                 <TableItem title="Imię" prop="firstName" :width="150"></TableItem>
                 <TableItem title="Nazwisko" prop="lastName" :width="150"></TableItem>
                 <TableItem title="Telefon" prop="phoneNumber" :width="150"></TableItem>

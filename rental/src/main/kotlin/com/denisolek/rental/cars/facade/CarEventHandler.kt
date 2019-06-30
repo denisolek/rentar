@@ -20,8 +20,7 @@ class CarEventHandler(
 
     @KafkaListener(topics = [Globals.CARS_TOPIC])
     fun process(message: String) {
-        val event = message.toCarEvent()
-        when (event) {
+        when (val event = message.toCarEvent()) {
             is CarAdded -> handle(event)
             is CarUpdated -> handle(event)
             is CarAddingCancelled -> handle(event)

@@ -5,10 +5,10 @@
     </div>
     <div class="h-panel-body">
       <Row>
-        <Cell width="8">
+        <Cell width="10">
           <EstimateRentals/>
         </Cell>
-        <Cell width="16">
+        <Cell width="14">
           <RentalsList/>
         </Cell>
       </Row>

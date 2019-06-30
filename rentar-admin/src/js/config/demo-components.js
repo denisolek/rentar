@@ -29,6 +29,11 @@ export default [{
   component: (resolve) => require(['components/rentar-components/views/rental'], resolve),
   meta: {title: 'Rental'}
 }, {
+  path: '/rentals/create',
+  name: 'CreateRental',
+  component: (resolve) => require(['components/rentar-components/views/createRental'], resolve),
+  meta: {title: 'Create rental'}
+}, {
   path: '/form',
   name: 'Form',
   component: (resolve) => require(['components/demo-components/form'], resolve),

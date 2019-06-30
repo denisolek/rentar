@@ -115,7 +115,8 @@
             return el.firstName.toLowerCase().includes(loweredValue) ||
               el.lastName.toLowerCase().includes(loweredValue) ||
               el.phoneNumber.toLowerCase().includes(loweredValue) ||
-              el.drivingLicence.toLowerCase().includes(loweredValue)
+              el.drivingLicence.toLowerCase().includes(loweredValue) ||
+              el.id.includes(loweredValue)
           });
           this.isPaginationVisible = false;
           this.customerTable = this.mapToTable(filteredCustomers)

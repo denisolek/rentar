@@ -114,7 +114,8 @@
             return el.registrationNumber.toLowerCase().includes(loweredValue) ||
               el.manufacturer.toLowerCase().includes(loweredValue) ||
               el.model.toLowerCase().includes(loweredValue) ||
-              el.productionYear.toString().includes(loweredValue)
+              el.productionYear.toString().includes(loweredValue) ||
+              el.id.includes(loweredValue)
           });
           this.isPaginationVisible = false;
           this.carTable = this.mapToTable(filteredCars)

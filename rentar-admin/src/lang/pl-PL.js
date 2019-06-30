@@ -207,7 +207,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
           }
         },
         datepicker: {
-          placeholder: 'wybierz datę',
+          placeholder: 'Wybierz datę',
           startTime: 'początek',
           endTime: 'koniec',
           customize: 'dostosuj',

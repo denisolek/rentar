@@ -65,7 +65,7 @@ const Request = {
       return Ajax.postJson('/rentals/validateCreate', param)
     },
     create(param) {
-      return Ajax.post('/rentals', param)
+      return Ajax.postJson('/rentals', param)
     },
     cancel(id) {
       return Ajax.delete('/rentals/' + id + '/cancel')

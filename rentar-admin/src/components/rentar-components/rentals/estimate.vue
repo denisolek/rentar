@@ -41,7 +41,7 @@
         <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
                     layout="total,pager,jumper" small></Pagination>
       </div>
-      <Loading text="Loading" :loading="loadingSearch"></Loading>
+      <Loading text="Loading" :loading="isLoading"></Loading>
     </div>
   </Row>
 </template>
@@ -59,7 +59,7 @@
         validationRules: {
           required: ['from', 'to']
         },
-        validOnChange: false,
+        validOnChange: true,
         search: {
           from: null,
           to: null
@@ -71,7 +71,6 @@
           total: 0
         },
         isPaginationVisible: true,
-        loadingSearch: false,
         resultsTable: [],
         results: [],
       }
@@ -101,17 +100,25 @@
         });
       },
       estimate() {
-        this.loadingSearch = true;
+        this.isLoading = true;
+        if (this.$refs.form.valid().result === false) {
+          this.isLoading = false;
+          return;
+        }
         let from = moment(this.search.from).format('YYYY-MM-DDTHH:mm');
         let to = moment(this.search.to).format('YYYY-MM-DDTHH:mm');
         R.Rentals.estimate(from, to).then(resp => {
           if (resp.status === 200) {
-            this.loadingSearch = false;
+            if (!resp.data.length) {
+              this.$Message.warn('Nie znaleziono wolnych pojazdów w tym terminie.');
+            }
+            this.isLoading = false;
             this.results = resp.data;
             this.pagination.total = this.results.length;
             this.refreshTable();
           }
         })
+        this.isLoading = false;
       }
     }
   }

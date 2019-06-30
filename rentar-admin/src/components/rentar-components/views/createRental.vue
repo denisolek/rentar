@@ -23,7 +23,7 @@
           <b>Numer rejestracyjny: </b><span>{{ car.registrationNumber }}</span><br><br>
         </Cell>
         <Cell width="14">
-          <RentalsList/>
+          <CustomerPicker/>
         </Cell>
       </Row>
     </div>
@@ -31,8 +31,7 @@
 </template>
 
 <script>
-  import EstimateRentals from 'components/rentar-components/rentals/estimate'
-  import RentalsList from 'components/rentar-components/rentals/rentalsList'
+  import CustomerPicker from 'components/rentar-components/rentals/customerPicker'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/createRentalBC'
   import dinero from "../../../../node_modules/dinero.js/build/esm/dinero";
   import moment from "moment";
@@ -101,8 +100,7 @@
     },
     components: {
       Breadcrumb,
-      EstimateRentals,
-      RentalsList
-    },
+      CustomerPicker
+    }
   }
 </script>

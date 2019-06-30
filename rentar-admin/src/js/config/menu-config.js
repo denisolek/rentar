@@ -16,13 +16,8 @@ const menuConfig = [
   },
   {
     title: 'Flota',
-    key: 'Fleet',
+    key: 'Cars',
     icon: 'h-icon-location'
-  },
-  {
-    title: 'Technikalia',
-    key: 'Events',
-    icon: 'h-icon-setting'
   },
   {
     title: 'Icons',

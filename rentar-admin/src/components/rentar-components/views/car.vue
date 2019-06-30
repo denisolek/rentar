@@ -6,10 +6,10 @@
     <div class="h-panel-body">
       <Row>
         <Cell width="8">
-          <UpdateCustomer/>
+          <UpdateCar/>
         </Cell>
         <Cell width="16">
-          <CustomerReservations/>
+          <CarRentals/>
         </Cell>
       </Row>
     </div>
@@ -17,17 +17,17 @@
 </template>
 
 <script>
-  import UpdateCustomer from 'components/rentar-components/updateCustomer'
-  import CustomerReservations from 'components/rentar-components/customerRentals'
-  import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
+  import UpdateCar from 'components/rentar-components/updateCar'
+  import CarRentals from 'components/rentar-components/carRentals'
+  import Breadcrumb from 'components/rentar-components/breadcrumbs/carBC'
+
   export default {
     data() {
-      return {
-      }
+      return {}
     },
     components: {
-      UpdateCustomer,
-      CustomerReservations,
+      UpdateCar,
+      CarRentals,
       Breadcrumb
     },
   }

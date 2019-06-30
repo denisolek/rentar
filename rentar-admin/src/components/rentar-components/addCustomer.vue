@@ -1,5 +1,5 @@
 <template>
-  <div v-width="450">
+  <div>
     <Form
       ref="form"
       :validOnChange="validOnChange"

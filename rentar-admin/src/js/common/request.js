@@ -44,6 +44,32 @@ const Request = {
     update(id, param) {
       return Ajax.putJson('/customers/' + id, param);
     },
+  },
+  Reservations: {
+    fetchAll() {
+      return Ajax.get('/rentals');
+    },
+    fetchOne(id) {
+      return Ajax.get('/rentals' + id);
+    },
+    fetchForCustomer(id) {
+      return Ajax.get('/rentals/customers/' + id);
+    },
+    fetchForCar(id) {
+      return Ajax.get('/rentals/cars/' + id);
+    },
+    estimate(from, to) {
+      return Ajax.get('/rentals/estimate', {from: from, to: to})
+    },
+    validateCreate(param) {
+      return Ajax.postJson('/rentals/validateCreate', param)
+    },
+    create(param) {
+      return Ajax.post('/rentals', param)
+    },
+    cancel(id) {
+      return Ajax.delete('/rentals/' + id + '/cancel')
+    }
   }
 };
 

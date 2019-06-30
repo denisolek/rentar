@@ -29,12 +29,21 @@ const Request = {
     fetchAll() {
       return Ajax.get('/customers');
     },
+    fetchOne(id) {
+      return Ajax.get('/customers/' + id)
+    },
     validateAdd(param) {
       return Ajax.postJson('/customers/validateAdd', param);
     },
     add(param) {
       return Ajax.postJson('/customers', param);
-    }
+    },
+    validateUpdate(id, param) {
+      return Ajax.postJson('/customers/' + id + '/validateUpdate', param);
+    },
+    update(id, param) {
+      return Ajax.putJson('/customers/' + id, param);
+    },
   }
 };
 

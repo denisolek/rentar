@@ -5,10 +5,10 @@
     </div>
     <div class="h-panel-body">
       <Row>
-        <Cell width="14">
-          left
+        <Cell width="8">
+          <UpdateCustomer/>
         </Cell>
-        <Cell width="10">
+        <Cell width="8">
           right
         </Cell>
       </Row>
@@ -17,29 +17,15 @@
 </template>
 
 <script>
+  import UpdateCustomer from 'components/rentar-components/updateCustomer'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
   export default {
     data() {
       return {
-        loadingCustomer: false,
-        customer: {}
-      }
-    },
-    created() {
-      this.fetchCustomer();
-    },
-    methods: {
-      fetchCustomer() {
-        this.loadingCustomer = true;
-        R.Customers.fetchOne(this.$route.params.id).then(resp => {
-          if (resp.status === 200) {
-            this.loadingCustomer = false;
-            this.customer = resp.data;
-          }
-        })
       }
     },
     components: {
+      UpdateCustomer,
       Breadcrumb
     },
   }

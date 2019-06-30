@@ -48,6 +48,13 @@ let ajax = {
       data: paramJson
     }, extendParam);
   },
+  putJson: function (url, paramJson, extendParam) {
+    return this.ajax({
+      url,
+      method: 'PUT',
+      data: paramJson
+    }, extendParam);
+  },
   patchJson: function (url, paramJson, dataType, extendParam) {
     return this.ajax({
       url,

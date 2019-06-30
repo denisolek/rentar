@@ -67,7 +67,6 @@
         validationRules: {
           required: ['firstName', 'lastName', 'email', 'birthDate', 'phoneNumber', 'drivingLicence', 'passport'],
           email: ['email'],
-          globalmobile: ['phoneNumber'],
           rules: {
             firstName: {
               minLen: 2,

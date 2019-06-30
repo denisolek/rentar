@@ -13,7 +13,7 @@
               <Button transparent>{{data.status}}</Button>
             </template>
           </TableItem>
-          <TableItem title="Akcja" align="center">
+          <TableItem title="Akcja" align="center" :width="100">
             <template slot-scope="{data}">
               <!--              <router-link :to="{name: 'Customer', params: {id: data.id}}">-->
               <button class="h-btn h-btn-red h-btn-circle">
@@ -24,20 +24,28 @@
           </TableItem>
           <div slot="empty">Brak danych</div>
         </Table>
+        <p/>
+        <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                    layout="total,pager,jumper" small></Pagination>
       </div>
       <Loading text="Loading" :loading="loadingRentals"></Loading>
     </div>
-
   </Row>
 </template>
 
 <script>
   import moment from "moment";
-  import dinero from "dinero.js"
+  import dinero from "../../../../node_modules/dinero.js/build/esm/dinero"
 
   export default {
     data() {
       return {
+        pagination: {
+          page: 1,
+          size: 10,
+          total: 0
+        },
+        isPaginationVisible: true,
         loadingRentals: false,
         rentalsTable: [],
         rentals: [],
@@ -47,6 +55,17 @@
       this.fetchRentals();
     },
     methods: {
+      changePage(value) {
+        this.pagination.page = value.cur;
+        this.refreshTable()
+      },
+      refreshTable() {
+        this.isPaginationVisible = true;
+        let lastIndex = this.pagination.page * this.pagination.size;
+        let firstIndex = lastIndex - this.pagination.size;
+        let rentals = this.rentals.slice(firstIndex, lastIndex);
+        this.rentalsTable = this.mapToTable(rentals)
+      },
       mapToTable: function (rentals) {
         return rentals.map(function (rental) {
           return {
@@ -66,13 +85,14 @@
       },
       fetchRentals() {
         this.loadingRentals = true;
-        R.Rentals.fetchForCustomer(this.$route.params.id).then(resp => {
+        R.Rentals.fetchAll(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
             this.loadingRentals = false;
             this.rentals = resp.data.sort(function (a, b) {
               return new Date(a.from).getTime() - new Date(b.from).getTime()
             }).reverse();
-            this.rentalsTable = this.mapToTable(this.rentals)
+            this.pagination.total = this.rentals.length;
+            this.refreshTable();
           }
         })
       }

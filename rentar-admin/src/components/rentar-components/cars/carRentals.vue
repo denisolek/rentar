@@ -4,10 +4,10 @@
     <div>
       <div>
         <Table :datas="rentalsTable">
-          <TableItem title="Od" prop="from" sort="auto"></TableItem>
-          <TableItem title="Do" prop="to" sort="auto"></TableItem>
-          <TableItem title="Ilość dni" prop="days" sort="auto"></TableItem>
-          <TableItem title="Cena" prop="price" sort="auto"></TableItem>
+          <TableItem title="Od" prop="from"></TableItem>
+          <TableItem title="Do" prop="to"></TableItem>
+          <TableItem title="Ilość dni" prop="days"></TableItem>
+          <TableItem title="Cena" prop="price"></TableItem>
           <TableItem title="Status" align="center" :width="130">
             <template slot-scope="{data}">
               <Button transparent>{{data.status}}</Button>
@@ -27,7 +27,6 @@
       </div>
       <Loading text="Loading" :loading="loadingRentals"></Loading>
     </div>
-
   </Row>
 </template>
 
@@ -69,7 +68,9 @@
         R.Rentals.fetchForCar(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
             this.loadingRentals = false;
-            this.rentals = resp.data;
+            this.rentals = resp.data.sort(function (a, b) {
+              return new Date(a.from).getTime() - new Date(b.from).getTime()
+            }).reverse();
             this.rentalsTable = this.mapToTable(this.rentals)
           }
         })

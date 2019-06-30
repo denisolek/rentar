@@ -16,11 +16,11 @@
           <div>
             <div>
               <Table :datas="carTable">
-                <TableItem title="Nr rejestracyjny" prop="registrationNumber" :width="150"></TableItem>
-                <TableItem title="Marka" prop="manufacturer" :width="150"></TableItem>
-                <TableItem title="Model" prop="model" :width="150"></TableItem>
-                <TableItem title="Rocznik" prop="productionYear" :width="150"></TableItem>
-                <TableItem title="Akcja" align="center" :width="100">
+                <TableItem title="Nr rejestracyjny" prop="registrationNumber"></TableItem>
+                <TableItem title="Marka" prop="manufacturer"></TableItem>
+                <TableItem title="Model" prop="model"></TableItem>
+                <TableItem title="Rocznik" prop="productionYear"></TableItem>
+                <TableItem title="Akcja" align="center">
                   <template slot-scope="{data}">
                     <router-link :to="{name: 'Car', params: {id: data.id}}">
                       <button class="h-btn h-btn-blue h-btn-circle">

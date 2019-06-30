@@ -16,10 +16,10 @@
           <div>
             <div>
               <Table :datas="customerTable">
-                <TableItem title="Imię" prop="firstName" :width="150"></TableItem>
-                <TableItem title="Nazwisko" prop="lastName" :width="150"></TableItem>
-                <TableItem title="Telefon" prop="phoneNumber" :width="150"></TableItem>
-                <TableItem title="Prawo jazdy" prop="drivingLicence" :width="150"></TableItem>
+                <TableItem title="Imię" prop="firstName"></TableItem>
+                <TableItem title="Nazwisko" prop="lastName"></TableItem>
+                <TableItem title="Telefon" prop="phoneNumber"></TableItem>
+                <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
                 <TableItem title="Akcja" align="center" :width="100">
                   <template slot-scope="{data}">
                     <router-link :to="{name: 'Customer', params: {id: data.id}}">

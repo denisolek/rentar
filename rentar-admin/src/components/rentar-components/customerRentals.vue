@@ -3,17 +3,17 @@
     <h2>Rezerwacje</h2><br>
     <div>
       <div>
-        <Table :datas="rentalsTable" :height="400">
-          <TableItem title="Od" prop="from" :width="150" sort="auto"></TableItem>
-          <TableItem title="Do" prop="to" :width="150" sort="auto"></TableItem>
-          <TableItem title="Ilość dni" prop="days" :width="150" sort="auto"></TableItem>
-          <TableItem title="Cena" prop="price" :width="150" sort="auto"></TableItem>
-          <TableItem title="Status" align="center" :width="150">
+        <Table :datas="rentalsTable">
+          <TableItem title="Od" prop="from" sort="auto"></TableItem>
+          <TableItem title="Do" prop="to" sort="auto"></TableItem>
+          <TableItem title="Ilość dni" prop="days" sort="auto"></TableItem>
+          <TableItem title="Cena" prop="price" sort="auto"></TableItem>
+          <TableItem title="Status" align="center" :width="130">
             <template slot-scope="{data}">
               <Button transparent>{{data.status}}</Button>
             </template>
           </TableItem>
-          <TableItem title="Akcja" align="center" :width="100">
+          <TableItem title="Akcja" align="center">
             <template slot-scope="{data}">
               <!--              <router-link :to="{name: 'Customer', params: {id: data.id}}">-->
               <button class="h-btn h-btn-red h-btn-circle">

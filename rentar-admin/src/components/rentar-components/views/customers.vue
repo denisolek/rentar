@@ -15,7 +15,7 @@
           </template>
           <div>
             <div>
-              <Table :datas="customerTable" :height="400">
+              <Table :datas="customerTable">
                 <TableItem title="Imię" prop="firstName" :width="150"></TableItem>
                 <TableItem title="Nazwisko" prop="lastName" :width="150"></TableItem>
                 <TableItem title="Telefon" prop="phoneNumber" :width="150"></TableItem>
@@ -31,6 +31,9 @@
                 </TableItem>
                 <div slot="empty">Brak danych</div>
               </Table>
+              <p/>
+              <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                          layout="total,pager,jumper" small></Pagination>
             </div>
             <Loading text="Loading" :loading="loadingCustomers"></Loading>
           </div>
@@ -51,6 +54,12 @@
   export default {
     data() {
       return {
+        pagination: {
+          page: 1,
+          size: 10,
+          total: 0
+        },
+        isPaginationVisible: true,
         loadingCustomers: false,
         customerSearchField: null,
         customerTable: [],
@@ -66,6 +75,10 @@
       })
     },
     methods: {
+      changePage(value) {
+        this.pagination.page = value.cur;
+        this.refreshTable()
+      },
       mapToTable: function (customers) {
         return customers.map(customer => ({
           id: customer.id,
@@ -74,19 +87,28 @@
           phoneNumber: parseMin(customer.phoneNumber).formatInternational(),
           drivingLicence: customer.drivingLicence
         }));
-      }, fetchCustomers() {
+      },
+      refreshTable() {
+        this.isPaginationVisible = true;
+        let lastIndex = this.pagination.page * this.pagination.size;
+        let firstIndex = lastIndex - this.pagination.size;
+        let customers = this.customers.slice(firstIndex, lastIndex);
+        this.customerTable = this.mapToTable(customers)
+      },
+      fetchCustomers() {
         this.loadingCustomers = true;
         R.Customers.fetchAll().then(resp => {
           if (resp.status === 200) {
             this.loadingCustomers = false;
             this.customers = resp.data;
-            this.customerTable = this.mapToTable(this.customers)
+            this.pagination.total = this.customers.length;
+            this.refreshTable();
           }
         })
       },
       customerSearch(value) {
         if (value === '') {
-          this.customerTable = this.mapToTable(this.customers)
+          this.refreshTable();
         } else {
           let loweredValue = value.toLowerCase();
           let filteredCustomers = this.customers.filter(function (el) {
@@ -94,7 +116,8 @@
               el.lastName.toLowerCase().includes(loweredValue) ||
               el.phoneNumber.toLowerCase().includes(loweredValue) ||
               el.drivingLicence.toLowerCase().includes(loweredValue)
-          })
+          });
+          this.isPaginationVisible = false;
           this.customerTable = this.mapToTable(filteredCustomers)
         }
       },

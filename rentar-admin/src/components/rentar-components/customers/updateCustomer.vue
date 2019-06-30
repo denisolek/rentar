@@ -113,10 +113,8 @@
         this.editedCustomer.passport = this.customer.passport;
       },
       fetchCustomer() {
-        this.loadingCustomer = true;
         R.Customers.fetchOne(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
-            this.loadingCustomer = false;
             this.customer = resp.data;
             this.updateViewCustomer();
           }

@@ -15,11 +15,11 @@
           </template>
           <div>
             <div>
-              <Table :datas="customerTable" :height="400">
-                <TableItem title="Imię" prop="firstName" :width="150"></TableItem>
-                <TableItem title="Nazwisko" prop="lastName" :width="150"></TableItem>
-                <TableItem title="Telefon" prop="phoneNumber" :width="150"></TableItem>
-                <TableItem title="Prawo jazdy" prop="drivingLicence" :width="150"></TableItem>
+              <Table :datas="customerTable">
+                <TableItem title="Imię" prop="firstName"></TableItem>
+                <TableItem title="Nazwisko" prop="lastName"></TableItem>
+                <TableItem title="Telefon" prop="phoneNumber"></TableItem>
+                <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
                 <TableItem title="Akcja" align="center" :width="100">
                   <template slot-scope="{data}">
                     <router-link :to="{name: 'Customer', params: {id: data.id}}">
@@ -31,6 +31,9 @@
                 </TableItem>
                 <div slot="empty">Brak danych</div>
               </Table>
+              <p/>
+              <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                          layout="total,pager,jumper" small></Pagination>
             </div>
             <Loading text="Loading" :loading="loadingCustomers"></Loading>
           </div>
@@ -44,13 +47,19 @@
 </template>
 
 <script>
-  import AddCustomer from 'components/rentar-components/addCustomer'
+  import AddCustomer from 'components/rentar-components/customers/addCustomer'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customersBC'
   import {parsePhoneNumberFromString as parseMin} from 'libphonenumber-js/max'
 
   export default {
     data() {
       return {
+        pagination: {
+          page: 1,
+          size: 10,
+          total: 0
+        },
+        isPaginationVisible: true,
         loadingCustomers: false,
         customerSearchField: null,
         customerTable: [],
@@ -66,6 +75,10 @@
       })
     },
     methods: {
+      changePage(value) {
+        this.pagination.page = value.cur;
+        this.refreshTable()
+      },
       mapToTable: function (customers) {
         return customers.map(customer => ({
           id: customer.id,
@@ -74,19 +87,28 @@
           phoneNumber: parseMin(customer.phoneNumber).formatInternational(),
           drivingLicence: customer.drivingLicence
         }));
-      }, fetchCustomers() {
+      },
+      refreshTable() {
+        this.isPaginationVisible = true;
+        let lastIndex = this.pagination.page * this.pagination.size;
+        let firstIndex = lastIndex - this.pagination.size;
+        let customers = this.customers.slice(firstIndex, lastIndex);
+        this.customerTable = this.mapToTable(customers)
+      },
+      fetchCustomers() {
         this.loadingCustomers = true;
         R.Customers.fetchAll().then(resp => {
           if (resp.status === 200) {
             this.loadingCustomers = false;
             this.customers = resp.data;
-            this.customerTable = this.mapToTable(this.customers)
+            this.pagination.total = this.customers.length;
+            this.refreshTable();
           }
         })
       },
       customerSearch(value) {
         if (value === '') {
-          this.customerTable = this.mapToTable(this.customers)
+          this.refreshTable();
         } else {
           let loweredValue = value.toLowerCase();
           let filteredCustomers = this.customers.filter(function (el) {
@@ -94,7 +116,8 @@
               el.lastName.toLowerCase().includes(loweredValue) ||
               el.phoneNumber.toLowerCase().includes(loweredValue) ||
               el.drivingLicence.toLowerCase().includes(loweredValue)
-          })
+          });
+          this.isPaginationVisible = false;
           this.customerTable = this.mapToTable(filteredCustomers)
         }
       },

@@ -3,12 +3,12 @@
     <h2>Rezerwacje</h2><br>
     <div>
       <div>
-        <Table :datas="rentalsTable" :height="400">
-          <TableItem title="Od" prop="from" :width="150" sort="auto"></TableItem>
-          <TableItem title="Do" prop="to" :width="150" sort="auto"></TableItem>
-          <TableItem title="Ilość dni" prop="days" :width="150" sort="auto"></TableItem>
-          <TableItem title="Cena" prop="price" :width="150" sort="auto"></TableItem>
-          <TableItem title="Status" align="center" :width="150">
+        <Table :datas="rentalsTable">
+          <TableItem title="Od" prop="from"></TableItem>
+          <TableItem title="Do" prop="to"></TableItem>
+          <TableItem title="Ilość dni" prop="days"></TableItem>
+          <TableItem title="Cena" prop="price"></TableItem>
+          <TableItem title="Status" align="center" :width="130">
             <template slot-scope="{data}">
               <Button transparent>{{data.status}}</Button>
             </template>
@@ -24,20 +24,28 @@
           </TableItem>
           <div slot="empty">Brak danych</div>
         </Table>
+        <p/>
+        <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                    layout="total,pager,jumper" small></Pagination>
       </div>
       <Loading text="Loading" :loading="loadingRentals"></Loading>
     </div>
-
   </Row>
 </template>
 
 <script>
   import moment from "moment";
-  import dinero from "dinero.js"
+  import dinero from "../../../../node_modules/dinero.js/build/esm/dinero"
 
   export default {
     data() {
       return {
+        pagination: {
+          page: 1,
+          size: 10,
+          total: 0
+        },
+        isPaginationVisible: true,
         loadingRentals: false,
         rentalsTable: [],
         rentals: [],
@@ -47,6 +55,17 @@
       this.fetchRentals();
     },
     methods: {
+      changePage(value) {
+        this.pagination.page = value.cur;
+        this.refreshTable()
+      },
+      refreshTable() {
+        this.isPaginationVisible = true;
+        let lastIndex = this.pagination.page * this.pagination.size;
+        let firstIndex = lastIndex - this.pagination.size;
+        let rentals = this.rentals.slice(firstIndex, lastIndex);
+        this.rentalsTable = this.mapToTable(rentals)
+      },
       mapToTable: function (rentals) {
         return rentals.map(function (rental) {
           return {
@@ -66,11 +85,14 @@
       },
       fetchRentals() {
         this.loadingRentals = true;
-        R.Rentals.fetchForCar(this.$route.params.id).then(resp => {
+        R.Rentals.fetchAll(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
             this.loadingRentals = false;
-            this.rentals = resp.data;
-            this.rentalsTable = this.mapToTable(this.rentals)
+            this.rentals = resp.data.sort(function (a, b) {
+              return new Date(a.from).getTime() - new Date(b.from).getTime()
+            }).reverse();
+            this.pagination.total = this.rentals.length;
+            this.refreshTable();
           }
         })
       }

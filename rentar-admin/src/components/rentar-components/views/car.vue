@@ -5,10 +5,10 @@
     </div>
     <div class="h-panel-body">
       <Row>
-        <Cell width="8">
+        <Cell width="10">
           <UpdateCar/>
         </Cell>
-        <Cell width="16">
+        <Cell width="14">
           <CarRentals/>
         </Cell>
       </Row>
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import UpdateCar from 'components/rentar-components/updateCar'
-  import CarRentals from 'components/rentar-components/carRentals'
+  import UpdateCar from 'components/rentar-components/cars/updateCar'
+  import CarRentals from 'components/rentar-components/cars/carRentals'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/carBC'
 
   export default {

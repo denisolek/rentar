@@ -3,17 +3,17 @@
     <h2>Rezerwacje</h2><br>
     <div>
       <div>
-        <Table :datas="rentalsTable" :height="400">
-          <TableItem title="Od" prop="from" :width="150" sort="auto"></TableItem>
-          <TableItem title="Do" prop="to" :width="150" sort="auto"></TableItem>
-          <TableItem title="Ilość dni" prop="days" :width="150" sort="auto"></TableItem>
-          <TableItem title="Cena" prop="price" :width="150" sort="auto"></TableItem>
-          <TableItem title="Status" align="center" :width="150">
+        <Table :datas="rentalsTable">
+          <TableItem title="Od" prop="from"></TableItem>
+          <TableItem title="Do" prop="to"></TableItem>
+          <TableItem title="Ilość dni" prop="days"></TableItem>
+          <TableItem title="Cena" prop="price"></TableItem>
+          <TableItem title="Status" align="center" :width="130">
             <template slot-scope="{data}">
               <Button transparent>{{data.status}}</Button>
             </template>
           </TableItem>
-          <TableItem title="Akcja" align="center" :width="100">
+          <TableItem title="Akcja" align="center">
             <template slot-scope="{data}">
               <!--              <router-link :to="{name: 'Customer', params: {id: data.id}}">-->
               <button class="h-btn h-btn-red h-btn-circle">
@@ -69,7 +69,9 @@
         R.Rentals.fetchForCustomer(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
             this.loadingRentals = false;
-            this.rentals = resp.data;
+            this.rentals = resp.data.sort(function (a, b) {
+              return new Date(a.from).getTime() - new Date(b.from).getTime()
+            }).reverse();
             this.rentalsTable = this.mapToTable(this.rentals)
           }
         })

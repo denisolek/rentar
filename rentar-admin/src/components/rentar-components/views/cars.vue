@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import AddCar from 'components/rentar-components/addCar'
+  import AddCar from 'components/rentar-components/cars/addCar'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/carsBC'
 
   export default {

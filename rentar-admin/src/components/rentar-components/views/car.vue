@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import UpdateCar from 'components/rentar-components/updateCar'
-  import CarRentals from 'components/rentar-components/carRentals'
+  import UpdateCar from 'components/rentar-components/cars/updateCar'
+  import CarRentals from 'components/rentar-components/cars/carRentals'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/carBC'
 
   export default {

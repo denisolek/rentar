@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import UpdateCustomer from 'components/rentar-components/updateCustomer'
-  import CustomerRentals from 'components/rentar-components/customerRentals'
+  import UpdateCustomer from 'components/rentar-components/customers/updateCustomer'
+  import CustomerRentals from 'components/rentar-components/customers/customerRentals'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customerBC'
   export default {
     data() {

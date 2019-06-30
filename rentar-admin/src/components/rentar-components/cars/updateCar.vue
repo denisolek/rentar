@@ -58,7 +58,7 @@
 </template>
 <script>
   import moment from "moment";
-  import dinero from "dinero.js";
+  import dinero from "../../../../node_modules/dinero.js/build/esm/dinero";
 
   export default {
     data() {

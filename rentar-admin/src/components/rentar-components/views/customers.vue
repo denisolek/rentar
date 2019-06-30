@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import AddCustomer from 'components/rentar-components/addCustomer'
+  import AddCustomer from 'components/rentar-components/customers/addCustomer'
   import Breadcrumb from 'components/rentar-components/breadcrumbs/customersBC'
   import {parsePhoneNumberFromString as parseMin} from 'libphonenumber-js/max'
 

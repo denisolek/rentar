@@ -43,7 +43,7 @@ object CarGenerator {
         CarTemplate("Peugeot", "308", "E", "MANUAL"),
         CarTemplate("Alfa Romeo", "Giulietta", "E", "MANUAL"),
         CarTemplate("Fiat", "Doblo", "E1", "MANUAL"),
-        CarTemplate("Nissan", "Juka", "E2", "MANUAL"),
+        CarTemplate("Nissan", "Juke", "E2", "MANUAL"),
         CarTemplate("Peugeot", "2008", "E2", "MANUAL"),
         CarTemplate("Opel", "Mokka", "E2", "MANUAL"),
         CarTemplate("Fiat", "500 X", "E2", "MANUAL"),

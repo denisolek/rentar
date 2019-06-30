@@ -1,6 +1,7 @@
 package com.denisolek.fleet.cars.infrastructure
 
 import com.denisolek.fleet.cars.model.Car
+import com.denisolek.fleet.cars.model.value.RegistrationNumber
 import com.denisolek.fleet.infrastructure.findOne
 import org.springframework.stereotype.Component
 import java.util.*
@@ -15,12 +16,16 @@ class CarRepository(val repository: CarEntityRepository) {
         return repository.findAll().map { it.toDomainModel() }
     }
 
+    fun findByRegistration(registrationNumber: RegistrationNumber): List<Car> {
+        return repository.findByRegistrationNumber(registrationNumber.value).map { it.toDomainModel() }
+    }
+
     fun findByIdOrThrow(id: UUID): Car {
         return repository.findOne(id)?.toDomainModel() ?: throw CarExceptions.CarNotFoundException()
     }
 
-    fun registrationAvailableOrThrow(registrationNumber: String): Boolean {
-        if (repository.countByRegistrationNumber(registrationNumber) > 0)
+    fun registrationAvailableOrThrow(registrationNumber: RegistrationNumber): Boolean {
+        if (repository.countByRegistrationNumber(registrationNumber.value) > 0)
             throw CarExceptions.RegistrationNumberAlreadyExistsException()
         else return true
     }

@@ -17,7 +17,7 @@ const initRouter = () => {
       children: [{
         path: '',
         name: 'Home',
-        component: (resolve) => require(['components/home/index'], resolve),
+        component: (resolve) => require(['components/rentar-components/views/dashboard'], resolve),
         meta: { title: 'Home', icon: 'icon-monitor' }
       }, {
         path: '/system-error',

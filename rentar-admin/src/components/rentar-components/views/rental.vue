@@ -14,7 +14,7 @@
                 </div>
                 <div class="h-panel-body">
                   <template>
-                    <Form :readonly="true" :labelWidth="130">
+                    <Form :readonly="true" :labelWidth="150">
                       <FormItem label="Identyfikator">{{customer.id}}</FormItem>
                       <FormItem label="Imię">{{customer.firstName}}</FormItem>
                       <FormItem label="Nazwisko">{{customer.lastName}}</FormItem>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="h-panel-body">
                   <template>
-                    <Form :readonly="true" :labelWidth="130">
+                    <Form :readonly="true" :labelWidth="150">
                       <FormItem label="Identyfikator">{{car.id}}</FormItem>
                       <FormItem label="Marka">{{car.manufacturer}}</FormItem>
                       <FormItem label="Model">{{car.model}}</FormItem>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="h-panel-body">
                   <template>
-                    <Form :readonly="true" :labelWidth="130">
+                    <Form :readonly="true" :labelWidth="150">
                       <FormItem label="Identyfikator">{{rental.id}}</FormItem>
                       <FormItem label="Data utworzenia">{{rental.createdAt}}</FormItem>
                       <FormItem label="Data edycji">{{rental.updatedAt}}</FormItem>

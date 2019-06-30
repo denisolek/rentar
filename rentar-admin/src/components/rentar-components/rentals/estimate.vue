@@ -59,7 +59,7 @@
         validationRules: {
           required: ['from', 'to']
         },
-        validOnChange: true,
+        validOnChange: false,
         search: {
           from: null,
           to: null

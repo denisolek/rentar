@@ -66,7 +66,7 @@
       },
       fetchRentals() {
         this.loadingRentals = true;
-        R.Rentals.fetchForCustomer(this.$route.params.id).then(resp => {
+        R.Rentals.fetchForCar(this.$route.params.id).then(resp => {
           if (resp.status === 200) {
             this.loadingRentals = false;
             this.rentals = resp.data;

@@ -241,8 +241,8 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
         pagination: {
           incorrectFormat: 'Niepoprawna wartość',
           overSize: 'Wartość przekracza zakres',
-          totalBefore: 'Suma',
-          totalAfter: 'wyników',
+          totalBefore: 'Łącznie',
+          totalAfter: 'pozycji',
           sizeOfPage: '{size} wyników/stronę'
         }
       }

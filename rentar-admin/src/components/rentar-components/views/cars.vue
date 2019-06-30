@@ -15,7 +15,7 @@
           </template>
           <div>
             <div>
-              <Table :datas="carTable" :height="400">
+              <Table :datas="carTable">
                 <TableItem title="Nr rejestracyjny" prop="registrationNumber" :width="150"></TableItem>
                 <TableItem title="Marka" prop="manufacturer" :width="150"></TableItem>
                 <TableItem title="Model" prop="model" :width="150"></TableItem>
@@ -31,6 +31,9 @@
                 </TableItem>
                 <div slot="empty">Brak danych</div>
               </Table>
+              <p/>
+              <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                          layout="total,pager,jumper" small></Pagination>
             </div>
             <Loading text="Loading" :loading="loadingCars"></Loading>
           </div>
@@ -50,6 +53,12 @@
   export default {
     data() {
       return {
+        pagination: {
+          page: 1,
+          size: 10,
+          total: 0
+        },
+        isPaginationVisible: true,
         loadingCars: false,
         carSearchField: null,
         carTable: [],
@@ -65,6 +74,10 @@
       })
     },
     methods: {
+      changePage(value) {
+        this.pagination.page = value.cur;
+        this.refreshTable()
+      },
       mapToTable: function (cars) {
         return cars.map(car => ({
           id: car.id,
@@ -73,19 +86,28 @@
           model: car.model,
           productionYear: car.productionYear
         }));
-      }, fetchCars() {
+      },
+      refreshTable() {
+        this.isPaginationVisible = true;
+        let lastIndex = this.pagination.page * this.pagination.size;
+        let firstIndex = lastIndex - this.pagination.size;
+        let cars = this.cars.slice(firstIndex, lastIndex);
+        this.carTable = this.mapToTable(cars)
+      },
+      fetchCars() {
         this.loadingCars = true;
         R.Cars.fetchAll().then(resp => {
           if (resp.status === 200) {
             this.loadingCars = false;
             this.cars = resp.data;
-            this.carTable = this.mapToTable(this.cars)
+            this.pagination.total = this.cars.length;
+            this.refreshTable();
           }
         })
       },
       carSearch(value) {
         if (value === '') {
-          this.carTable = this.mapToTable(this.cars)
+          this.refreshTable();
         } else {
           let loweredValue = value.toLowerCase();
           let filteredCars = this.cars.filter(function (el) {
@@ -94,6 +116,7 @@
               el.model.toLowerCase().includes(loweredValue) ||
               el.productionYear.toString().includes(loweredValue)
           });
+          this.isPaginationVisible = false;
           this.carTable = this.mapToTable(filteredCars)
         }
       },

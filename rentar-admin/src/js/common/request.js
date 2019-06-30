@@ -50,7 +50,7 @@ const Request = {
       return Ajax.get('/rentals');
     },
     fetchOne(id) {
-      return Ajax.get('/rentals' + id);
+      return Ajax.get('/rentals/' + id);
     },
     fetchForCustomer(id) {
       return Ajax.get('/rentals/customers/' + id);

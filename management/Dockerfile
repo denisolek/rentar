@@ -1,4 +1,4 @@
-FROM openjdk:11.0.4-jre-slim-stretch
+FROM openjdk:11.0.3-jre-slim-stretch
 COPY . /home/gradle/project
 WORKDIR /home/gradle/project
 ENV DEBIAN_FRONTEND noninteractive

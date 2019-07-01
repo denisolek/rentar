@@ -27,14 +27,24 @@ class CustomerQueryHandler(val repository: CustomerRepository) {
     }
 
     fun validateUpdate(dto: UpdateCustomerValidate, id: UUID) {
-        when {
-            repository.findByEmail(Email(dto.email)).firstOrNull()?.id != CustomerId(id) ->
-                throw EmailAlreadyExistsException()
-            repository.findByDrivingLicence(DrivingLicence(dto.drivingLicence)).firstOrNull()?.id != CustomerId(id) ->
-                throw DrivingLicenceAlreadyExistsException()
-            repository.findByPassport(Passport(dto.passport)).firstOrNull()?.id != CustomerId(id) ->
-                throw PassportAlreadyExistsException()
-        }
+        validateUpdateEmail(Email(dto.email), id)
+        validateUpdateDrivingLicence(DrivingLicence(dto.drivingLicence), id)
+        validateUpdatePassport(Passport(dto.passport), id)
+    }
+
+    private fun validateUpdatePassport(passport: Passport, id: UUID) {
+        repository.findByPassport(passport).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw PassportAlreadyExistsException() }
+    }
+
+    private fun validateUpdateDrivingLicence(drivingLicence: DrivingLicence, id: UUID) {
+        repository.findByDrivingLicence(drivingLicence).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw DrivingLicenceAlreadyExistsException() }
+    }
+
+    private fun validateUpdateEmail(email: Email, id: UUID) {
+        repository.findByEmail(email).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw EmailAlreadyExistsException() }
     }
 
     fun fetchAll(): List<BaseCustomer> {

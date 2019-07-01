@@ -18,9 +18,9 @@ class CarQueryHandler(val repository: CarRepository) {
     }
 
     fun validateUpdate(dto: UpdateCarValidate, id: UUID) {
-        val findByRegistration = repository.findByRegistration(RegistrationNumber(dto.registrationNumber))
-        if (findByRegistration.firstOrNull()?.id != CarId(id))
-            throw RegistrationNumberAlreadyExistsException()
+        repository.findByRegistration(RegistrationNumber(dto.registrationNumber))
+            .firstOrNull()
+            ?.let { if (it.id != CarId(id)) throw RegistrationNumberAlreadyExistsException() }
     }
 
     fun fetchAll(): List<BaseCar> {

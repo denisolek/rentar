@@ -9,7 +9,9 @@
   white-space: nowrap;
   transition: padding .3s;
   .app-logo-text {
-    font-size: 30px;
+    font-family: minimJoe;
+    font-size: 40px;
+    font-weight: bold;
     vertical-align: middle;
   }
   .app-logo-icon {

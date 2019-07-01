@@ -19,7 +19,7 @@
             </div>
           </template>
         </Cell>
-        <Cell width="12">
+        <Cell width="14">
           <template>
             <div>
               <div class="h-panel">

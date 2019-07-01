@@ -5,7 +5,7 @@
     </div>
     <div class="h-panel-body">
       <Row type="flex" justify="space-around">
-        <Cell width="12">
+        <Cell width="14">
           <template>
             <div>
               <div class="h-panel">

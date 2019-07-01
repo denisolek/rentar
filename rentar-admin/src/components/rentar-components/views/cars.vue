@@ -4,42 +4,64 @@
       <Breadcrumb/>
     </div>
     <div class="h-panel-body">
-      <Row>
+      <Row type="flex" justify="space-around">
         <Cell width="14">
           <template>
             <div>
-              <p>
-                <Search @search="carSearch" v-model="carSearchField" placeholder="Szukaj auta"></Search>
-              </p>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Flota</span>
+                </div>
+                <div class="h-panel-body">
+                  <template>
+                    <div>
+                      <p>
+                        <Search @search="carSearch" v-model="carSearchField" placeholder="Szukaj"></Search>
+                      </p>
+                    </div>
+                  </template>
+                  <div>
+                    <div>
+                      <Table :datas="carTable">
+                        <TableItem title="Nr rejestracyjny" prop="registrationNumber"></TableItem>
+                        <TableItem title="Marka" prop="manufacturer"></TableItem>
+                        <TableItem title="Model" prop="model"></TableItem>
+                        <TableItem title="Rocznik" prop="productionYear"></TableItem>
+                        <TableItem title="Akcja" align="center">
+                          <template slot-scope="{data}">
+                            <router-link :to="{name: 'Car', params: {id: data.id}}">
+                              <button class="h-btn h-btn-blue h-btn-circle">
+                                <i class="h-icon-edit"></i>
+                              </button>
+                            </router-link>
+                          </template>
+                        </TableItem>
+                        <div slot="empty">Brak danych</div>
+                      </Table>
+                      <p/>
+                      <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                                  layout="total,pager,jumper" small></Pagination>
+                    </div>
+                    <Loading text="Loading" :loading="loadingCars"></Loading>
+                  </div>
+                </div>
+              </div>
             </div>
           </template>
-          <div>
-            <div>
-              <Table :datas="carTable">
-                <TableItem title="Nr rejestracyjny" prop="registrationNumber"></TableItem>
-                <TableItem title="Marka" prop="manufacturer"></TableItem>
-                <TableItem title="Model" prop="model"></TableItem>
-                <TableItem title="Rocznik" prop="productionYear"></TableItem>
-                <TableItem title="Akcja" align="center">
-                  <template slot-scope="{data}">
-                    <router-link :to="{name: 'Car', params: {id: data.id}}">
-                      <button class="h-btn h-btn-blue h-btn-circle">
-                        <i class="h-icon-edit"></i>
-                      </button>
-                    </router-link>
-                  </template>
-                </TableItem>
-                <div slot="empty">Brak danych</div>
-              </Table>
-              <p/>
-              <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
-                          layout="total,pager,jumper" small></Pagination>
-            </div>
-            <Loading text="Loading" :loading="loadingCars"></Loading>
-          </div>
         </Cell>
-        <Cell width="10">
-          <AddCar/>
+        <Cell width="8">
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Dodaj nowy pojazd</span>
+                </div>
+                <div class="h-panel-body">
+                  <AddCar/>
+                </div>
+              </div>
+            </div>
+          </template>
         </Cell>
       </Row>
     </div>

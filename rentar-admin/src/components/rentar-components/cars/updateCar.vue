@@ -1,9 +1,12 @@
 <template>
-  <Row v-padding="30">
-    <h2>Dane auta</h2><br>
-    <b>Identyfikator: </b><span>{{ editedCar.id }}</span><br>
-    <b>Data utworzenia: </b><span>{{ editedCar.createdAt }}</span><br>
-    <b>Data edycji: </b><span>{{ editedCar.updatedAt }}</span><br><br>
+  <Row>
+    <template>
+      <Form :readonly="true" :labelWidth="130">
+        <FormItem label="Identyfikator">{{editedCar.id}}</FormItem>
+        <FormItem label="Data utworzenia">{{editedCar.createdAt}}</FormItem>
+        <FormItem label="Data edycji">{{editedCar.updatedAt}}</FormItem>
+      </Form>
+    </template>
     <Form
       ref="form"
       :validOnChange="validOnChange"
@@ -50,8 +53,8 @@
         <input type="text" v-model="editedCar.dailyPrice">
       </FormItem>
       <FormItem>
-        <Button color="blue" :loading="isLoading" @click="submitAsync">Zapisz</Button>
-        <Button @click="updateViewCar">Przywróć</Button>
+        <Button :circle="true" color="blue" :loading="isLoading" @click="submitAsync">Zapisz</Button>
+        <Button :circle="true" @click="updateViewCar">Przywróć</Button>
       </FormItem>
     </Form>
   </Row>
@@ -64,7 +67,7 @@
       return {
         mode: 'single',
         isLoading: false,
-        labelPosition: 'left',
+        labelPosition: 'right',
         segments: ['A', 'A1', 'B', 'B2', 'C', 'C1', 'D2', 'E', 'E1', 'E2', 'F1', 'G1', 'G3'],
         transmissions: [
           {title: 'Manualna', key: 'MANUAL'},

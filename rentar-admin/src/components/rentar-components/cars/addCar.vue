@@ -8,9 +8,6 @@
       :rules="validationRules"
       :model="carModel"
     >
-      <FormItem>
-        <h2>Dodaj nowe auto</h2>
-      </FormItem>
       <FormItem label="Pole 'Marka' " prop="manufacturer">
         <template v-slot:label>Marka</template>
         <input type="text" v-model="carModel.manufacturer">
@@ -48,8 +45,8 @@
         <input type="text" v-model="carModel.dailyPrice">
       </FormItem>
       <FormItem>
-        <Button color="blue" :loading="isLoading" @click="submitAsync">Dodaj auto</Button>
-        <Button @click="reset">wyczyść</Button>
+        <Button :circle="true" color="blue" :loading="isLoading" @click="submitAsync">Dodaj auto</Button>
+        <Button :circle="true" @click="reset">wyczyść</Button>
       </FormItem>
     </Form>
   </div>

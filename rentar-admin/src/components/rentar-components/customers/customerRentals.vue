@@ -1,6 +1,5 @@
 <template>
-  <Row v-padding="30">
-    <h2>Rezerwacje</h2><br>
+  <Row>
     <div>
       <div>
         <Table :datas="rentalsTable">
@@ -10,7 +9,7 @@
           <TableItem title="Cena" prop="price"></TableItem>
           <TableItem title="Status" align="center" :width="130">
             <template slot-scope="{data}">
-              <Button transparent>{{data.status}}</Button>
+              <Button transparent :circle="true">{{data.status}}</Button>
             </template>
           </TableItem>
           <TableItem title="Akcja" align="center">

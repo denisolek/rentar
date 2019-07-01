@@ -162,7 +162,6 @@
         setTimeout(() => {
           this.updateClock();
         }, 1000);
-        state.siderCollapsed = isShow;
       },
       trigger(data) {
         if (data == 'logout') {

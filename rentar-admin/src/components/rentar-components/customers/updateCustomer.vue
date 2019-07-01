@@ -1,9 +1,12 @@
 <template>
-  <Row v-padding="30">
-    <h2>Dane klienta</h2><br>
-    <b>Identyfikator: </b><span>{{ editedCustomer.id }}</span><br>
-    <b>Data utworzenia: </b><span>{{ editedCustomer.createdAt }}</span><br>
-    <b>Data edycji: </b><span>{{ editedCustomer.updatedAt }}</span><br><br>
+  <Row>
+    <template>
+      <Form :readonly="true" :labelWidth="130">
+        <FormItem label="Identyfikator">{{editedCustomer.id}}</FormItem>
+        <FormItem label="Data utworzenia">{{editedCustomer.createdAt}}</FormItem>
+        <FormItem label="Data edycji">{{editedCustomer.updatedAt}}</FormItem>
+      </Form>
+    </template>
     <Form
       ref="form"
       :validOnChange="validOnChange"
@@ -42,8 +45,8 @@
         <input type="text" v-model="editedCustomer.passport">
       </FormItem>
       <FormItem>
-        <Button color="blue" :loading="isLoading" @click="submitAsync">Zapisz</Button>
-        <Button @click="updateViewCustomer">Przywróć</Button>
+        <Button color="blue" :circle="true" :loading="isLoading" @click="submitAsync">Zapisz</Button>
+        <Button @click="updateViewCustomer" :circle="true">Przywróć</Button>
       </FormItem>
     </Form>
   </Row>
@@ -57,7 +60,7 @@
       return {
         mode: 'single',
         isLoading: false,
-        labelPosition: 'left',
+        labelPosition: 'right',
         customer: null,
         editedCustomer: {
           id: '',

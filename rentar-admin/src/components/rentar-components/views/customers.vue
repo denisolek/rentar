@@ -4,42 +4,64 @@
       <Breadcrumb/>
     </div>
     <div class="h-panel-body">
-      <Row>
-        <Cell width="14">
+      <Row type="flex" justify="space-around">
+        <Cell width="12">
           <template>
             <div>
-              <p>
-                <Search @search="customerSearch" v-model="customerSearchField" placeholder="Szukaj klienta"></Search>
-              </p>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Klienci</span>
+                </div>
+                <div class="h-panel-body">
+                  <template>
+                    <div>
+                      <p>
+                        <Search @search="customerSearch" v-model="customerSearchField" placeholder="Szukaj"></Search>
+                      </p>
+                    </div>
+                  </template>
+                  <div>
+                    <div>
+                      <Table :datas="customerTable">
+                        <TableItem title="Imię" prop="firstName"></TableItem>
+                        <TableItem title="Nazwisko" prop="lastName"></TableItem>
+                        <TableItem title="Telefon" prop="phoneNumber"></TableItem>
+                        <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
+                        <TableItem title="Akcja" align="center" :width="100">
+                          <template slot-scope="{data}">
+                            <router-link :to="{name: 'Customer', params: {id: data.id}}">
+                              <button class="h-btn h-btn-blue h-btn-circle">
+                                <i class="h-icon-edit"></i>
+                              </button>
+                            </router-link>
+                          </template>
+                        </TableItem>
+                        <div slot="empty">Brak danych</div>
+                      </Table>
+                      <p/>
+                      <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                                  layout="total,pager,jumper" small></Pagination>
+                    </div>
+                    <Loading text="Loading" :loading="loadingCustomers"></Loading>
+                  </div>
+                </div>
+              </div>
             </div>
           </template>
-          <div>
-            <div>
-              <Table :datas="customerTable">
-                <TableItem title="Imię" prop="firstName"></TableItem>
-                <TableItem title="Nazwisko" prop="lastName"></TableItem>
-                <TableItem title="Telefon" prop="phoneNumber"></TableItem>
-                <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
-                <TableItem title="Akcja" align="center" :width="100">
-                  <template slot-scope="{data}">
-                    <router-link :to="{name: 'Customer', params: {id: data.id}}">
-                      <button class="h-btn h-btn-blue h-btn-circle">
-                        <i class="h-icon-edit"></i>
-                      </button>
-                    </router-link>
-                  </template>
-                </TableItem>
-                <div slot="empty">Brak danych</div>
-              </Table>
-              <p/>
-              <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
-                          layout="total,pager,jumper" small></Pagination>
-            </div>
-            <Loading text="Loading" :loading="loadingCustomers"></Loading>
-          </div>
         </Cell>
-        <Cell width="10">
-          <AddCustomer/>
+        <Cell width="8">
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Dodaj nowego klienta</span>
+                </div>
+                <div class="h-panel-body">
+                  <AddCustomer/>
+                </div>
+              </div>
+            </div>
+          </template>
         </Cell>
       </Row>
     </div>

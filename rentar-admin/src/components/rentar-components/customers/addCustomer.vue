@@ -8,9 +8,6 @@
       :rules="validationRules"
       :model="model"
     >
-      <FormItem>
-        <h2>Dodaj nowego klienta</h2>
-      </FormItem>
       <FormItem label="Pole 'Imię' " prop="firstName">
         <template v-slot:label>Imię</template>
         <input type="text" v-model="model.firstName">
@@ -40,8 +37,8 @@
         <input type="text" v-model="model.passport">
       </FormItem>
       <FormItem>
-        <Button color="blue" :loading="isLoading" @click="submitAsync">Dodaj klienta</Button>
-        <Button @click="reset">wyczyść</Button>
+        <Button color="blue" :circle="true" :loading="isLoading" @click="submitAsync">Dodaj klienta</Button>
+        <Button @click="reset" :circle="true">wyczyść</Button>
       </FormItem>
     </Form>
   </div>

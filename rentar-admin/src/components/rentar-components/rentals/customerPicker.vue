@@ -1,32 +1,43 @@
 <template>
-  <Row v-padding="30">
-    <h2>Wybierz klienta</h2><br>
-    <div>
+  <Row>
+    <template>
       <div>
-        <template>
-          <div>
-            <p>
-              <Search @search="customerSearch" v-model="customerSearchField" placeholder="Szukaj klienta"></Search>
-            </p>
+        <div class="h-panel">
+          <div class="h-panel-bar">
+            <span class="h-panel-title">Wybierz klienta</span>
           </div>
-        </template>
-        <Table :datas="customersTable">
-          <TableItem title="Klient" prop="name"></TableItem>
-          <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
-          <TableItem title="Akcja" align="center">
-            <template slot-scope="{data}">
-              <Button class="h-btn h-btn-blue h-btn-circle" :circle="true" @click="selectCustomer(data)">Wybierz
-              </Button>
-            </template>
-          </TableItem>
-          <div slot="empty">Brak danych</div>
-        </Table>
-        <p></p>
-        <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
-                    layout="total,pager,jumper" small></Pagination>
+          <div class="h-panel-body">
+            <div>
+              <div>
+                <template>
+                  <div>
+                    <p>
+                      <Search @search="customerSearch" v-model="customerSearchField"
+                              placeholder="Szukaj klienta"></Search>
+                    </p>
+                  </div>
+                </template>
+                <Table :datas="customersTable">
+                  <TableItem title="Klient" prop="name"></TableItem>
+                  <TableItem title="Prawo jazdy" prop="drivingLicence"></TableItem>
+                  <TableItem title="Akcja" align="center">
+                    <template slot-scope="{data}">
+                      <Button class="h-btn h-btn-blue h-btn-circle" :circle="true" @click="selectCustomer(data)">Wybierz
+                      </Button>
+                    </template>
+                  </TableItem>
+                  <div slot="empty">Brak danych</div>
+                </Table>
+                <p></p>
+                <Pagination v-if="isPaginationVisible" v-model="pagination" @change="changePage"
+                            layout="total,pager,jumper" small></Pagination>
+              </div>
+              <Loading text="Loading" :loading="loadingCustomers"></Loading>
+            </div>
+          </div>
+        </div>
       </div>
-      <Loading text="Loading" :loading="loadingCustomers"></Loading>
-    </div>
+    </template>
   </Row>
 </template>
 

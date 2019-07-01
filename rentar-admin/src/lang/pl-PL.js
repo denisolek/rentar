@@ -109,7 +109,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
         locale: 'en-US',
         common: {
           cancel: 'Nie',
-          confirm: 'Tak',
+          confirm: 'Potwierdź',
           clear: 'Wyczyść',
           nullOptionText: 'proszę wybrać',
           empty: 'pueste',

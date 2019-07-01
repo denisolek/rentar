@@ -50,8 +50,8 @@
         return rentals.map(function (rental) {
           return {
             id: rental.id,
-            from: moment(rental.from).format("YYYY-MM-DD"),
-            to: moment(rental.to).format("YYYY-MM-DD"),
+            from: moment(rental.from).format("YYYY/MM/DD"),
+            to: moment(rental.to).format("YYYY/MM/DD"),
             days: moment(rental.to).diff(moment(rental.from), 'days'),
             price: dinero({amount: rental.price, currency: 'PLN'}).setLocale('pl-PL').toFormat('$0,0'),
             status: {

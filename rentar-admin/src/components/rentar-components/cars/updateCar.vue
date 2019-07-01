@@ -7,6 +7,7 @@
         <FormItem label="Data edycji">{{editedCar.updatedAt}}</FormItem>
       </Form>
     </template>
+    <br>
     <Form
       ref="form"
       :validOnChange="validOnChange"
@@ -128,8 +129,8 @@
     methods: {
       updateViewCar() {
         this.editedCar.id = this.car.id;
-        this.editedCar.createdAt = moment(this.car.createdAt).format("YYYY-MM-DD HH:mm:ss");
-        this.editedCar.updatedAt = moment(this.car.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+        this.editedCar.createdAt = moment(this.car.createdAt).format("YYYY/MM/DD HH:mm");
+        this.editedCar.updatedAt = moment(this.car.updatedAt).format("YYYY/MM/DD HH:mm");
         this.editedCar.manufacturer = this.car.manufacturer;
         this.editedCar.model = this.car.model;
         this.editedCar.segment = this.car.segment;

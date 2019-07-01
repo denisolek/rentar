@@ -4,23 +4,51 @@
       <Breadcrumb/>
     </div>
     <div class="h-panel-body">
-      <Row>
-        <Cell width="10" v-padding="30">
-          <h2>Dane rezerwacji</h2><br>
-          <b>Data wynajmu: </b><span>{{ reservation.from }}</span><br>
-          <b>Data zwrotu: </b><span>{{ reservation.to }}</span><br>
-          <b>Ilość dni: </b><span>{{ reservation.days }}</span><br>
-          <b>Cena: </b><span>{{ reservation.price }}</span><br><br><br>
-          <h2>Dane pojazdu</h2><br>
-          <b>Identyfikator: </b><span>{{ car.id }}</span><br>
-          <b>Marka: </b><span>{{ car.manufacturer }}</span><br>
-          <b>Model: </b><span>{{ car.model }}</span><br>
-          <b>Segment: </b><span>{{ car.segment }}</span><br>
-          <b>Rocznik: </b><span>{{ car.productionYear }}</span><br>
-          <b>Przebieg (w km): </b><span>{{ car.mileage }}</span><br>
-          <b>Skrzynia biegów: </b><span>{{ car.transmission }}</span><br>
-          <b>Rodzaj paliwa: </b><span>{{ car.fuel }}</span><br>
-          <b>Numer rejestracyjny: </b><span>{{ car.registrationNumber }}</span><br><br>
+      <Row type="flex" justify="space-around">
+        <Cell width="8">
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Dane rezerwacji</span>
+                </div>
+                <div class="h-panel-body">
+                  <template>
+                    <Form :readonly="true" :labelWidth="150">
+                      <FormItem label="Data wynajmu">{{reservation.from}}</FormItem>
+                      <FormItem label="Data zwrotu">{{reservation.to}}</FormItem>
+                      <FormItem label="Ilość dni">{{reservation.days}}</FormItem>
+                      <FormItem label="Cena">{{reservation.price}}</FormItem>
+                    </Form>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Dane pojazdu</span>
+                </div>
+                <div class="h-panel-body">
+                  <template>
+                    <Form :readonly="true" :labelWidth="150">
+                      <FormItem label="Identyfikator">{{car.id}}</FormItem>
+                      <FormItem label="Marka">{{car.manufacturer}}</FormItem>
+                      <FormItem label="Model">{{car.model}}</FormItem>
+                      <FormItem label="Segment">{{car.segment}}</FormItem>
+                      <FormItem label="Rocznik">{{car.productionYear}}</FormItem>
+                      <FormItem label="Przebieg (w km)">{{car.mileage}}</FormItem>
+                      <FormItem label="Skrzynia biegów">{{car.transmission}}</FormItem>
+                      <FormItem label="Rodzaj paliwa">{{car.fuel}}</FormItem>
+                      <FormItem label="Numer rejestracyjny">{{car.registrationNumber}}</FormItem>
+                    </Form>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
         </Cell>
         <Cell width="14">
           <CustomerPicker/>
@@ -67,8 +95,8 @@
         this.loadCarInfo();
       },
       loadReservationInfo() {
-        this.reservation.from = moment(this.$route.query.from).format("YYYY-MM-DD HH:mm:ss");
-        this.reservation.to = moment(this.$route.query.to).format("YYYY-MM-DD HH:mm:ss");
+        this.reservation.from = moment(this.$route.query.from).format("YYYY/MM/DD HH:mm");
+        this.reservation.to = moment(this.$route.query.to).format("YYYY/MM/DD HH:mm");
         this.reservation.days = moment(this.$route.query.to).diff(moment(this.$route.query.from), 'days');
         this.reservation.price = dinero({
           amount: parseInt(this.$route.query.price),

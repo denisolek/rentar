@@ -7,6 +7,7 @@
         <FormItem label="Data edycji">{{editedCustomer.updatedAt}}</FormItem>
       </Form>
     </template>
+    <br>
     <Form
       ref="form"
       :validOnChange="validOnChange"
@@ -105,8 +106,8 @@
     methods: {
       updateViewCustomer() {
         this.editedCustomer.id = this.customer.id;
-        this.editedCustomer.createdAt = moment(this.customer.createdAt).format("YYYY-MM-DD HH:mm:ss");
-        this.editedCustomer.updatedAt = moment(this.customer.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+        this.editedCustomer.createdAt = moment(this.customer.createdAt).format("YYYY/MM/DD HH:mm");
+        this.editedCustomer.updatedAt = moment(this.customer.updatedAt).format("YYYY/MM/DD HH:mm");
         this.editedCustomer.firstName = this.customer.firstName;
         this.editedCustomer.lastName = this.customer.lastName;
         this.editedCustomer.email = this.customer.email;

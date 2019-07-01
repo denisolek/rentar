@@ -144,10 +144,10 @@
         this.rental.id = data.id;
         this.rental.carId = data.carId;
         this.rental.customerId = data.customerId;
-        this.rental.createdAt = moment(data.createdAt).format("YYYY-MM-DD HH:mm:ss");
-        this.rental.updatedAt = moment(data.updatedAt).format("YYYY-MM-DD HH:mm:ss");
-        this.rental.from = moment(data.from).format("YYYY-MM-DD HH:mm:ss");
-        this.rental.to = moment(data.to).format("YYYY-MM-DD HH:mm:ss");
+        this.rental.createdAt = moment(data.createdAt).format("YYYY/MM/DD HH:mm");
+        this.rental.updatedAt = moment(data.updatedAt).format("YYYY/MM/DD HH:mm");
+        this.rental.from = moment(data.from).format("YYYY/MM/DD HH:mm");
+        this.rental.to = moment(data.to).format("YYYY/MM/DD HH:mm");
         this.rental.status = {
           'Cancelled': 'Anulowana',
           'Completed': 'Zakończona',

@@ -12,7 +12,7 @@
           icon: 'h-icon-home',
           route: {name: 'Home'}
         }, {
-          title: 'Flota',
+          title: 'Pojazdy',
           route: {name: 'Cars'}
         }]
       };

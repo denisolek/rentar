@@ -10,7 +10,7 @@
             <div>
               <div class="h-panel">
                 <div class="h-panel-bar">
-                  <span class="h-panel-title">Flota</span>
+                  <span class="h-panel-title">Pojazdy</span>
                 </div>
                 <div class="h-panel-body">
                   <template>

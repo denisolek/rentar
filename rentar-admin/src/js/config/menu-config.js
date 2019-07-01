@@ -15,7 +15,7 @@ const menuConfig = [
     icon: 'h-icon-users'
   },
   {
-    title: 'Flota',
+    title: 'Pojazdy',
     key: 'Cars',
     icon: 'h-icon-location'
   }

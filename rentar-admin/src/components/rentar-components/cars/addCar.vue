@@ -45,7 +45,7 @@
         <input type="text" v-model="carModel.dailyPrice">
       </FormItem>
       <FormItem>
-        <Button :circle="true" color="blue" :loading="isLoading" @click="submitAsync">Dodaj auto</Button>
+        <Button :circle="true" color="blue" :loading="isLoading" @click="submitAsync">Dodaj pojazd</Button>
         <Button :circle="true" @click="reset">wyczyść</Button>
       </FormItem>
     </Form>
@@ -116,7 +116,7 @@
         }
 
         if (this.carModel.productionYear > new Date().getFullYear()) {
-          this.$Message.error('Samochód z przyszłości?');
+          this.$Message.error('Pojazd z przyszłości?');
           this.isLoading = false;
           return;
         }
@@ -136,7 +136,7 @@
             dailyPrice: this.carModel.dailyPrice * 100
           });
           if (addCar.status === 201) {
-            this.$Message.success('Dodano auto [' + addCar.data + ']!');
+            this.$Message.success('Dodano pojazd [' + addCar.data + ']!');
             this.$bus.emit('CarCreated', addCar.data);
           }
         }

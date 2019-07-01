@@ -157,7 +157,7 @@
         }
 
         if (this.editedCar.productionYear > new Date().getFullYear()) {
-          this.$Message.error('Samochód z przyszłości?');
+          this.$Message.error('Pojazd z przyszłości?');
           this.isLoading = false;
           return;
         }
@@ -181,7 +181,7 @@
           };
           let updateCar = await R.Cars.update(this.$route.params.id, updateDTO);
           if (updateCar.status === 200) {
-            this.$Message.success('Zapisano auto [' + this.$route.params.id + ']!');
+            this.$Message.success('Zapisano pojazd [' + this.$route.params.id + ']!');
             this.$bus.emit('CarUpdated', updateCar.data);
           }
         }

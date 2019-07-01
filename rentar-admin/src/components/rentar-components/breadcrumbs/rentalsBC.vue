@@ -12,7 +12,7 @@
           icon: 'h-icon-home',
           route: {name: 'Dashboard'}
         }, {
-          title: 'Wypożyczenia',
+          title: 'Rezerwacje',
           route: {name: 'Rentals'}
         }]
       };

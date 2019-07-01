@@ -50,7 +50,7 @@ const Request = {
       return Ajax.get('/rentals');
     },
     fetchOne(id) {
-      return Ajax.get('/rentals' + id);
+      return Ajax.get('/rentals/' + id);
     },
     fetchForCustomer(id) {
       return Ajax.get('/rentals/customers/' + id);
@@ -65,10 +65,10 @@ const Request = {
       return Ajax.postJson('/rentals/validateCreate', param)
     },
     create(param) {
-      return Ajax.post('/rentals', param)
+      return Ajax.postJson('/rentals', param)
     },
     cancel(id) {
-      return Ajax.delete('/rentals/' + id + '/cancel')
+      return Ajax.putJson('/rentals/' + id + '/cancel')
     }
   },
   Cars: {

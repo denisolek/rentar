@@ -14,6 +14,8 @@
         }, {
           title: 'Rezerwacje',
           route: {name: 'Rentals'}
+        }, {
+          title: 'Rezerwacja'
         }]
       };
     }

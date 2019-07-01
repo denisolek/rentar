@@ -4,12 +4,34 @@
       <Breadcrumb/>
     </div>
     <div class="h-panel-body">
-      <Row>
-        <Cell width="10">
-          <UpdateCar/>
+      <Row type="flex" justify="space-around">
+        <Cell width="8">
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Dane pojazdu</span>
+                </div>
+                <div class="h-panel-body">
+                  <UpdateCar/>
+                </div>
+              </div>
+            </div>
+          </template>
         </Cell>
         <Cell width="14">
-          <CarRentals/>
+          <template>
+            <div>
+              <div class="h-panel">
+                <div class="h-panel-bar">
+                  <span class="h-panel-title">Rezerwacje</span>
+                </div>
+                <div class="h-panel-body">
+                  <CarRentals/>
+                </div>
+              </div>
+            </div>
+          </template>
         </Cell>
       </Row>
     </div>

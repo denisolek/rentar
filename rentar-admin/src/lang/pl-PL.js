@@ -108,8 +108,8 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
       h: {
         locale: 'en-US',
         common: {
-          cancel: 'Anuluj',
-          confirm: 'Potwierdź',
+          cancel: 'Nie',
+          confirm: 'Tak',
           clear: 'Wyczyść',
           nullOptionText: 'proszę wybrać',
           empty: 'pueste',
@@ -207,7 +207,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
           }
         },
         datepicker: {
-          placeholder: 'wybierz datę',
+          placeholder: 'Wybierz datę',
           startTime: 'początek',
           endTime: 'koniec',
           customize: 'dostosuj',

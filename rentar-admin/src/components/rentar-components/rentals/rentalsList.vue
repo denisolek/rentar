@@ -1,6 +1,5 @@
 <template>
-  <Row v-padding="30">
-    <h2>Rezerwacje</h2><br>
+  <Row>
     <div>
       <div>
         <Table :datas="rentalsTable">
@@ -15,11 +14,11 @@
           </TableItem>
           <TableItem title="Akcja" align="center" :width="100">
             <template slot-scope="{data}">
-              <!--              <router-link :to="{name: 'Customer', params: {id: data.id}}">-->
-              <button class="h-btn h-btn-red h-btn-circle">
-                <i class="h-icon-edit"></i>
-              </button>
-              <!--              </router-link>-->
+              <router-link :to="{name: 'Rental', params: {id: data.id}}">
+                <button class="h-btn h-btn-red h-btn-circle">
+                  <i class="h-icon-edit"></i>
+                </button>
+              </router-link>
             </template>
           </TableItem>
           <div slot="empty">Brak danych</div>

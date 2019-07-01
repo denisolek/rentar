@@ -10,7 +10,7 @@
       return {
         datas: [{
           icon: 'h-icon-home',
-          route: {name: 'Dashboard'}
+          route: {name: 'Home'}
         }, {
           title: 'Rezerwacje',
           route: {name: 'Rentals'}

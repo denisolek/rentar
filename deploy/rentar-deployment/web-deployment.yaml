@@ -15,7 +15,7 @@ spec:
         app: rentar-web
     spec:
       containers:
-      - image: denisolek/rentar-web:1.0.0
+      - image: denisolek/rentar-web:1.0.1
         name: rentar-web
         ports:
         - containerPort: 80

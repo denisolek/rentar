@@ -1,6 +1,5 @@
 <template>
-  <Row v-padding="30">
-    <h2>Szukaj pojazdu</h2><br>
+  <Row>
     <div>
       <div>
         <Form

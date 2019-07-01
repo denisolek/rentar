@@ -1,6 +1,5 @@
 <template>
-  <Row v-padding="30">
-    <h2>Rezerwacje</h2><br>
+  <Row>
     <div>
       <div>
         <Table :datas="rentalsTable">

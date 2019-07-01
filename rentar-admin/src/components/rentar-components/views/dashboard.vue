@@ -1,54 +1,73 @@
 <template>
-  <div>
-    <p>
-      <button class="h-btn h-btn-s h-btn-blue" @click="add(datas)"><i class="h-icon-plus"></i><span>Add a line</span></button>
-    </p>
-    <Table :datas="datas" :height="400">
-      <TableItem title="name" prop="name" :width="150"></TableItem>
-      <TableItem title="age" prop="age" :width="150"></TableItem>
-      <TableItem title="address" prop="address" align="center" :width="150"></TableItem>
-      <TableItem title="name" prop="name" :width="150"></TableItem>
-      <TableItem title="age" prop="age" :width="150"></TableItem>
-      <TableItem title="address" prop="address" align="center" :width="150"></TableItem>
-      <TableItem title="Name" prop="name" :width="150"></TableItem>
-      <TableItem title="age" prop="age" :width="150"></TableItem>
-      <TableItem title="address" prop="address" align="center" :width="150"></TableItem>
-      <TableItem title="operating" :width="100" fixed="right"><template slot-scope="{data}"><button class="h-btn h-btn-s h-btn-red" @click="remove(datas, data)"><i class="h-icon-trash"></i></button></template></TableItem>
-      <div slot="empty">Custom reminder: no data at this time</div>
-    </Table>
+  <div class="app-home-vue frame-page">
+    <Row :space="30">
+      <Cell :xs='24' :sm='24' :md='24' :lg='8' :xl='8'>
+        <div class="h-panel">
+          <div class="h-panel-bar">
+            <div class="h-panel-title">Agregaty</div>
+          </div>
+          <div class="home-part-body2">
+            <template>
+              <div id="chart">
+                <apexchart type=pie width=380 :options="chartOptions" :series="series"/>
+              </div>
+            </template>
+          </div>
+        </div>
+      </Cell>
+
+    </Row>
   </div>
 </template>
-
 <script>
-export default {
-  data() {
-    return {
-      datas: [
-        { id: 5, name: 'test 5', age: 12, address: 'Shanghai' },
-        { id: 6, name: 'test 6', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 5, name: 'test 5', age: 12, address: 'Shanghai' },
-        { id: 6, name: 'test 6', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 5, name: 'test 5', age: 12, address: 'Shanghai' },
-        { id: 6, name: 'test 6', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' },
-        { id: 5, name: 'test 5', age: 12, address: 'Shanghai' },
-        { id: 6, name: 'test 6', age: 12, address: 'Shanghai' },
-        { id: 7, name: 'test 7', age: 12, address: 'Shanghai' }
-      ]
-    };
-  },
-  methods: {
-    remove(datas, data) {
-      datas.splice(datas.indexOf(data), 1);
+
+  export default {
+    data() {
+      return {
+        series: [0, 0, 0],
+        chartOptions: {
+          labels: ['Rezerwacje', 'Klienci', 'Pojazdy'],
+          responsive: [{
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 200
+              },
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }]
+        }
+      }
     },
-    add(datas) {
-      datas.push({ id: 7, name: 'Add to', age: 12, address: 'Then added' });
+    mounted() {
+      this.fetchRentals();
+      this.fetchCustomers();
+      this.fetchCars();
+    },
+    methods: {
+      fetchRentals() {
+        R.Rentals.fetchAll().then(resp => {
+          if (resp.status === 200) {
+            this.series[0] = resp.data.length;
+          }
+        })
+      },
+      fetchCustomers() {
+        R.Customers.fetchAll().then(resp => {
+          if (resp.status === 200) {
+            this.series[1] = resp.data.length;
+          }
+        })
+      },
+      fetchCars() {
+        R.Cars.fetchAll().then(resp => {
+          if (resp.status === 200) {
+            this.series[2] = resp.data.length;
+          }
+        })
+      }
     }
-  }
-};
+  };
 </script>

@@ -4,6 +4,7 @@ import Vue from 'vue';
 import App from 'components/App';
 import pl from './lang/pl-PL.js';
 import VueBus from 'vue-bus';
+import VueApexCharts from 'vue-apexcharts';
 
 import heyuiConfig from 'js/config/heyui-config';
 import routerConfig from 'js/config/router-config';
@@ -20,6 +21,8 @@ require('./mock/index');
 heyuiConfig();
 Vue.use(HeyUI, {locale: pl});
 Vue.use(VueBus);
+Vue.use(VueApexCharts);
+Vue.component('apexchart', VueApexCharts);
 
 const router = routerConfig();
 export default new Vue({

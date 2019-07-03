@@ -21,6 +21,12 @@ spec:
       - prometheus.rentar.eu
       - kafka-manager.rentar.eu
   rules:
+  - host: rentar.eu
+    http:
+      paths:
+      - backend:
+          serviceName: rentar-web
+          servicePort: 4000
   - host: api.rentar.eu
     http:
       paths:
@@ -39,18 +45,18 @@ spec:
   - host: grafana.rentar.eu
     http:
       paths:
-        - backend:
-            serviceName: grafana
-            servicePort: 3000
+      - backend:
+          serviceName: grafana
+          servicePort: 3000
   - host: prometheus.rentar.eu
     http:
       paths:
-        - backend:
-            serviceName: prometheus
-            servicePort: 9090
+      - backend:
+          serviceName: prometheus
+          servicePort: 9090
   - host: kafka-manager.rentar.eu
     http:
       paths:
-        - backend:
-            serviceName: kafka-manager
-            servicePort: 9000
+      - backend:
+          serviceName: kafka-manager
+          servicePort: 9000

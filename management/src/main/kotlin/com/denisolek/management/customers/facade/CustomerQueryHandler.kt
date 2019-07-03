@@ -6,6 +6,10 @@ import com.denisolek.management.customers.facade.query.DetailedCustomer
 import com.denisolek.management.customers.facade.query.UpdateCustomerValidate
 import com.denisolek.management.customers.infrastructure.CustomerExceptions.*
 import com.denisolek.management.customers.infrastructure.config.CustomerRepository
+import com.denisolek.management.customers.model.value.CustomerId
+import com.denisolek.management.customers.model.value.DrivingLicence
+import com.denisolek.management.customers.model.value.Email
+import com.denisolek.management.customers.model.value.Passport
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -13,22 +17,34 @@ import java.util.*
 class CustomerQueryHandler(val repository: CustomerRepository) {
     fun validateAdd(dto: AddCustomerValidate) {
         when {
-            repository.countByEmail(dto.email) > 0 -> throw EmailAlreadyExistsException()
-            repository.countByDrivingLicence(dto.drivingLicence) > 0 -> throw DrivingLicenceAlreadyExistsException()
-            repository.countByPassport(dto.passport) > 0 -> throw PassportAlreadyExistsException()
+            repository.findByEmail(Email(dto.email)).isNotEmpty() ->
+                throw EmailAlreadyExistsException()
+            repository.findByDrivingLicence(DrivingLicence(dto.drivingLicence)).isNotEmpty() ->
+                throw DrivingLicenceAlreadyExistsException()
+            repository.findByPassport(Passport(dto.passport)).isNotEmpty() ->
+                throw PassportAlreadyExistsException()
         }
     }
 
     fun validateUpdate(dto: UpdateCustomerValidate, id: UUID) {
-        val customer = repository.findByIdOrThrow(id)
-        when {
-            customer.email.equals(dto.email) && repository.countByEmail(dto.email) > 0 ->
-                throw EmailAlreadyExistsException()
-            customer.drivingLicence.equals(dto.drivingLicence) && repository.countByDrivingLicence(dto.drivingLicence) > 0 ->
-                throw DrivingLicenceAlreadyExistsException()
-            customer.passport.equals(dto.passport) && repository.countByPassport(dto.passport) > 0 ->
-                throw PassportAlreadyExistsException()
-        }
+        validateUpdateEmail(Email(dto.email), id)
+        validateUpdateDrivingLicence(DrivingLicence(dto.drivingLicence), id)
+        validateUpdatePassport(Passport(dto.passport), id)
+    }
+
+    private fun validateUpdatePassport(passport: Passport, id: UUID) {
+        repository.findByPassport(passport).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw PassportAlreadyExistsException() }
+    }
+
+    private fun validateUpdateDrivingLicence(drivingLicence: DrivingLicence, id: UUID) {
+        repository.findByDrivingLicence(drivingLicence).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw DrivingLicenceAlreadyExistsException() }
+    }
+
+    private fun validateUpdateEmail(email: Email, id: UUID) {
+        repository.findByEmail(email).firstOrNull()
+            ?.let { if (it.id != CustomerId(id)) throw EmailAlreadyExistsException() }
     }
 
     fun fetchAll(): List<BaseCustomer> {

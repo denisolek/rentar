@@ -5,8 +5,8 @@ import feign.Feign
 import feign.gson.GsonDecoder
 import feign.gson.GsonEncoder
 import management.dto.AddCustomerDTO
-import management.dto.ValidateAddCustomerDTO
 import management.dto.UpdateCustomerDTO
+import management.dto.ValidateAddCustomerDTO
 import management.dto.ValidateUpdateCustomerDTO
 import java.util.*
 
@@ -15,6 +15,10 @@ class ManagementFacade {
         .encoder(GsonEncoder())
         .decoder(GsonDecoder())
         .target(ManagementClient::class.java, Setup.apiHost)
+
+    fun getAll(): List<UUID> {
+        return managementClient.getAll().map { it.id }
+    }
 
     fun addCustomers(count: Int): List<DummyCustomer> {
         val customers = mutableListOf<DummyCustomer>()

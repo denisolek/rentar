@@ -3,13 +3,17 @@ package management
 import feign.Headers
 import feign.Param
 import feign.RequestLine
-import management.dto.AddCustomerDTO
-import management.dto.ValidateAddCustomerDTO
-import management.dto.ValidateUpdateCustomerDTO
-import management.dto.UpdateCustomerDTO
+import management.dto.*
 import java.util.*
 
 interface ManagementClient {
+    /**
+     * Get all customers
+     */
+    @RequestLine("GET /customers")
+    @Headers("Content-Type: application/json")
+    fun getAll(): List<BaseCustomer>
+
     /**
      * Add customer
      */

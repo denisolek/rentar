@@ -17,3 +17,4 @@ microk8s.kubectl -n kube-system describe secret $token
 sleep 5
 cat ngrok.log | grep 'url=https://' | awk '{print $8}'
 
+

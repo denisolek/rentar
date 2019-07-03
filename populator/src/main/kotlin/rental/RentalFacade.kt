@@ -22,6 +22,10 @@ class RentalFacade {
             Thread.sleep(Setup.requestInterval.toLong())
             val dates = generateTimeRange()
             val availableCars = rentalClient.estimate(dates.first, dates.second).map { it.carId }
+            if (availableCars.isEmpty()) {
+                println("No cars available [$i] : ${dates.first} ${dates.second} !")
+                continue@loop
+            }
             val dto = CreateRentalDTO(availableCars, customers, dates.first, dates.second)
             if (validateCreateRental(dto, i)) continue@loop
             var id: UUID?
